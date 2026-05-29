@@ -14,19 +14,11 @@
     <line x1="1568" y1="448" x2="1568" y2="424"/><line x1="1568" y1="448" x2="1544" y2="448"/>
   </g>
   <line x1="240" y1="190" x2="1360" y2="190" stroke="#2a2722" stroke-width="1" stroke-dasharray="3 5"/>
-  <text x="800" y="124" text-anchor="middle" font-family="'Cormorant Garamond','EB Garamond',Georgia,serif" font-size="13" fill="#4a463d" letter-spacing="16" font-weight="500">— II — AGENT</text>
-  <text x="800" y="190" text-anchor="middle" font-family="'Noto Serif JP','Hiragino Mincho ProN','Yu Mincho','Songti SC',serif" font-size="68" fill="#c8c2b2" opacity="0.88">爪</text>
-  <text x="800" y="305" text-anchor="middle" font-family="'Cormorant Garamond','EB Garamond',Georgia,serif" font-size="96" fill="#e8e2d2" letter-spacing="6" font-weight="500">hakoCLAW</text>
-  <text x="800" y="350" text-anchor="middle" font-family="'Cormorant Garamond','EB Garamond',Georgia,serif" font-size="22" fill="#b89656" font-style="italic" letter-spacing="2">a standalone agent for the inner chamber</text>
+  <text x="800" y="124" text-anchor="middle" font-family="'Cormorant Garamond','EB Garamond',Georgia,serif" font-size="13" fill="#4a463d" letter-spacing="16" font-weight="500">— I — EDITOR</text>
+  <text x="800" y="190" text-anchor="middle" font-family="'Noto Serif JP','Hiragino Mincho ProN','Yu Mincho','Songti SC',serif" font-size="68" fill="#c8c2b2" opacity="0.88">箱</text>
+  <text x="800" y="305" text-anchor="middle" font-family="'Cormorant Garamond','EB Garamond',Georgia,serif" font-size="120" fill="#e8e2d2" letter-spacing="14" font-weight="500">hake</text>
+  <text x="800" y="338" text-anchor="middle" font-family="'JetBrains Mono','Fira Code','SF Mono',monospace" font-size="12" fill="#b89656" letter-spacing="6">EDIT · HAKO-EDIT</text>
+  <text x="800" y="372" text-anchor="middle" font-family="'Cormorant Garamond','EB Garamond',Georgia,serif" font-size="22" fill="#b89656" font-style="italic" letter-spacing="2">a quiet box around the cursor</text>
   <text x="800" y="412" text-anchor="middle" font-family="'JetBrains Mono','Fira Code','SF Mono',monospace" font-size="10" fill="#4a463d" letter-spacing="8">— ORDO MITHRAEUM · MMXXVI · GPL-3.0 —</text>
-  <g stroke="#8a3a1f" stroke-width="2.5" stroke-linecap="round" opacity="0.7">
-    <line x1="1280" y1="120" x2="1340" y2="60"/>
-    <line x1="1305" y1="140" x2="1365" y2="80"/>
-    <line x1="1330" y1="160" x2="1390" y2="100"/>
-  </g>
-  <g stroke="#8a3a1f" stroke-width="2.5" stroke-linecap="round" opacity="0.7">
-    <line x1="220" y1="380" x2="160" y2="320"/>
-    <line x1="245" y1="400" x2="185" y2="340"/>
-    <line x1="270" y1="420" x2="210" y2="360"/>
-  </g>
+  <rect x="950" y="240" width="20" height="60" fill="#7a8a3a" opacity="0.85"/>
 </svg>

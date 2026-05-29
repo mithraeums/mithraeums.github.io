@@ -240,6 +240,12 @@
   .product-body {
     display: flex; flex-direction: column; gap: 16px;
   }
+  .product-shot {
+    margin-bottom: 16px;
+  }
+  .product-shot a { display: block; line-height: 0; }
+  .product-shot img { transition: opacity 0.2s ease; }
+  .product-shot a:hover img { opacity: 0.85; }
   .product-body p {
     font-size: 14px;
     color: var(--paper);
@@ -445,7 +451,7 @@
     .foot-bottom { flex-direction: column; gap: 8px; align-items: flex-start; }
 
     /* install code block: shrink + allow wrap */
-    section#claw-install code { font-size: 11px; word-break: break-all; white-space: pre-wrap !important; }
+    section#hako-install code { font-size: 11px; word-break: break-all; white-space: pre-wrap !important; }
   }
 </style>
 </head>
@@ -466,7 +472,7 @@
     </a>
     <div class="nav-links">
       <a href="#products">Products</a>
-      <a href="#claw-install">Install</a>
+      <a href="#hako-install">Install</a>
       <a href="#skills">Skills</a>
       <a href="#releases">Releases</a>
       <a href="https://github.com/mithraeums" target="_blank" rel="noopener">GitHub ↗</a>
@@ -485,11 +491,12 @@
         Tools for<br/>the inner<br/>chamber<span class="blink" style="color: var(--gold);">.</span>
       </h1>
       <p class="lede">
-        Mithraeum builds <em>quiet</em> software for people who write code by hand. We make small, durable instruments — text editors, agents, and the local models that run them. Bring your own keys. Bring your own weights. Nothing phones home that you didn't tell it to.
+        Mithraeum builds <em>quiet</em> software for people who write code by hand. Three instruments under one suite — a modal editor (<code style="color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:0.9em">hake</code>), a terminal agent (<code style="color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:0.9em">hako</code>), and the local models that run them (<code style="color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:0.9em">hakm</code>). Bring your own keys, or run our <code style="color:var(--paper);font-family:'JetBrains Mono',monospace;font-size:0.9em">hako-sho-stock</code> weights on-device — no cloud, no telemetry, no daemon.
       </p>
       <div class="hero-meta">
         <span><b id="m-repo-count">3</b> repositories</span>
         <span><b id="m-product-count">3</b> products</span>
+        <span><b>2</b> local models</span>
         <span><b id="m-license">GPL-3.0</b></span>
       </div>
     </div>
@@ -560,83 +567,102 @@
     </div>
     <div class="products">
 
-      <!-- ============== HAKO ============== -->
-      <article class="product" data-repo="mithraeums/hako">
+      <!-- ============== I · hako-edit (CLI: hake) ============== -->
+      <article class="product" data-repo="mithraeums/hako-edit">
         <div class="product-id">
           <div class="codename">— I — editor</div>
-          <div class="name">hako<span style="color: var(--gold);">_</span></div>
-          <div class="latin">箱 · the box</div>
-          <div class="status"><span class="dot"></span> v0.1.1 · stable</div>
+          <div class="name">hake<span style="color: var(--gold);">_</span></div>
+          <div class="latin">箱 · hako-edit · the box</div>
+          <div class="status"><span class="dot"></span> v0.1.3 · stable</div>
         </div>
         <div class="product-body">
-          <p>A single-file modal text editor written in C. Vi-bound, language-aware, and built to last a decade. Hako is the workspace — a quiet box around the cursor where everything else hangs off.</p>
-          <p style="color: var(--ash); font-size: 12px;">— Modal editing · 40+ syntax modes · Configurable from a single header file · Zero runtime dependencies.</p>
+          <div class="product-shot">
+            <a href="https://github.com/mithraeums/hako-edit" target="_blank" rel="noopener">
+              <img src="assets/readme-screenshots/hako-edit/screenshot-splash.png" alt="hake editor splash" loading="lazy" style="width:100%;display:block;border:1px solid var(--rule);"/>
+            </a>
+          </div>
+          <p>A single-file modal text editor written in C99. Vim-bound, language-aware, multi-pane. Embeds the <code style="color:var(--bone);font-family:'JetBrains Mono',monospace">hako</code> agent in a split pane so you can talk to a model without leaving your file.</p>
+          <p style="color: var(--ash); font-size: 12px;">— Modal editing · 40+ syntax modes · 17 themes · OS-aware clipboard fidelity · Zero runtime dependencies beyond libc + curl.</p>
           <div class="product-actions">
-            <a class="btn gold" href="https://github.com/mithraeums/hako" target="_blank" rel="noopener">Source ↗</a>
-            <a class="btn" href="https://github.com/mithraeums/hako/releases" target="_blank" rel="noopener">Releases</a>
-            <a class="btn" href="#hako-readme">Read</a>
+            <a class="btn gold" href="#hako-install">curl install ↗</a>
+            <a class="btn" href="https://github.com/mithraeums/hako-edit" target="_blank" rel="noopener">Source ↗</a>
+            <a class="btn" href="https://github.com/mithraeums/hako-edit/releases" target="_blank" rel="noopener">Releases</a>
           </div>
         </div>
         <div class="product-meta">
           <dl>
-            <dt>VERSION</dt><dd data-field="version">v0.1.1</dd>
-            <dt>LANG</dt><dd data-field="lang">C</dd>
-            <dt>STARS</dt><dd data-field="stars">—</dd>
-            <dt>UPDATED</dt><dd data-field="updated">2026-05-13</dd>
-            <dt>LICENSE</dt><dd data-field="license">GPL-3.0</dd>
+            <dt>CLI</dt><dd><code>hake</code></dd>
+            <dt>VERSION</dt><dd>v0.1.3</dd>
+            <dt>LANG</dt><dd>C99 single file</dd>
+            <dt>THEMES</dt><dd>17</dd>
+            <dt>LICENSE</dt><dd>GPL-3.0</dd>
           </dl>
         </div>
       </article>
 
-      <!-- ============== CLAW (REI) ============== -->
-      <article class="product" data-repo="mithraeums/hakoCLAW">
+      <!-- ============== II · hako-code (CLI: hako) ============== -->
+      <article class="product" data-repo="mithraeums/hako-code">
         <div class="product-id">
           <div class="codename">— II — agent</div>
-          <div class="name">hakoCLAW</div>
-          <div class="latin">"rei" · the thing-itself</div>
-          <div class="status"><span class="dot"></span> v0.1.5 · solo</div>
+          <div class="name">hako<span style="color: var(--gold);">_</span></div>
+          <div class="latin">函 · hako-code · the agent</div>
+          <div class="status"><span class="dot"></span> v0.1.6 · stable</div>
         </div>
         <div class="product-body">
-          <p>A standalone terminal agent in a single C file. Model-agnostic, skill-driven, and quiet — the binary is one file, your keys live on disk, the conversation never leaves your shell unless you tell it to. Inside hako it answers to <code style="color: var(--gold); font-family: 'JetBrains Mono', monospace;">:rei</code>; outside, it's <code style="color: var(--bone);">hakoc</code>.</p>
-          <p style="color: var(--ash); font-size: 12px;">— Skills are markdown-defined behaviors. Drop a folder in <code style="color: var(--bone);">skills/</code> and CLAW invokes it. Persistent session, resumable history, trust-gated tools. Community PRs welcome.</p>
+          <div class="product-shot">
+            <a href="https://github.com/mithraeums/hako-code" target="_blank" rel="noopener">
+              <img src="assets/readme-screenshots/hako-code/screenrecord-hako.gif" alt="hako agent live demo" loading="lazy" style="width:100%;display:block;border:1px solid var(--rule);"/>
+            </a>
+          </div>
+          <p>A standalone terminal AI agent in a single C file. Auto-defaults to any installed hako model (<code style="color:var(--paper);font-family:'JetBrains Mono',monospace">hako-sho-stock</code> 3B or <code style="color:var(--paper);font-family:'JetBrains Mono',monospace">hako-koi-mini-stock</code> 7B), no key, no cloud. Adds 13 cloud providers (Anthropic OAuth, Copilot, GH Models, OpenRouter, OpenAI-compat) when you want them.</p>
+          <p style="color: var(--ash); font-size: 12px;">— Persistent sessions · skills as markdown · trust-gated tools · prose tool mode for small models · sha-verified self-update.</p>
           <div class="product-actions">
-            <a class="btn gold" href="#claw-install" id="claw-curl-btn">curl install ↗</a>
-            <a class="btn" href="https://github.com/mithraeums/hakoCLAW" target="_blank" rel="noopener">Source ↗</a>
-            <a class="btn" href="https://github.com/mithraeums/hakoCLAW/releases" target="_blank" rel="noopener">Releases</a>
+            <a class="btn gold" href="#hako-install">curl install ↗</a>
+            <a class="btn" href="https://github.com/mithraeums/hako-code" target="_blank" rel="noopener">Source ↗</a>
+            <a class="btn" href="https://github.com/mithraeums/hako-code/releases" target="_blank" rel="noopener">Releases</a>
             <a class="btn" href="#skills">Browse skills</a>
           </div>
         </div>
         <div class="product-meta">
           <dl>
-            <dt>STATUS</dt><dd>standalone CLI</dd>
-            <dt>SKILLS</dt><dd data-field="skill-count">1</dd>
-            <dt>BACKENDS</dt><dd>13+ providers</dd>
-            <dt>UPDATED</dt><dd data-field="claw-updated">—</dd>
+            <dt>CLI</dt><dd><code>hako</code></dd>
+            <dt>VERSION</dt><dd>v0.1.6</dd>
+            <dt>DEFAULT</dt><dd><code>hako-sho-stock</code></dd>
+            <dt>PROVIDERS</dt><dd>1 local + 13 cloud</dd>
+            <dt>LICENSE</dt><dd>GPL-3.0</dd>
           </dl>
         </div>
       </article>
 
-      <!-- ============== HAKO AI ============== -->
-      <article class="product" data-repo="mithraeums/hakoAI">
+      <!-- ============== III · hako (models, CLI: hakm) ============== -->
+      <article class="product" data-repo="mithraeums/hako">
         <div class="product-id">
           <div class="codename">— III — models</div>
-          <div class="name">hakoAI</div>
-          <div class="latin">in officina · in the workshop</div>
-          <div class="status warn"><span class="dot"></span> in production</div>
+          <div class="name">hakm<span style="color: var(--gold);">_</span></div>
+          <div class="latin">形 · hako · in officina</div>
+          <div class="status"><span class="dot"></span> v0 · koi live</div>
         </div>
         <div class="product-body">
-          <p>Local models, trained for the cursor. Small enough to run on your machine; tuned for the kinds of edits a programmer actually asks for. The repo is private until the first weights ship.</p>
-          <p style="color: var(--ash); font-size: 12px;">— No cloud round-trip. No prompt logging. Architecture and training data documented when released.</p>
+          <div class="product-shot">
+            <a href="https://github.com/mithraeums/hako" target="_blank" rel="noopener">
+              <img src="assets/readme-screenshots/hako-code/screenshot-models.png" alt="hako-sho-stock model listing" loading="lazy" style="width:100%;display:block;border:1px solid var(--rule);"/>
+            </a>
+          </div>
+          <p>Local-first model family. <b>sho</b> (mini · 3B · Qwen2.5-Coder + hako wrap) and <b>koi-mini</b> (mid-small · 7B · Qwen2.5-Coder + hako wrap) live today, tool-aware out of the box. <b>koi</b> (mid · 14B/32B fine-tune) queued. <b>samurai</b> (max · 50B+ desktop) reserved.</p>
+          <p style="color: var(--ash); font-size: 12px;">— No cloud inference. ChatML-compatible. Honest framing: stock is stock, fine-tunes name their base + corpus. Native engine (vendored llama.cpp subset → own kernels) lands v0.1.7.</p>
           <div class="product-actions">
-            <button class="btn disabled" disabled>Repository · private</button>
-            <a class="btn" href="#claw-install">Notify me</a>
+            <a class="btn gold" href="#hako-install">curl install ↗</a>
+            <a class="btn" href="https://github.com/mithraeums/hako" target="_blank" rel="noopener">Source ↗</a>
+            <a class="btn" href="https://github.com/mithraeums/hako#tiers" target="_blank" rel="noopener">Model catalog</a>
           </div>
         </div>
         <div class="product-meta">
           <dl>
-            <dt>STATUS</dt><dd>training</dd>
-            <dt>TARGET</dt><dd>local · CPU + GPU</dd>
-            <dt>RELEASE</dt><dd>TBD</dd>
+            <dt>CLI</dt><dd><code>hakm</code></dd>
+            <dt>LIVE</dt><dd><code>hako-sho-stock</code></dd>
+            <dt>TIERS</dt><dd>mini · mid · max</dd>
+            <dt>RUNTIME</dt><dd>mithraeum (ollama today, own v0.1.7)</dd>
+            <dt>LICENSE</dt><dd>Apache 2.0 / MIT</dd>
           </dl>
         </div>
       </article>
@@ -646,26 +672,31 @@
 </section>
 
 <!-- ============================================ -->
-<!-- INSTALL · CLAW                               -->
+<!-- INSTALL · hako-code                               -->
 <!-- ============================================ -->
-<section class="s" id="claw-install">
+<section class="s" id="hako-install">
   <div class="container">
     <div class="section-head">
       <div class="section-eyebrow">— II.b — Install</div>
       <h2>One line, <em>either chamber</em>.</h2>
     </div>
-    <p style="max-width: 680px; color: var(--bone); font-size: 13px; margin: -32px 0 28px;">
-      The installer fetches the latest signed release for your OS and arch, verifies the sha256 sidecar, and drops the binary into <code style="color: var(--paper);">~/.local/bin</code> (or <code style="color: var(--paper);">/usr/local/bin</code> if writable). No package manager, no daemon, no telemetry. CLAW installs <code style="color: var(--paper);">hakoc</code>; hako installs <code style="color: var(--paper);">hako</code> — same script shape, different binary.
+    <p style="max-width: 720px; color: var(--bone); font-size: 13px; margin: -32px 0 28px;">
+      Each installer fetches the latest signed release for your OS and arch, verifies the sha256 sidecar, drops the binary into <code style="color: var(--paper);">~/.local/bin</code> (or <code style="color: var(--paper);">/usr/local/bin</code> if writable). No package manager, no daemon, no telemetry. Same script shape across the suite — different binary at the end.
     </p>
 
     <div style="background: var(--shadow); border: 1px solid var(--rule-strong); padding: 20px 24px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; color: var(--paper); position: relative; overflow-x: auto;">
-      <div style="color: var(--ash); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;">— CLAW · agent · curl —</div>
-      <code style="color: var(--bone); white-space: pre;">curl -fsSL https://mithraeums.github.io/hakoCLAW.sh | sh</code>
+      <div style="color: var(--ash); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;">— hako · agent · <code style="color:var(--gold);">hako</code> —</div>
+      <code style="color: var(--bone); white-space: pre;">curl -fsSL https://mithraeums.github.io/hako.sh | sh</code>
     </div>
 
     <div style="background: var(--shadow); border: 1px solid var(--rule-strong); padding: 20px 24px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; color: var(--paper); position: relative; overflow-x: auto; margin-top: 14px;">
-      <div style="color: var(--ash); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;">— HAKO · editor · curl —</div>
-      <code style="color: var(--bone); white-space: pre;">curl -fsSL https://mithraeums.github.io/hako.sh | sh</code>
+      <div style="color: var(--ash); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;">— hake · editor · <code style="color:var(--gold);">hake</code> —</div>
+      <code style="color: var(--bone); white-space: pre;">curl -fsSL https://mithraeums.github.io/hake.sh | sh</code>
+    </div>
+
+    <div style="background: var(--shadow); border: 1px solid var(--rule-strong); padding: 20px 24px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; color: var(--paper); position: relative; overflow-x: auto; margin-top: 14px;">
+      <div style="color: var(--ash); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;">— hakm · models suite · <code style="color:var(--gold);">hakm</code> + <code style="color:var(--gold);">hako-sho-stock</code> —</div>
+      <code style="color: var(--bone); white-space: pre;">curl -fsSL https://mithraeums.github.io/hakm.sh | sh</code>
     </div>
 
     <div style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 24px; color: var(--ash); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">
@@ -673,34 +704,34 @@
       <span><b style="color: var(--paper);">Linux</b> x86_64 · arm64</span>
       <span><b style="color: var(--paper);">FreeBSD</b> x86_64</span>
       <span><b style="color: var(--paper);">Windows</b> x86_64 · MinGW</span>
+      <span><b style="color: var(--paper);">iSh</b> linux-x86_64</span>
     </div>
 
     <div style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px;">
       <div>
-        <h4 style="font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--paper); margin: 0 0 8px;">Bring your own deity</h4>
-        <p style="color: var(--bone); font-size: 12px; margin: 0;">Anthropic, OpenAI, Gemini, Groq, Cerebras, DeepSeek, Mistral, Together, Fireworks, OpenRouter, xAI, Ollama, plus a <code>custom</code> hatch. Set a key, set a model, that's the wire.</p>
+        <h4 style="font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--paper); margin: 0 0 8px;">Local model, zero config</h4>
+        <p style="color: var(--bone); font-size: 12px; margin: 0;">Install <code>hakm.sh</code>, launch <code>hako</code>. The agent detects <code>hako-sho-stock</code> and defaults to it via the mithraeum provider. No key, no <code>:login</code>, no cloud round-trip.</p>
       </div>
       <div>
-        <h4 style="font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--paper); margin: 0 0 8px;">Free tiers, real work</h4>
-        <p style="color: var(--bone); font-size: 12px; margin: 0;">Gemini, Groq, Cerebras, OpenRouter <code>:free</code>, Ollama local — claw runs against any of them with a single <code>/login</code>. No card. No quota dance.</p>
+        <h4 style="font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--paper); margin: 0 0 8px;">13 cloud providers when you want them</h4>
+        <p style="color: var(--bone); font-size: 12px; margin: 0;">Anthropic OAuth (Claude Pro/Max sub), GitHub Copilot, GH Models (free), OpenRouter PKCE, plus 9 more over OpenAI-compat. Single <code>:login &lt;name&gt;</code> walks you through.</p>
       </div>
       <div>
         <h4 style="font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--paper); margin: 0 0 8px;">Skills as memory</h4>
-        <p style="color: var(--bone); font-size: 12px; margin: 0;">Persistent sessions, JSONL history, resumable threads, trust-gated tools. The agent keeps context the way you keep notes — on disk, where you can read it.</p>
+        <p style="color: var(--bone); font-size: 12px; margin: 0;">Persistent sessions, JSONL history, trust-gated tools. Skills are markdown — drop a folder, the agent loads it. Notes you keep on disk where you can read them.</p>
       </div>
       <div>
         <h4 style="font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--paper); margin: 0 0 8px;">Self-update</h4>
-        <p style="color: var(--bone); font-size: 12px; margin: 0;"><code>hakoc --update</code> pulls the latest release, verifies the hash, and atomically replaces the binary. No reinstall, no rebuild.</p>
+        <p style="color: var(--bone); font-size: 12px; margin: 0;"><code>hako --update</code> pulls the latest release, verifies the sha, atomically replaces the binary. No reinstall, no rebuild.</p>
       </div>
     </div>
 
     <div style="margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap;">
-      <a class="btn gold" href="https://github.com/mithraeums/hakoCLAW#readme" target="_blank" rel="noopener">CLAW manual ↗</a>
-      <a class="btn gold" href="https://github.com/mithraeums/hako#readme" target="_blank" rel="noopener">hako manual ↗</a>
-      <a class="btn" href="https://github.com/mithraeums/hakoCLAW/releases" target="_blank" rel="noopener">CLAW releases</a>
-      <a class="btn" href="https://github.com/mithraeums/hako/releases" target="_blank" rel="noopener">hako releases</a>
-      <a class="btn" href="https://github.com/mithraeums/hakoCLAW/blob/main/install.sh" target="_blank" rel="noopener">CLAW install.sh</a>
-      <a class="btn" href="https://github.com/mithraeums/hako/blob/main/install.sh" target="_blank" rel="noopener">hako install.sh</a>
+      <a class="btn gold" href="https://github.com/mithraeums/hako-code#readme" target="_blank" rel="noopener">hako-code manual ↗</a>
+      <a class="btn gold" href="https://github.com/mithraeums/hako-edit#readme" target="_blank" rel="noopener">hako-edit manual ↗</a>
+      <a class="btn gold" href="https://github.com/mithraeums/hako#readme" target="_blank" rel="noopener">hako (models) manual ↗</a>
+      <a class="btn" href="https://github.com/mithraeums/hako-code/releases" target="_blank" rel="noopener">hako-code releases</a>
+      <a class="btn" href="https://github.com/mithraeums/hako-edit/releases" target="_blank" rel="noopener">hako-edit releases</a>
     </div>
   </div>
 </section>
@@ -712,10 +743,10 @@
   <div class="container">
     <div class="section-head">
       <div class="section-eyebrow">III · Skills</div>
-      <h2>Behaviors for <em>CLAW</em>, by name.</h2>
+      <h2>Behaviors for <em>hako-code</em>, by name.</h2>
     </div>
     <p style="max-width: 640px; color: var(--bone); font-size: 13px; margin: -32px 0 32px;">
-      Each skill is a folder in <a href="https://github.com/mithraeums/skills" target="_blank" rel="noopener" style="color: var(--gold);">mithraeums/skills</a> containing a <code style="color: var(--paper);">SKILL.md</code> and any helpers. CLAW loads them on startup. Open a PR to add yours — the rite is the README.
+      Each skill is a folder in <a href="https://github.com/mithraeums/skills" target="_blank" rel="noopener" style="color: var(--gold);">mithraeums/skills</a> containing a <code style="color: var(--paper);">SKILL.md</code> and any helpers. hako-code loads them on startup. Open a PR to add yours — the rite is the README.
     </p>
     <div class="skills-grid" id="skills-grid">
       <!-- Skills are populated at build time from the repo. Default content is the static fallback. -->
@@ -723,7 +754,7 @@
         <div class="skill-num">— 01 —</div>
         <div class="skill-body">
           <h4>read-pdf<span class="ext">/</span></h4>
-          <p>Extracts text and structure from a PDF on disk. Handed to CLAW so the agent can answer questions about a document without re-uploading it.</p>
+          <p>Extracts text and structure from a PDF on disk. Handed to hako-code so the agent can answer questions about a document without re-uploading it.</p>
         </div>
         <div class="skill-meta">v1 · markdown</div>
       </div>
@@ -754,29 +785,29 @@
       <h2>Latest from <em>each chamber</em>.</h2>
     </div>
     <div class="releases" id="releases-grid">
-      <div class="release" data-repo="mithraeums/hakoCLAW">
-        <div class="release-tag"><span>CLAW</span><b data-field="release-tag">v0.1.5</b></div>
-        <h3 class="release-version" data-field="release-title">OAuth quartet + ReAct</h3>
-        <p class="release-msg" data-field="release-body">Sign in with <strong>Claude Pro/Max</strong>, <strong>GitHub Copilot</strong>, <strong>GitHub Models</strong> (free), or <strong>OpenRouter</strong> (PKCE). <code>/providers</code> catalog · <code>/models</code> suggestions · <code>/retry</code> <code>/edit</code> <code>/undo</code> · <code>/toolmode react</code> unlocks tools on smaller models · session cost in status line · TAB completion.</p>
-        <div class="release-date" data-field="release-date">2026-05-20</div>
+      <div class="release" data-repo="mithraeums/hako-code">
+        <div class="release-tag"><span>hako-code</span><b data-field="release-tag">v0.1.6</b></div>
+        <h3 class="release-version" data-field="release-title">mithraeum provider + koi auto-default + naming rename</h3>
+        <p class="release-msg" data-field="release-body">Real <code>mithraeum</code> provider (distinct from ollama), force-prose tool mode for koi-class models, auto-defaults to local <code>hako-sho-stock</code> when present. Fixed <code>aiExtractStringValue</code> <code>\uXXXX</code> handling so the prose tool parser actually sees <code>&lt;tool&gt;</code> blocks. Renames: <code>hakoCLAW</code> → <code>hako-code</code>, binary <code>hakoc</code> → <code>hako</code>, <code>~/.hakoc/</code> → <code>~/.hako/</code> with auto-migrator.</p>
+        <div class="release-date" data-field="release-date">2026-05-26</div>
+      </div>
+      <div class="release" data-repo="mithraeums/hako-edit">
+        <div class="release-tag"><span>hako-edit</span><b data-field="release-tag">v0.1.3</b></div>
+        <h3 class="release-version" data-field="release-title">rename → hake + clipboard fidelity</h3>
+        <p class="release-msg" data-field="release-body">CLI rename <code>hako</code> → <code>hake</code>, source <code>hako.c</code> → <code>hake.c</code>, macros <code>HAKO_*</code> → <code>HAKE_*</code>, splash gains <code>EDIT</code> subtitle. OS-aware clipboard transport (<code>pbcopy</code> / <code>wl-copy</code> / <code>xclip</code> / <code>clip</code>) — fixes tabs+indents mangled on yank-out → external paste. Subprocess wire updated to launch the renamed <code>hako</code> agent.</p>
+        <div class="release-date" data-field="release-date">2026-05-26</div>
       </div>
       <div class="release" data-repo="mithraeums/hako">
-        <div class="release-tag"><span>HAKO</span><b data-field="release-tag">v0.1.1</b></div>
-        <h3 class="release-version" data-field="release-title">windows + iSh + splash</h3>
-        <p class="release-msg" data-field="release-body">Windows link error fixed (<code>detectTerminalType</code> moved outside POSIX block). iSh defenses: <code>gridResize</code> caps, bounded skill loader, session resume on fresh setups. Splash gained <code># NEW</code> + <code># TIPS</code>.</p>
-        <div class="release-date" data-field="release-date">2026-05-13</div>
+        <div class="release-tag"><span>hako</span><b data-field="release-tag">v0</b></div>
+        <h3 class="release-version" data-field="release-title">koi v0 live + hakm CLI stub</h3>
+        <p class="release-msg" data-field="release-body"><code>hako-sho-stock</code> (Qwen2.5-Coder-3B + hako wrap) and <code>hako-koi-mini-stock</code> (Qwen2.5-Coder-7B + hako wrap) live via mithraeum runtime. Tool-aware Modelfile <code>SYSTEM</code> teaches the <code>&lt;tool name="X"&gt;{...}&lt;/tool&gt;</code> schema, including <code>run_shell</code> escape hatch for grep / find / sed / git / etc. <code>hakm</code> shell-stub CLI (<code>run</code> / <code>chat</code> / <code>list</code> / <code>pull</code> / <code>models</code>). <code>engine/</code> scaffold for the vendored llama.cpp subset + own-kernel path landing v0.1.7.</p>
+        <div class="release-date" data-field="release-date">2026-05-26</div>
       </div>
       <div class="release" data-repo="mithraeums/skills">
-        <div class="release-tag"><span>SKILLS</span><b data-field="release-tag">— pre-1.0 —</b></div>
+        <div class="release-tag"><span>skills</span><b data-field="release-tag">— pre-1.0 —</b></div>
         <h3 class="release-version" data-field="release-title">read-pdf</h3>
-        <p class="release-msg" data-field="release-body">First skill landed. Defines the SKILL.md schema CLAW will load against. PRs open for community contributions.</p>
+        <p class="release-msg" data-field="release-body">First skill landed. Defines the <code>SKILL.md</code> schema <code>hako-code</code> loads against. PRs open for community contributions.</p>
         <div class="release-date" data-field="release-date">2026-04-22</div>
-      </div>
-      <div class="release">
-        <div class="release-tag"><span>HAKO·AI</span><b style="color: var(--ash);">— in production —</b></div>
-        <h3 class="release-version" style="color: var(--ash); font-style: italic;">forthcoming</h3>
-        <p class="release-msg">First local weights aimed for the v0.1 hako cycle. Repo opens with the release.</p>
-        <div class="release-date">— TBD —</div>
       </div>
     </div>
   </div>
@@ -800,17 +831,18 @@
       <div class="foot-col">
         <h5>SUITE</h5>
         <ul>
-          <li><a href="#products">hako</a></li>
-          <li><a href="#products">hakoCLAW</a></li>
-          <li><a href="#products">hakoAI</a></li>
+          <li><a href="#products">hake · editor</a></li>
+          <li><a href="#products">hako · agent</a></li>
+          <li><a href="#products">hakm · models</a></li>
         </ul>
       </div>
       <div class="foot-col">
         <h5>SOURCE</h5>
         <ul>
           <li><a href="https://github.com/mithraeums" target="_blank" rel="noopener">github.com/mithraeums</a></li>
+          <li><a href="https://github.com/mithraeums/hako-edit" target="_blank" rel="noopener">/hako-edit</a></li>
+          <li><a href="https://github.com/mithraeums/hako-code" target="_blank" rel="noopener">/hako-code</a></li>
           <li><a href="https://github.com/mithraeums/hako" target="_blank" rel="noopener">/hako</a></li>
-          <li><a href="https://github.com/mithraeums/hakoCLAW" target="_blank" rel="noopener">/hakoCLAW</a></li>
           <li><a href="https://github.com/mithraeums/skills" target="_blank" rel="noopener">/skills</a></li>
         </ul>
       </div>
@@ -825,7 +857,7 @@
     </div>
     <div class="foot-bottom">
       <span>© MMXXVI · <em>ordo mithraeum</em> · GPL-3.0</span>
-      <span data-field="build-stamp">— BUILD · 2026.05.08 —</span>
+      <span data-field="build-stamp">— BUILD · 2026.05.26 —</span>
     </div>
   </div>
 </footer>
@@ -842,7 +874,7 @@
     "repos": {
       "hako":   { "version": "v0.0.9", "stars": 0, "updated": "2026-05-08", "license": "GPL-3.0", "lang": "C" },
       "skills": { "version": "—",       "stars": 0, "updated": "2026-04-22", "skillCount": 1 },
-      "hakoAI": { "private": true }
+      "hako": { "private": true }
     },
     "skills": [
       { "slug": "read-pdf", "title": "read-pdf", "summary": "...", "version": "v1" }
@@ -851,29 +883,38 @@
       { "repo": "hako",   "tag": "v0.0.9", "title": "caret & modes", "body": "...", "date": "2026-05-02" },
       { "repo": "skills", "tag": "—",       "title": "read-pdf",      "body": "...", "date": "2026-04-22" }
     ],
-    "build": "2026-05-08T12:00:00Z"
+    "build": "2026-05-24T12:00:00Z"
   }
 -->
 <script type="application/json" id="mithraeum-data">
 {
   "repos": {
-    "hako":     { "version": "v0.1.1", "stars": 0, "updated": "2026-05-13", "license": "GPL-3.0", "lang": "C" },
-    "hakoCLAW": { "version": "v0.1.5", "stars": 0, "updated": "2026-05-20", "license": "GPL-3.0", "lang": "C" },
-    "skills":   { "version": "—",       "stars": 0, "updated": "2026-04-22", "skillCount": 1 },
-    "hakoAI":   { "private": true }
+    "hako-edit": { "version": "v0.1.3", "stars": 0, "updated": "2026-05-26", "license": "GPL-3.0",          "lang": "C" },
+    "hako-code": { "version": "v0.1.6", "stars": 0, "updated": "2026-05-26", "license": "GPL-3.0",          "lang": "C" },
+    "hako":      { "version": "v0",     "stars": 0, "updated": "2026-05-26", "license": "Apache-2.0 / MIT", "lang": "Shell + Modelfile", "model": "hako-sho-stock" },
+    "skills":    { "version": "—",      "stars": 0, "updated": "2026-04-22", "skillCount": 1 }
   },
   "skills": [
-    { "slug": "read-pdf", "title": "read-pdf", "summary": "Extracts text and structure from a PDF on disk. Handed to CLAW so the agent can answer questions about a document without re-uploading it.", "version": "v1" }
+    { "slug": "read-pdf", "title": "read-pdf", "summary": "Extracts text and structure from a PDF on disk. Handed to hako-code so the agent can answer questions about a document without re-uploading it.", "version": "v1" }
   ],
   "releases": [
-    { "repo": "hakoCLAW", "tag": "v0.1.5", "title": "OAuth quartet + ReAct", "body": "Sign in with Claude Pro/Max, GitHub Copilot, GitHub Models (free), or OpenRouter (PKCE). /providers + /models discovery. /retry /edit /undo workflow. /toolmode react unlocks tools on any instruct model. Session cost in status line. TAB completion.", "date": "2026-05-20" },
-    { "repo": "hakoCLAW", "tag": "v0.1.3", "title": "tools + banner", "body": "Gemini tool-call fix (preserves tool_calls + tool_call_id). /models lists installed ollama models. Ollama endpoint-leak on provider swap fixed. New framed banner with # NEW + # TIPS sections. Read/write byte-exact on Windows.", "date": "2026-05-13" },
-    { "repo": "hako",     "tag": "v0.1.1", "title": "windows + iSh + splash", "body": "Windows link error fixed (detectTerminalType moved outside POSIX block). iSh defenses: gridResize caps, bounded skill loader, hkLoadSession on first launch. Splash gained # NEW + # TIPS.", "date": "2026-05-13" },
-    { "repo": "hakoCLAW", "tag": "v0.1.2", "title": "termios & self-update", "body": "Termios raw line editor with cursor keys, history, Home/End, kill-word. --update self-updater verifies sha256 before atomic-replacing the binary. Universal2 macOS, Linux arm64, FreeBSD x86_64 added.", "date": "2026-05-10" },
-    { "repo": "hako",     "tag": "v0.0.9", "title": "caret & modes",         "body": "Block caret refinements, two new syntax modes, sigil-based status line, opt-in mouse support. Configuration moved to a single header.", "date": "2026-05-02" },
-    { "repo": "skills",   "tag": "—",       "title": "read-pdf",              "body": "First skill landed. Defines the SKILL.md schema CLAW will load against. PRs open for community contributions.", "date": "2026-04-22" }
+    { "repo": "hako-code", "tag": "v0.1.6", "title": "mithraeum provider + koi auto-default + naming rename",
+      "body": "Real `mithraeum` provider (distinct from ollama), force-prose tool mode for koi-class models, auto-defaults to local `hako-sho-stock` when present. Fixed `aiExtractStringValue` \\uXXXX handling so prose tool parser sees real `<tool>` blocks. Renames: `hakoCLAW` → `hako-code`, binary `hakoc` → `hako`, `~/.hakoc/` → `~/.hako/` with auto-migrator. CHANGELOG has the full punch list.",
+      "date": "2026-05-26" },
+    { "repo": "hako-edit", "tag": "v0.1.3", "title": "rename → hake + clipboard fidelity",
+      "body": "CLI rename `hako` → `hake`, source `hako.c` → `hake.c`, macros `HAKO_*` → `HAKE_*`, splash gains EDIT subtitle. OS-aware system clipboard transport (`pbcopy` / `wl-copy` / `xclip` / `clip`) — fixes tabs+indents getting mangled on yank-out → external paste. Subprocess wire updated to launch the renamed `hako` agent.",
+      "date": "2026-05-26" },
+    { "repo": "hako",      "tag": "v0",     "title": "koi v0 live + hakm CLI stub",
+      "body": "hako-sho-stock (Qwen2.5-Coder-3B + hako wrap) and hako-koi-mini-stock (Qwen2.5-Coder-7B + hako wrap) live via mithraeum runtime. Tool-aware Modelfile SYSTEM teaches the `<tool name=\"X\">{...}</tool>` schema with run_shell escape hatch. `hakm` shell-stub CLI (run / chat / list / pull / models). `engine/` scaffold for the vendored llama.cpp subset + own-kernel path landing in v0.1.7.",
+      "date": "2026-05-26" },
+    { "repo": "hako-code", "tag": "v0.1.5", "title": "OAuth quartet + ReAct",
+      "body": "Sign in with Claude Pro/Max, GitHub Copilot, GitHub Models (free), or OpenRouter (PKCE). /providers + /models discovery. /retry /edit /undo workflow. /toolmode react unlocks tools on any instruct model. Session cost in status line. TAB completion.",
+      "date": "2026-05-20" },
+    { "repo": "skills",    "tag": "—",       "title": "read-pdf",
+      "body": "First skill landed. Defines the SKILL.md schema hako-code loads against. PRs open for community contributions.",
+      "date": "2026-04-22" }
   ],
-  "build": "2026-05-20"
+  "build": "2026-05-26"
 }
 </script>
 
@@ -903,7 +944,7 @@
       if (f === "license" && info.license) el.textContent = info.license;
       if (f === "lang" && info.lang) el.textContent = info.lang;
       if (f === "skill-count" && info.skillCount != null) el.textContent = info.skillCount;
-      if (f === "claw-updated" && info.updated) el.textContent = info.updated;
+      if (f === "hako-updated" && info.updated) el.textContent = info.updated;
     });
   });
 
@@ -954,7 +995,7 @@
     });
   }
 
-  // Skill count summary on CLAW card
+  // Skill count summary on hako-code card
   const skillCountEl = document.querySelector('[data-field="skill-count"]');
   if (skillCountEl && data.skills) skillCountEl.textContent = data.skills.length;
 

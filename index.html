@@ -491,7 +491,7 @@
         Tools for<br/>the inner<br/>chamber<span class="blink" style="color: var(--gold);">.</span>
       </h1>
       <p class="lede">
-        Mithraeum builds <em>quiet</em> software for people who write code by hand. Three instruments under one suite — a modal editor (<code style="color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:0.9em">hake</code>), a terminal agent (<code style="color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:0.9em">hako</code>), and the local models that run them (<code style="color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:0.9em">hakm</code>). Bring your own keys, or run our <code style="color:var(--paper);font-family:'JetBrains Mono',monospace;font-size:0.9em">hako-sho-stock</code> weights on-device — no cloud, no telemetry, no daemon.
+        Mithraeum builds <em>quiet</em> software for people who write code by hand. Three instruments under one suite — a modal editor (<code style="color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:0.9em">hake</code>), a terminal agent (<code style="color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:0.9em">hako</code>), and the local models that run them (<code style="color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:0.9em">hakm</code>) — on a <em>from-scratch C inference engine</em>, no llama.cpp, no ollama. Bring your own keys, or run our <code style="color:var(--paper);font-family:'JetBrains Mono',monospace;font-size:0.9em">hako-sho-stock</code> weights on-device — no cloud, no telemetry, no daemon.
       </p>
       <div class="hero-meta">
         <span><b id="m-repo-count">3</b> repositories</span>
@@ -649,7 +649,7 @@
             </a>
           </div>
           <p>Local-first model family. <b>sho</b> (mini · 3B · Qwen2.5-Coder + hako wrap) and <b>koi-mini</b> (mid-small · 7B · Qwen2.5-Coder + hako wrap) live today, tool-aware out of the box. <b>koi</b> (mid · 14B/32B fine-tune) queued. <b>samurai</b> (max · 50B+ desktop) reserved.</p>
-          <p style="color: var(--ash); font-size: 12px;">— No cloud inference. ChatML-compatible. Honest framing: stock is stock, fine-tunes name their base + corpus. Native engine (vendored llama.cpp subset → own kernels) lands v0.1.7.</p>
+          <p style="color: var(--ash); font-size: 12px;">— No cloud inference. ChatML-compatible. Honest framing: stock is stock, fine-tunes name their base + corpus. <b>Native C engine — own loader, Q4_K/Q6_K + int8 kernels, BPE. No llama.cpp, no ggml, no ollama.</b> Runs in-process inside the agent.</p>
           <div class="product-actions">
             <a class="btn gold" href="#hako-install">curl install ↗</a>
             <a class="btn" href="https://github.com/mithraeums/hako" target="_blank" rel="noopener">Source ↗</a>
@@ -661,7 +661,7 @@
             <dt>CLI</dt><dd><code>hakm</code></dd>
             <dt>LIVE</dt><dd><code>hako-sho-stock</code></dd>
             <dt>TIERS</dt><dd>mini · mid · max</dd>
-            <dt>RUNTIME</dt><dd>mithraeum (ollama today, own v0.1.7)</dd>
+            <dt>RUNTIME</dt><dd>native C engine (no ollama)</dd>
             <dt>LICENSE</dt><dd>Apache 2.0 / MIT</dd>
           </dl>
         </div>
@@ -695,8 +695,9 @@
     </div>
 
     <div style="background: var(--shadow); border: 1px solid var(--rule-strong); padding: 20px 24px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; color: var(--paper); position: relative; overflow-x: auto; margin-top: 14px;">
-      <div style="color: var(--ash); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;">— hakm · models suite · <code style="color:var(--gold);">hakm</code> + <code style="color:var(--gold);">hako-sho-stock</code> —</div>
-      <code style="color: var(--bone); white-space: pre;">curl -fsSL https://mithraeums.github.io/hakm.sh | sh</code>
+      <div style="color: var(--ash); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;">— hakm · models suite · native C engine · <code style="color:var(--gold);">hakm</code> —</div>
+      <code style="color: var(--bone); white-space: pre;">git clone https://github.com/mithraeums/hako
+cd hako/engine && make        # libc + libm + pthread only — no deps</code>
     </div>
 
     <div style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 24px; color: var(--ash); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">
@@ -710,7 +711,7 @@
     <div style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px;">
       <div>
         <h4 style="font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--paper); margin: 0 0 8px;">Local model, zero config</h4>
-        <p style="color: var(--bone); font-size: 12px; margin: 0;">Install <code>hakm.sh</code>, launch <code>hako</code>. The agent detects <code>hako-sho-stock</code> and defaults to it via the mithraeum provider. No key, no <code>:login</code>, no cloud round-trip.</p>
+        <p style="color: var(--bone); font-size: 12px; margin: 0;">Convert a Qwen GGUF once with <code>tools/gguf2mlf.py</code>, drop the <code>.mlf2</code> in <code>~/.hako/models/</code>, launch <code>hako</code>. The agent runs it <b>in-process</b> via the linked engine — no key, no <code>:login</code>, no ollama, no cloud round-trip.</p>
       </div>
       <div>
         <h4 style="font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--paper); margin: 0 0 8px;">13 cloud providers when you want them</h4>
@@ -798,10 +799,10 @@
         <div class="release-date" data-field="release-date">2026-05-26</div>
       </div>
       <div class="release" data-repo="mithraeums/hako">
-        <div class="release-tag"><span>hako</span><b data-field="release-tag">v0</b></div>
-        <h3 class="release-version" data-field="release-title">koi v0 live + hakm CLI stub</h3>
-        <p class="release-msg" data-field="release-body"><code>hako-sho-stock</code> (Qwen2.5-Coder-3B + hako wrap) and <code>hako-koi-mini-stock</code> (Qwen2.5-Coder-7B + hako wrap) live via mithraeum runtime. Tool-aware Modelfile <code>SYSTEM</code> teaches the <code>&lt;tool name="X"&gt;{...}&lt;/tool&gt;</code> schema, including <code>run_shell</code> escape hatch for grep / find / sed / git / etc. <code>hakm</code> shell-stub CLI (<code>run</code> / <code>chat</code> / <code>list</code> / <code>pull</code> / <code>models</code>). <code>engine/</code> scaffold for the vendored llama.cpp subset + own-kernel path landing v0.1.7.</p>
-        <div class="release-date" data-field="release-date">2026-05-26</div>
+        <div class="release-tag"><span>hako</span><b data-field="release-tag">engine</b></div>
+        <h3 class="release-version" data-field="release-title">native C inference engine — no llama.cpp, no ollama</h3>
+        <p class="release-msg" data-field="release-body">From-scratch runtime runs the real Qwen2.5-Coder weights end to end: own GGUF→MLF2 loader, own Q4_K/Q6_K dequant + matmul (int8-activation × int4-weight fast path, AVX2), own BPE tokenizer — <b>libc + libm + pthread only</b>. Links into the agent as <code>libhakm.a</code> and runs <b>in-process</b> (no subprocess, no server, no port). <code>hako-sho-stock</code> (3B) + <code>hako-koi-mini-stock</code> (7B) convert + run; <code>~2.1×</code> from the int8 dot. We skipped the "vendor llama.cpp first" step and built the whole stack.</p>
+        <div class="release-date" data-field="release-date">2026-06-01</div>
       </div>
       <div class="release" data-repo="mithraeums/skills">
         <div class="release-tag"><span>skills</span><b data-field="release-tag">— pre-1.0 —</b></div>
@@ -904,9 +905,9 @@
     { "repo": "hako-edit", "tag": "v0.1.3", "title": "rename → hake + clipboard fidelity",
       "body": "CLI rename `hako` → `hake`, source `hako.c` → `hake.c`, macros `HAKO_*` → `HAKE_*`, splash gains EDIT subtitle. OS-aware system clipboard transport (`pbcopy` / `wl-copy` / `xclip` / `clip`) — fixes tabs+indents getting mangled on yank-out → external paste. Subprocess wire updated to launch the renamed `hako` agent.",
       "date": "2026-05-26" },
-    { "repo": "hako",      "tag": "v0",     "title": "koi v0 live + hakm CLI stub",
-      "body": "hako-sho-stock (Qwen2.5-Coder-3B + hako wrap) and hako-koi-mini-stock (Qwen2.5-Coder-7B + hako wrap) live via mithraeum runtime. Tool-aware Modelfile SYSTEM teaches the `<tool name=\"X\">{...}</tool>` schema with run_shell escape hatch. `hakm` shell-stub CLI (run / chat / list / pull / models). `engine/` scaffold for the vendored llama.cpp subset + own-kernel path landing in v0.1.7.",
-      "date": "2026-05-26" },
+    { "repo": "hako",      "tag": "engine", "title": "native C inference engine — no llama.cpp, no ollama",
+      "body": "From-scratch runtime runs the real Qwen2.5-Coder weights end to end: own GGUF→MLF2 loader, own Q4_K/Q6_K dequant + matmul (int8-activation × int4-weight fast path, AVX2), own BPE tokenizer — libc + libm + pthread only. Links into the agent as libhakm.a and runs in-process (no subprocess, no server, no ollama). hako-sho-stock (3B) + hako-koi-mini-stock (7B) convert + run; ~2.1x from the int8 dot. We skipped the 'vendor llama.cpp first' step and built the whole stack.",
+      "date": "2026-06-01" },
     { "repo": "hako-code", "tag": "v0.1.5", "title": "OAuth quartet + ReAct",
       "body": "Sign in with Claude Pro/Max, GitHub Copilot, GitHub Models (free), or OpenRouter (PKCE). /providers + /models discovery. /retry /edit /undo workflow. /toolmode react unlocks tools on any instruct model. Session cost in status line. TAB completion.",
       "date": "2026-05-20" },

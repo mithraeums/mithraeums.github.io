@@ -64,10 +64,10 @@ curl -fsSL https://mithraeums.github.io/hako.sh | sh
 curl -fsSL https://mithraeums.github.io/hake.sh | sh
 ```
 
-### hakm · the models suite (requires ollama)
+### hakm · the models suite — native C engine (no ollama, no llama.cpp)
 
 ```sh
-curl -fsSL https://mithraeums.github.io/hakm.sh | sh
+git clone https://github.com/mithraeums/hako && cd hako/engine && make
 ```
 
 <p align="center">

@@ -26,18 +26,18 @@
     <td width="40" align="center"><sub><b>I</b></sub></td>
     <td width="200"><b><a href="https://github.com/mithraeums/hako-edit">hako-edit</a></b><br/><sub>箱 · the box · <code>hake</code></sub></td>
     <td>Modal text editor in a single C file. Vim-bound, language-aware, 17 themes. <code>:rei</code> answers from inside.</td>
-    <td align="right"><sub>v0.1.3</sub></td>
+    <td align="right"><sub>v0.1.4</sub></td>
   </tr>
   <tr>
     <td align="center"><sub><b>II</b></sub></td>
     <td><b><a href="https://github.com/mithraeums/hako-code">hako-code</a></b><br/><sub>函 · the agent · <code>hako</code></sub></td>
     <td>Standalone terminal AI agent. Same C99 stack. 13+ providers, persistent sessions, sha-verified self-update.</td>
-    <td align="right"><sub>v0.1.6</sub></td>
+    <td align="right"><sub>v0.1.8</sub></td>
   </tr>
   <tr>
     <td align="center"><sub><b>III</b></sub></td>
     <td><b><a href="https://github.com/mithraeums/hako">hako</a></b><br/><sub>· in officina · <code>hakm</code></sub></td>
-    <td>Local models, trained for the cursor. <code>hako-koi-v0</code> live; <code>hako-koi-v1</code> fine-tune in flight.</td>
+    <td>Local models for the cursor on a from-scratch C engine. <code>hako-sho</code> (3B) + <code>hako-koi</code> (7B) live on HuggingFace; larger fine-tunes queued.</td>
     <td align="right"><sub><em>v0 live</em></sub></td>
   </tr>
   <tr>
@@ -67,7 +67,7 @@ curl -fsSL https://mithraeums.github.io/hake.sh | sh
 ### hakm · the models suite — native C engine (no ollama, no llama.cpp)
 
 ```sh
-git clone https://github.com/mithraeums/hako && cd hako/engine && make
+git clone https://github.com/mithraeums/hako && cd hako && make
 ```
 
 <p align="center">

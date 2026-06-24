@@ -1,0 +1,43 @@
+name: build mirror
+
+# Regenerate the no-JS plain mirror (html/index.html) from index.html's MITH object
+# on every push that changes the source. The bot commit only touches html/, which is
+# excluded from the trigger paths below — so it never retriggers itself.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - index.html
+      - tools/build-mirror.mjs
+      - .github/workflows/mirror.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-mirror
+  cancel-in-progress: true
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Generate mirror
+        run: node tools/build-mirror.mjs
+      - name: Commit if changed
+        run: |
+          git config user.name  "mithraeum-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add html/index.html
+          if git diff --cached --quiet; then
+            echo "mirror already up to date"
+          else
+            git commit -m "chore: regenerate /html mirror [skip ci]"
+            git push
+          fi

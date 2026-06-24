@@ -26,13 +26,13 @@
     <td width="40" align="center"><sub><b>I</b></sub></td>
     <td width="200"><b><a href="https://github.com/mithraeums/hako-edit">hako-edit</a></b><br/><sub>箱 · the box · <code>hake</code></sub></td>
     <td>Modal text editor in a single C file. Vim-bound, language-aware, 17 themes. <code>:rei</code> answers from inside.</td>
-    <td align="right"><sub>v0.1.4</sub></td>
+    <td align="right"><sub>v0.1.5</sub></td>
   </tr>
   <tr>
     <td align="center"><sub><b>II</b></sub></td>
-    <td><b><a href="https://github.com/mithraeums/hako-code">hako-code</a></b><br/><sub>函 · the agent · <code>hako</code></sub></td>
+    <td><b><a href="https://github.com/mithraeums/hako-code">hako-code</a></b><br/><sub>箱 · the agent · <code>hako</code></sub></td>
     <td>Standalone terminal AI agent. Same C99 stack. 13+ providers, persistent sessions, sha-verified self-update.</td>
-    <td align="right"><sub>v0.1.8</sub></td>
+    <td align="right"><sub>v0.2.0</sub></td>
   </tr>
   <tr>
     <td align="center"><sub><b>III</b></sub></td>
@@ -42,7 +42,7 @@
   </tr>
   <tr>
     <td align="center"><sub><b>·</b></sub></td>
-    <td><b><a href="https://github.com/mithraeums/skills">skills</a></b><br/><sub>技 · behaviors</sub></td>
+    <td><b><a href="https://github.com/mithraeums/skills">skills</a></b><br/><sub>箱 · behaviors</sub></td>
     <td>Markdown skills for hako-code and hako-edit. PR-driven catalog. corp is the inaugural entry.</td>
     <td align="right"><sub>pre-1.0</sub></td>
   </tr>
@@ -82,7 +82,7 @@ git clone https://github.com/mithraeums/hako && cd hako && make
   <tr>
     <td width="33%" valign="top"><b>I · Local first.</b><br/><sub>Your text, your keys, your weights. No telemetry. No silent network. The cursor is a private place.</sub></td>
     <td width="33%" valign="top"><b>II · Single binary.</b><br/><sub>One file. One C source. No JavaScript runtime to swallow your editor. The tool fits in a head.</sub></td>
-    <td width="33%" valign="top"><b>III · Bring your own deity.</b><br/><sub>Any model. Any provider. Any prompt. The agent is a peer at your terminal, not a stranger in the cloud.</sub></td>
+    <td width="33%" valign="top"><b>III · Bring your own model.</b><br/><sub>Any model. Any provider. Any prompt. The agent is a peer at your terminal, not a stranger in the cloud.</sub></td>
   </tr>
 </table>
 
@@ -90,7 +90,19 @@ git clone https://github.com/mithraeums/hako && cd hako && make
 
 ## Site
 
-`index.html` is the source for [mithraeums.github.io](https://mithraeums.github.io). `install.sh` is a thin proxy to the canonical hako-code installer in [`mithraeums/hako-code`](https://github.com/mithraeums/hako-code). `hake.sh` / `hako.sh` / `hakm.sh` are per-product proxies. Banner SVGs in `assets/` are referenced by every project README.
+`index.html` is the whole interactive site — one hand-written static file: inline CSS, inline vanilla JS, **no build step, no framework, no third-party script, no web font, no tracker**. It's a pane-switcher (terminal home view; nav tabs slide between Suite / Install / Skills / Releases).
+
+**One source of truth.** A single `MITH` object at the top of `index.html` holds every version, repo URL, the product copy, releases, and skills. Everything dynamic renders from it — bump a version *there*, once. No version string is hardcoded anywhere else.
+
+**Plain mirror.** `html/index.html` is a **generated**, JavaScript-free mirror for emacs `eww`, lynx/w3m, screen readers, and offline reading — live at [`/html`](https://mithraeums.github.io/html). Do **not** hand-edit it:
+
+```sh
+node tools/build-mirror.mjs    # reads MITH out of index.html, rewrites html/index.html
+```
+
+`.github/workflows/mirror.yml` runs this on every push that touches `index.html`, so the mirror can't go stale. Custom domain `mithraeum.studio` points at this same Pages site, so `/html` is served on both.
+
+`install.sh` is a thin proxy to the canonical hako-code installer in [`mithraeums/hako-code`](https://github.com/mithraeums/hako-code). `hake.sh` / `hako.sh` / `hakm.sh` are per-product proxies. Banner SVGs in `assets/` are referenced by every project README.
 
 <p align="center"><sub><a href="LICENSE">— SEE LICENSE —</a> &nbsp;·&nbsp; GPL-3.0 &nbsp;·&nbsp; copyleft</sub></p>
 

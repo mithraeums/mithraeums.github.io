@@ -714,7 +714,7 @@
 -->
 <script>
 window.MITH = (function(){
-  const ver = { hake: 'v0.1.5', hako: 'v0.2.0', engine: 'v0.0.2' };
+  const ver = { hake: 'v0.1.5', hako: 'v0.2.1', engine: 'v0.0.2' };
   const repo = {
     edit:    'https://github.com/mithraeums/hako-edit',
     code:    'https://github.com/mithraeums/hako-code',
@@ -729,9 +729,9 @@ window.MITH = (function(){
     build: '2026-06-18',
     email: 'contact@mithraeum.studio',
     releases: [
-      { repo:'hako-code', tag: ver.hako, title:'deterministic local tools · permission gate · MCP',
-        body:'A per-call trust gate at the tool chokepoint — <code>[y]</code> once / <code>[n]</code> no / <code>[a]</code> always (scoped), <code>:auto</code> / <code>--yolo</code> to bypass. An MCP stdio client (<code>~/.hako/mcp.json</code>, <code>mcp__server__tool</code>). And the harness that makes a 3B/7B local model call tools deterministically: greedy tool turns, a raw <code>&lt;write_file&gt;</code> channel, dedup, repair nudges. Persistent <code>hakm</code> subprocess with KV reuse — warm turns in seconds.',
-        date:'2026-06-18' },
+      { repo:'hako-code', tag: ver.hako, title:'reliable writes · a 3B that actually works',
+        body:'Whole-file writes no longer truncate — the 2048-token output cap that turned even a capable model into a &ldquo;cut off &rarr; reverted &rarr; corrupt&rdquo; loop is gone (tool turns floor at 8k / 4k; a stop sequence means it is never overspent). A <code>:model</code> arrow-key picker joins <code>:theme</code> / <code>:provider</code>, and <code>~/.hakorc</code> now beats a stale global default. For small local models: <b>auto-orient</b> — the harness runs <code>list_dir(&quot;.&quot;)</code> itself when the model stalls instead of asking you to — plus a trimmed local tool set, a function-call-paren dialect, and a shape-only prompt example, so a 3B lists, reads, writes and fixes without hand-holding.',
+        date:'2026-07-05' },
       { repo:'hako-edit', tag: ver.hake, title:'in-pane agent permissions · install + update from the editor',
         body:'The Rei pane now shows the agent’s tool-permission prompts inline — answer <code>[y/n/a]</code> without leaving your file; <code>:auto</code> / <code>:noauto</code> toggle it. <code>:install-agent</code> / <code>:update-agent</code> add or upgrade <code>hako</code> from inside the editor. A <code>NO_AGENT=1</code> build ships an editor that degrades gracefully. Protocol-2 handshake surfaces the agent version in the pane.',
         date:'2026-06-18' },

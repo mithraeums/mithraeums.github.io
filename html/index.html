@@ -60,12 +60,12 @@
   </article>
   <article id="hako">
     <h3>hako <small>箱 · hako-code · the agent</small></h3>
-    <p class="status">— II — agent &nbsp;·&nbsp; v0.2.0 · stable</p>
+    <p class="status">— II — agent &nbsp;·&nbsp; v0.2.1 · stable</p>
     <p>A standalone terminal AI agent in one C file. Defaults to any installed hako model (<code>hako-sho</code> 3B / <code>hako-koi</code> 7B) — no key, no cloud. Adds 13 cloud providers (Anthropic OAuth, Copilot, GH Models, OpenRouter, OpenAI-compat) when you want them.</p>
     <p class="sub">— Persistent sessions · skills as markdown · trust-gated tools · prose tool mode for small models · sha-verified self-update.</p>
     <dl>
       <dt>CLI</dt><dd>hako</dd>
-      <dt>VERSION</dt><dd>v0.2.0</dd>
+      <dt>VERSION</dt><dd>v0.2.1</dd>
       <dt>DEFAULT</dt><dd>hako-sho</dd>
       <dt>PROVIDERS</dt><dd>1 local + 13 cloud</dd>
       <dt>LICENSE</dt><dd>GPL-3.0</dd>
@@ -122,9 +122,9 @@ git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make<
 
 <h2 id="releases">Releases — latest from each chamber</h2>
   <article>
-    <h3>hako-code <small>v0.2.0 · 2026-06-18</small></h3>
-    <p><b>deterministic local tools · permission gate · MCP</b></p>
-    <p>A per-call trust gate at the tool chokepoint — <code>[y]</code> once / <code>[n]</code> no / <code>[a]</code> always (scoped), <code>:auto</code> / <code>--yolo</code> to bypass. An MCP stdio client (<code>~/.hako/mcp.json</code>, <code>mcp__server__tool</code>). And the harness that makes a 3B/7B local model call tools deterministically: greedy tool turns, a raw <code>&amp;lt;write_file&amp;gt;</code> channel, dedup, repair nudges. Persistent <code>hakm</code> subprocess with KV reuse — warm turns in seconds.</p>
+    <h3>hako-code <small>v0.2.1 · 2026-07-05</small></h3>
+    <p><b>reliable writes · a 3B that actually works</b></p>
+    <p>Whole-file writes no longer truncate — the 2048-token output cap that turned even a capable model into a &amp;ldquo;cut off &amp;rarr; reverted &amp;rarr; corrupt&amp;rdquo; loop is gone (tool turns floor at 8k / 4k; a stop sequence means it is never overspent). A <code>:model</code> arrow-key picker joins <code>:theme</code> / <code>:provider</code>, and <code>~/.hakorc</code> now beats a stale global default. For small local models: <b>auto-orient</b> — the harness runs <code>list_dir(&amp;quot;.&amp;quot;)</code> itself when the model stalls instead of asking you to — plus a trimmed local tool set, a function-call-paren dialect, and a shape-only prompt example, so a 3B lists, reads, writes and fixes without hand-holding.</p>
   </article>
   <article>
     <h3>hako-edit <small>v0.1.5 · 2026-06-18</small></h3>

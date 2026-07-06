@@ -32,7 +32,7 @@
     <td align="center"><sub><b>II</b></sub></td>
     <td><b><a href="https://github.com/mithraeums/hako-code">hako-code</a></b><br/><sub>箱 · the agent · <code>hako</code></sub></td>
     <td>Standalone terminal AI agent. Same C99 stack. 13+ providers, persistent sessions, sha-verified self-update.</td>
-    <td align="right"><sub>v0.2.0</sub></td>
+    <td align="right"><sub>v0.2.1</sub></td>
   </tr>
   <tr>
     <td align="center"><sub><b>III</b></sub></td>

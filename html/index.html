@@ -46,14 +46,14 @@
 <h2>Suite — three instruments, one chamber</h2>
   <article id="hake">
     <h3>hake <small>箱 · hako-edit · the box</small></h3>
-    <p class="status">— I — editor &nbsp;·&nbsp; v0.1.5 · stable</p>
+    <p class="status">— I — editor &nbsp;·&nbsp; v0.1.6 · stable</p>
     <p>A single-file modal text editor in C99. Vim-bound, language-aware, multi-pane. Embeds the <code>hako</code> agent in a split pane, so you can talk to a model without leaving your file.</p>
-    <p class="sub">— Modal editing · 40+ syntax modes · 17 themes · OS-aware clipboard · zero runtime deps beyond libc + curl.</p>
+    <p class="sub">— Modal editing · 40+ syntax modes · 18 themes · a live runner pane · OS-aware clipboard · zero runtime deps beyond libc + curl.</p>
     <dl>
       <dt>CLI</dt><dd>hake</dd>
-      <dt>VERSION</dt><dd>v0.1.5</dd>
+      <dt>VERSION</dt><dd>v0.1.6</dd>
       <dt>LANG</dt><dd>C99 single file</dd>
-      <dt>THEMES</dt><dd>17</dd>
+      <dt>THEMES</dt><dd>18</dd>
       <dt>LICENSE</dt><dd>GPL-3.0</dd>
     </dl>
     <p class="actions"><a href="#install">curl install ↗</a> &nbsp;·&nbsp; <a href="https://github.com/mithraeums/hako-edit" target="_blank" rel="noopener">Source ↗</a> &nbsp;·&nbsp; <a href="https://github.com/mithraeums/hako-edit/releases" target="_blank" rel="noopener">Releases</a></p>
@@ -127,9 +127,9 @@ git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make<
     <p>Whole-file writes no longer truncate — the 2048-token output cap that turned even a capable model into a &amp;ldquo;cut off &amp;rarr; reverted &amp;rarr; corrupt&amp;rdquo; loop is gone (tool turns floor at 8k / 4k; a stop sequence means it is never overspent). A <code>:model</code> arrow-key picker joins <code>:theme</code> / <code>:provider</code>, and <code>~/.hakorc</code> now beats a stale global default. For small local models: <b>auto-orient</b> — the harness runs <code>list_dir(&amp;quot;.&amp;quot;)</code> itself when the model stalls instead of asking you to — plus a trimmed local tool set, a function-call-paren dialect, and a shape-only prompt example, so a 3B lists, reads, writes and fixes without hand-holding.</p>
   </article>
   <article>
-    <h3>hako-edit <small>v0.1.5 · 2026-06-18</small></h3>
-    <p><b>in-pane agent permissions · install + update from the editor</b></p>
-    <p>The Rei pane now shows the agent’s tool-permission prompts inline — answer <code>[y/n/a]</code> without leaving your file; <code>:auto</code> / <code>:noauto</code> toggle it. <code>:install-agent</code> / <code>:update-agent</code> add or upgrade <code>hako</code> from inside the editor. A <code>NO_AGENT=1</code> build ships an editor that degrades gracefully. Protocol-2 handshake surfaces the agent version in the pane.</p>
+    <h3>hako-edit <small>v0.1.6 · 2026-07-09</small></h3>
+    <p><b>a runner pane · one thousand fewer lines</b></p>
+    <p>The compile loop moves in: <code>:build</code> / <code>:test</code> / <code>:run</code> stream into a bottom pane while you keep editing, <code>]e</code> jumps straight to <code>file:line</code> errors, and one key hands the error to the Rei agent. <code>:!cmd</code> for quick one-shots. Underneath, a full lean pass — dead scaffolding out, duplicated logic folded into shared helpers, themes now a data table — <b>~1,000 lines lighter</b> with the same behavior, plus real fixes: visible selection boxes on every theme, a status bar you can read, an explorer that splits instead of clobbering unsaved work.</p>
   </article>
   <article>
     <h3>hako <small>engine v0.0.2 · 2026-06-18</small></h3>
@@ -138,7 +138,7 @@ git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make<
   </article>
 
 <footer>
-  <p>© MMXXVI · ordo mithraeum · <a href="../LICENSE">GPL-3.0</a> · BUILD 2026-06-18</p>
+  <p>© MMXXVI · ordo mithraeum · <a href="../LICENSE">GPL-3.0</a> · BUILD 2026-07-09</p>
   <p><a href="https://github.com/mithraeums" target="_blank" rel="noopener">source ↗</a> ·
      <a href="index.html" download>⇩ this page</a> ·
      <a href="https://github.com/orgs/mithraeums/discussions" target="_blank" rel="noopener">discussions ↗</a> ·

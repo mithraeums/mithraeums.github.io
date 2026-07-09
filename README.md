@@ -25,8 +25,8 @@
   <tr>
     <td width="40" align="center"><sub><b>I</b></sub></td>
     <td width="200"><b><a href="https://github.com/mithraeums/hako-edit">hako-edit</a></b><br/><sub>箱 · the box · <code>hake</code></sub></td>
-    <td>Modal text editor in a single C file. Vim-bound, language-aware, 17 themes. <code>:rei</code> answers from inside.</td>
-    <td align="right"><sub>v0.1.5</sub></td>
+    <td>Modal text editor in a single C file. Vim-bound, language-aware, 18 themes. <code>:rei</code> answers from inside.</td>
+    <td align="right"><sub>v0.1.6</sub></td>
   </tr>
   <tr>
     <td align="center"><sub><b>II</b></sub></td>

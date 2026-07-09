@@ -714,7 +714,7 @@
 -->
 <script>
 window.MITH = (function(){
-  const ver = { hake: 'v0.1.5', hako: 'v0.2.1', engine: 'v0.0.2' };
+  const ver = { hake: 'v0.1.6', hako: 'v0.2.1', engine: 'v0.0.2' };
   const repo = {
     edit:    'https://github.com/mithraeums/hako-edit',
     code:    'https://github.com/mithraeums/hako-code',
@@ -726,15 +726,15 @@ window.MITH = (function(){
   };
   return {
     ver, repo,
-    build: '2026-06-18',
+    build: '2026-07-09',
     email: 'contact@mithraeum.studio',
     releases: [
       { repo:'hako-code', tag: ver.hako, title:'reliable writes · a 3B that actually works',
         body:'Whole-file writes no longer truncate — the 2048-token output cap that turned even a capable model into a &ldquo;cut off &rarr; reverted &rarr; corrupt&rdquo; loop is gone (tool turns floor at 8k / 4k; a stop sequence means it is never overspent). A <code>:model</code> arrow-key picker joins <code>:theme</code> / <code>:provider</code>, and <code>~/.hakorc</code> now beats a stale global default. For small local models: <b>auto-orient</b> — the harness runs <code>list_dir(&quot;.&quot;)</code> itself when the model stalls instead of asking you to — plus a trimmed local tool set, a function-call-paren dialect, and a shape-only prompt example, so a 3B lists, reads, writes and fixes without hand-holding.',
         date:'2026-07-05' },
-      { repo:'hako-edit', tag: ver.hake, title:'in-pane agent permissions · install + update from the editor',
-        body:'The Rei pane now shows the agent’s tool-permission prompts inline — answer <code>[y/n/a]</code> without leaving your file; <code>:auto</code> / <code>:noauto</code> toggle it. <code>:install-agent</code> / <code>:update-agent</code> add or upgrade <code>hako</code> from inside the editor. A <code>NO_AGENT=1</code> build ships an editor that degrades gracefully. Protocol-2 handshake surfaces the agent version in the pane.',
-        date:'2026-06-18' },
+      { repo:'hako-edit', tag: ver.hake, title:'a runner pane · one thousand fewer lines',
+        body:'The compile loop moves in: <code>:build</code> / <code>:test</code> / <code>:run</code> stream into a bottom pane while you keep editing, <code>]e</code> jumps straight to <code>file:line</code> errors, and one key hands the error to the Rei agent. <code>:!cmd</code> for quick one-shots. Underneath, a full lean pass — dead scaffolding out, duplicated logic folded into shared helpers, themes now a data table — <b>~1,000 lines lighter</b> with the same behavior, plus real fixes: visible selection boxes on every theme, a status bar you can read, an explorer that splits instead of clobbering unsaved work.',
+        date:'2026-07-09' },
       { repo:'hako', tag: 'engine ' + ver.engine, title:'persistent serve · KV reuse · speed',
         body:'<code>hakm --serve</code> keeps the model resident and reuses the KV prefix across turns. Batched prefill, FMA q4k, a Q6_K int8 path, threaded attention, f16 KV — decode climbs to <code>~8 tok/s</code> flat-with-depth on a CPU-only i3, warm agent turns <code>~3-5s</code> (were 5+ min). Added <code>--version</code>. Still <b>libc + libm + pthread</b>, no llama.cpp, no ollama.',
         date:'2026-06-18' },
@@ -754,8 +754,8 @@ window.MITH = (function(){
       hake:{ codename:'— I — editor', name:'hake', latin:'箱 · hako-edit · the box',
         status: ver.hake+' · stable', warn:false,
         desc:'A single-file modal text editor in C99. Vim-bound, language-aware, multi-pane. Embeds the <code>hako</code> agent in a split pane, so you can talk to a model without leaving your file.',
-        sub:'Modal editing · 40+ syntax modes · 17 themes · OS-aware clipboard · zero runtime deps beyond libc + curl.',
-        meta:[['CLI','hake'],['VERSION',ver.hake],['LANG','C99 single file'],['THEMES','17'],['LICENSE','GPL-3.0']],
+        sub:'Modal editing · 40+ syntax modes · 18 themes · a live runner pane · OS-aware clipboard · zero runtime deps beyond libc + curl.',
+        meta:[['CLI','hake'],['VERSION',ver.hake],['LANG','C99 single file'],['THEMES','18'],['LICENSE','GPL-3.0']],
         actions:[['curl install ↗','#install',1,0],['Source ↗',repo.edit,0,1],['Releases',repo.edit+'/releases',0,1]] },
       hako:{ codename:'— II — agent', name:'hako', latin:'箱 · hako-code · the agent',
         status: ver.hako+' · stable', warn:false,
@@ -882,7 +882,7 @@ window.MITH = (function(){
   };
   const DETAIL={
     hake:['<span class="g">hake</span> — the editor · <span class="di">hako-edit · '+V.hake+' · GPL-3.0</span>',
-      'Single-file modal text editor in C99. Vim-bound, 40+ syntax modes, 17 themes.',
+      'Single-file modal text editor in C99. Vim-bound, 40+ syntax modes, 18 themes.',
       'Embeds <span class="ch">hako</span> in a split Rei pane — talk to a model without leaving your file.',
       'Zero runtime deps beyond libc + curl.   <span class="di">open hako-edit</span>'],
     hako:['<span class="g">hako</span> — the agent · <span class="di">hako-code · '+V.hako+' · GPL-3.0</span>',

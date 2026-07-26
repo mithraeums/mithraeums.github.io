@@ -714,7 +714,7 @@
 -->
 <script>
 window.MITH = (function(){
-  const ver = { hake: 'v0.1.6', hako: 'v0.2.1', engine: 'v0.0.2' };
+  const ver = { hake: 'v0.1.6', hako: 'v0.2.1', engine: 'v0.0.3' };
   const repo = {
     edit:    'https://github.com/mithraeums/hako-edit',
     code:    'https://github.com/mithraeums/hako-code',
@@ -735,9 +735,9 @@ window.MITH = (function(){
       { repo:'hako-edit', tag: ver.hake, title:'a runner pane · one thousand fewer lines',
         body:'The compile loop moves in: <code>:build</code> / <code>:test</code> / <code>:run</code> stream into a bottom pane while you keep editing, <code>]e</code> jumps straight to <code>file:line</code> errors, and one key hands the error to the Rei agent. <code>:!cmd</code> for quick one-shots. Underneath, a full lean pass — dead scaffolding out, duplicated logic folded into shared helpers, themes now a data table — <b>~1,000 lines lighter</b> with the same behavior, plus real fixes: visible selection boxes on every theme, a status bar you can read, an explorer that splits instead of clobbering unsaved work.',
         date:'2026-07-09' },
-      { repo:'hako', tag: 'engine ' + ver.engine, title:'persistent serve · KV reuse · speed',
-        body:'<code>hakm --serve</code> keeps the model resident and reuses the KV prefix across turns. Batched prefill, FMA q4k, a Q6_K int8 path, threaded attention, f16 KV — decode climbs to <code>~8 tok/s</code> flat-with-depth on a CPU-only i3, warm agent turns <code>~3-5s</code> (were 5+ min). Added <code>--version</code>. Still <b>libc + libm + pthread</b>, no llama.cpp, no ollama.',
-        date:'2026-06-18' },
+      { repo:'hako', tag: 'engine ' + ver.engine, title:'faster prefill · steady under pressure',
+        body:'The Q4_K prefill kernel drops half its per-group MACs: the min term is activation-only, so <code>scale·Σx</code> is folded once per activation and reused across every weight row — <b>~1.3× prefill</b> on a CPU-only i3, greedy output bit-identical (a <code>make test_kdot</code> proves it against a scalar reference). A repetition penalty joins the sampler (<code>--rep</code>, default off so tool turns stay deterministic), and <code>hakm_ctx_new</code> now guards its allocations and fails clean instead of segfaulting when RAM runs short. Still <b>libc + libm + pthread</b>, no llama.cpp, no ollama.',
+        date:'2026-07-18' },
     ],
     skills: [
       { slug:'corp',      title:'corp',      summary:'A company in a folder. CEO · DEV · DESIGN · QA · ARCH — routes tasks by domain. Ships as CLAUDE.md + AGENTS.md, molds to its host.' },

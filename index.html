@@ -714,7 +714,7 @@
 -->
 <script>
 window.MITH = (function(){
-  const ver = { hake: 'v0.1.6', hako: 'v0.2.1', engine: 'v0.0.3' };
+  const ver = { hake: 'v0.1.6', hako: 'v0.2.2', engine: 'v0.0.3' };
   const repo = {
     edit:    'https://github.com/mithraeums/hako-edit',
     code:    'https://github.com/mithraeums/hako-code',
@@ -726,12 +726,12 @@ window.MITH = (function(){
   };
   return {
     ver, repo,
-    build: '2026-07-09',
+    build: '2026-07-30',
     email: 'contact@mithraeum.studio',
     releases: [
-      { repo:'hako-code', tag: ver.hako, title:'reliable writes · a 3B that actually works',
-        body:'Whole-file writes no longer truncate — the 2048-token output cap that turned even a capable model into a &ldquo;cut off &rarr; reverted &rarr; corrupt&rdquo; loop is gone (tool turns floor at 8k / 4k; a stop sequence means it is never overspent). A <code>:model</code> arrow-key picker joins <code>:theme</code> / <code>:provider</code>, and <code>~/.hakorc</code> now beats a stale global default. For small local models: <b>auto-orient</b> — the harness runs <code>list_dir(&quot;.&quot;)</code> itself when the model stalls instead of asking you to — plus a trimmed local tool set, a function-call-paren dialect, and a shape-only prompt example, so a 3B lists, reads, writes and fixes without hand-holding.',
-        date:'2026-07-05' },
+      { repo:'hako-code', tag: ver.hako, title:'model lists that keep themselves current',
+        body:'Model names came from a table we maintained by hand, and it went stale between every release. Now <code>:models</code> and the <code>:model</code> picker read each provider&rsquo;s own catalog &mdash; Anthropic, OpenAI, OpenRouter, Groq, DeepSeek, Mistral, Gemini, Copilot, ollama and the rest &mdash; cached for a day, refreshed with <code>:models refresh</code>, and falling back to the built-in list when you are offline. Embedding and speech entries are filtered out, the newest models sort first, and <code>/</code> filters as you type, because a gateway can hand back three hundred of them. <b>TAB now behaves like a shell</b>: longest common prefix, then a column list &mdash; over commands, provider and theme names, and file paths anywhere in a line. Plus a press-any-key splash that sizes itself down to a phone-width terminal.',
+        date:'2026-07-30' },
       { repo:'hako-edit', tag: ver.hake, title:'a runner pane · one thousand fewer lines',
         body:'The compile loop moves in: <code>:build</code> / <code>:test</code> / <code>:run</code> stream into a bottom pane while you keep editing, <code>]e</code> jumps straight to <code>file:line</code> errors, and one key hands the error to the Rei agent. <code>:!cmd</code> for quick one-shots. Underneath, a full lean pass — dead scaffolding out, duplicated logic folded into shared helpers, themes now a data table — <b>~1,000 lines lighter</b> with the same behavior, plus real fixes: visible selection boxes on every theme, a status bar you can read, an explorer that splits instead of clobbering unsaved work.',
         date:'2026-07-09' },

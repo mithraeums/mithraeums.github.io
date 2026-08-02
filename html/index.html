@@ -60,12 +60,12 @@
   </article>
   <article id="hako">
     <h3>hako <small>箱 · hako-code · the agent</small></h3>
-    <p class="status">— II — agent &nbsp;·&nbsp; v0.2.1 · stable</p>
+    <p class="status">— II — agent &nbsp;·&nbsp; v0.2.2 · stable</p>
     <p>A standalone terminal AI agent in one C file. Defaults to any installed hako model (<code>hako-sho</code> 3B / <code>hako-koi</code> 7B) — no key, no cloud. Adds 13 cloud providers (Anthropic OAuth, Copilot, GH Models, OpenRouter, OpenAI-compat) when you want them.</p>
     <p class="sub">— Persistent sessions · skills as markdown · trust-gated tools · prose tool mode for small models · sha-verified self-update.</p>
     <dl>
       <dt>CLI</dt><dd>hako</dd>
-      <dt>VERSION</dt><dd>v0.2.1</dd>
+      <dt>VERSION</dt><dd>v0.2.2</dd>
       <dt>DEFAULT</dt><dd>hako-sho</dd>
       <dt>PROVIDERS</dt><dd>1 local + 13 cloud</dd>
       <dt>LICENSE</dt><dd>GPL-3.0</dd>
@@ -122,9 +122,9 @@ git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make<
 
 <h2 id="releases">Releases — latest from each chamber</h2>
   <article>
-    <h3>hako-code <small>v0.2.1 · 2026-07-05</small></h3>
-    <p><b>reliable writes · a 3B that actually works</b></p>
-    <p>Whole-file writes no longer truncate — the 2048-token output cap that turned even a capable model into a &amp;ldquo;cut off &amp;rarr; reverted &amp;rarr; corrupt&amp;rdquo; loop is gone (tool turns floor at 8k / 4k; a stop sequence means it is never overspent). A <code>:model</code> arrow-key picker joins <code>:theme</code> / <code>:provider</code>, and <code>~/.hakorc</code> now beats a stale global default. For small local models: <b>auto-orient</b> — the harness runs <code>list_dir(&amp;quot;.&amp;quot;)</code> itself when the model stalls instead of asking you to — plus a trimmed local tool set, a function-call-paren dialect, and a shape-only prompt example, so a 3B lists, reads, writes and fixes without hand-holding.</p>
+    <h3>hako-code <small>v0.2.2 · 2026-07-30</small></h3>
+    <p><b>model lists that keep themselves current</b></p>
+    <p>Model names came from a table we maintained by hand, and it went stale between every release. Now <code>:models</code> and the <code>:model</code> picker read each provider&amp;rsquo;s own catalog &amp;mdash; Anthropic, OpenAI, OpenRouter, Groq, DeepSeek, Mistral, Gemini, Copilot, ollama and the rest &amp;mdash; cached for a day, refreshed with <code>:models refresh</code>, and falling back to the built-in list when you are offline. Embedding and speech entries are filtered out, the newest models sort first, and <code>/</code> filters as you type, because a gateway can hand back three hundred of them. <b>TAB now behaves like a shell</b>: longest common prefix, then a column list &amp;mdash; over commands, provider and theme names, and file paths anywhere in a line. Plus a press-any-key splash that sizes itself down to a phone-width terminal.</p>
   </article>
   <article>
     <h3>hako-edit <small>v0.1.6 · 2026-07-09</small></h3>
@@ -138,7 +138,7 @@ git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make<
   </article>
 
 <footer>
-  <p>© MMXXVI · ordo mithraeum · <a href="../LICENSE">GPL-3.0</a> · BUILD 2026-07-09</p>
+  <p>© MMXXVI · ordo mithraeum · <a href="../LICENSE">GPL-3.0</a> · BUILD 2026-07-30</p>
   <p><a href="https://github.com/mithraeums" target="_blank" rel="noopener">source ↗</a> ·
      <a href="index.html" download>⇩ this page</a> ·
      <a href="https://github.com/orgs/mithraeums/discussions" target="_blank" rel="noopener">discussions ↗</a> ·

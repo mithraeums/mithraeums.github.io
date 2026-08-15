@@ -537,41 +537,14 @@
     pointer-events: none; z-index: 0; opacity: 0.06;
   }
   .term-hero .arch-ghost svg { width: min(80vh, 760px); height: min(80vh, 760px); }
-  .tsh {
-    position: relative; z-index: 1;
-    background: #060605;
-    border: 1px solid var(--rule-strong);
-    box-shadow: 0 30px 90px #000000aa;
-    display: flex; flex-direction: column;
-    height: min(70vh, 600px);
-  }
-  .tsh-bar {
-    display: flex; align-items: center; gap: 8px;
-    padding: 9px 14px; border-bottom: 1px solid var(--rule);
-    background: var(--shadow); font-size: 11px; color: var(--ash); letter-spacing: 0.04em;
-  }
-  .tsh-bar .o { width: 9px; height: 9px; border-radius: 50%; border: 1px solid var(--ash); }
-  .tsh-bar .o.g { border-color: var(--gold); }
-  .tsh-bar .grow { margin-left: auto; color: var(--ash); }
-  .tsh-body {
-    flex: 1; overflow-y: auto; padding: 16px 18px;
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 13px; line-height: 1.55; color: var(--bone);
-    white-space: pre-wrap; word-break: break-word; cursor: text;
-  }
-  .tsh-body::-webkit-scrollbar { width: 8px; }
-  .tsh-body::-webkit-scrollbar-thumb { background: var(--stone); }
-  .tsh-line { display: block; white-space: pre-wrap; }
   .tsh .g { color: var(--gold); } .tsh .ph { color: var(--phosphor); }
   .tsh .di { color: var(--ash); } .tsh .pa { color: var(--paper); }
   .tsh .ch { color: var(--chalk); } .tsh .ru { color: var(--rust); }
-  .tsh-prompt { color: var(--gold); }
   .tsh-cmd { color: var(--chalk); }
   .tsh-cur {
     display: inline-block; width: 8px; height: 15px; background: var(--phosphor);
     vertical-align: -2px; margin-left: 1px; animation: blink 1.05s steps(1) infinite;
   }
-  .tsh-input { position: absolute; bottom: 0; left: 0; width: 1px; height: 1px; opacity: 0; border: 0; padding: 0; }
   .tsh-hint {
     margin-top: 16px; display: flex; gap: 18px; align-items: center; flex-wrap: wrap;
     font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ash);
@@ -598,20 +571,22 @@
     text-transform: uppercase; color: var(--chalk); margin: 0 0 18px;
   }
   .tsh-lede { font-size: 15px; color: var(--paper); line-height: 1.7; margin: 0; }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 26px; }
+  .hero-cta .cta {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--bone); background: var(--shadow);
+    border: 1px solid var(--rule-strong); padding: 12px 20px;
+    transition: all 0.15s ease;
+  }
+  .hero-cta .cta:hover { border-color: var(--gold); color: var(--chalk); background: #1b1812; }
+  .hero-cta .cta-primary { color: var(--ink); background: var(--gold); border-color: var(--gold); }
+  .hero-cta .cta-primary:hover { background: var(--chalk); border-color: var(--chalk); color: var(--ink); }
+  .hero-note { flex-basis: 100%; margin: 4px 0 0; font-size: 12px; color: var(--ash); line-height: 1.6; }
   .tsh-lede .di { color: var(--gold); }
   /* clickable command chips — no typing required */
-  .tsh-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
-  .tsh-chips button {
-    font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em;
-    color: var(--bone); background: var(--shadow); border: 1px solid var(--rule-strong);
-    padding: 8px 14px; cursor: pointer; transition: all 0.15s ease;
-  }
-  .tsh-chips button::before { content: "› "; color: var(--gold); }
-  .tsh-chips button:hover { border-color: var(--gold); color: var(--chalk); background: #1b1812; }
   @media (max-width: 640px) {
     .term-hero { padding: 24px 0 40px; }
-    .tsh { height: min(60vh, 460px); }
-    .tsh-body { font-size: 12px; }
     .tsh-hint { gap: 12px; }
     .tsh-scroll { margin-left: 0; }
     .tsh-h1 { font-size: clamp(30px, 9vw, 44px); }
@@ -714,11 +689,13 @@
 -->
 <script>
 window.MITH = (function(){
-  const ver = { hake: 'v0.1.6', hako: 'v0.2.2', engine: 'v0.0.3' };
+  const ver = { hake: 'v0.1.6', hako: 'v0.2.3', engine: 'v0.0.3', studio: 'v0.0.2' };
   const repo = {
     edit:    'https://github.com/mithraeums/hako-edit',
     code:    'https://github.com/mithraeums/hako-code',
     models:  'https://github.com/mithraeums/hako',
+    studio:  'https://github.com/mithraeums/hako-studio',
+    app:     'https://hako.mithraeum.studio',
     skills:  'https://github.com/mithraeums/skills',
     org:     'https://github.com/mithraeums',
     discuss: 'https://github.com/orgs/mithraeums/discussions',
@@ -726,10 +703,13 @@ window.MITH = (function(){
   };
   return {
     ver, repo,
-    build: '2026-07-30',
+    build: '2026-08-14',
     email: 'contact@mithraeum.studio',
     releases: [
-      { repo:'hako-code', tag: ver.hako, title:'model lists that keep themselves current',
+      { repo:'hako-code', tag: ver.hako, title:'hako studio — the agent in a browser tab',
+        body:'<code>hako --serve</code> opens the same agent in a browser: chat, tool-approval boxes, a folder browser, per-folder sessions you can rename and delete, the model picker, four themes. It is <b>a mode of the binary, not a server</b> &mdash; same loop, same sessions, same credentials, same trust as the terminal, so a conversation started in one finishes in the other. The page itself is compiled into the executable, so one file is the whole product and it works with no network at all. <code>hako --serve --lan</code> prints a URL to open on your phone, and the UI is built for a thumb: drawer navigation, keyboard-aware layout, add it to your home screen. No backend, no database, no account, nothing stored anywhere but your own machine. This release also lifts the agent onto a <b>platform seam</b> — the same <code>hako.c</code> now compiles to WebAssembly, which is what <b>hako studio</b> runs on in a browser — adds <code>--token</code> so you can reach your own machine through a tunnel safely, and brings <code>--serve</code> to Windows.',
+        date:'2026-08-14' },
+      { repo:'hako-code', tag: 'v0.2.2', title:'model lists that keep themselves current',
         body:'Model names came from a table we maintained by hand, and it went stale between every release. Now <code>:models</code> and the <code>:model</code> picker read each provider&rsquo;s own catalog &mdash; Anthropic, OpenAI, OpenRouter, Groq, DeepSeek, Mistral, Gemini, Copilot, ollama and the rest &mdash; cached for a day, refreshed with <code>:models refresh</code>, and falling back to the built-in list when you are offline. Embedding and speech entries are filtered out, the newest models sort first, and <code>/</code> filters as you type, because a gateway can hand back three hundred of them. <b>TAB now behaves like a shell</b>: longest common prefix, then a column list &mdash; over commands, provider and theme names, and file paths anywhere in a line. Plus a press-any-key splash that sizes itself down to a phone-width terminal.',
         date:'2026-07-30' },
       { repo:'hako-edit', tag: ver.hake, title:'a runner pane · one thousand fewer lines',
@@ -759,18 +739,24 @@ window.MITH = (function(){
         actions:[['curl install ↗','#install',1,0],['Source ↗',repo.edit,0,1],['Releases',repo.edit+'/releases',0,1]] },
       hako:{ codename:'— II — agent', name:'hako', latin:'箱 · hako-code · the agent',
         status: ver.hako+' · stable', warn:false,
-        desc:'A standalone terminal AI agent in one C file. Defaults to any installed hako model (<code>hako-sho</code> 3B / <code>hako-koi</code> 7B) — no key, no cloud. Adds 13 cloud providers (Anthropic OAuth, Copilot, GH Models, OpenRouter, OpenAI-compat) when you want them.',
-        sub:'Persistent sessions · skills as markdown · trust-gated tools · prose tool mode for small models · sha-verified self-update.',
-        meta:[['CLI','hako'],['VERSION',ver.hako],['DEFAULT','hako-sho'],['PROVIDERS','1 local + 13 cloud'],['LICENSE','GPL-3.0']],
+        desc:'A standalone terminal AI agent in one C file. Defaults to any installed hako model (<code>hako-sho</code> 3B / <code>hako-koi</code> 7B) — no key, no cloud. Adds 13 cloud providers (Anthropic OAuth, Copilot, GH Models, OpenRouter, OpenAI-compat) when you want them. <code>hako --serve</code> puts the same agent in a browser tab — <b>hako studio</b>, page and all, compiled into the binary.',
+        sub:'Persistent sessions · skills as markdown · trust-gated tools · prose tool mode for small models · a browser UI with no backend · sha-verified self-update.',
+        meta:[['CLI','hako'],['VERSION',ver.hako],['DEFAULT','hako-sho'],['PROVIDERS','1 local + 13 cloud'],['STUDIO','hako --serve'],['LICENSE','GPL-3.0']],
         actions:[['curl install ↗','#install',1,0],['Source ↗',repo.code,0,1],['Browse skills','#skills',0,0]] },
-      hakm:{ codename:'— III — models', name:'hakm', latin:'箱 · hako · in officina',
+      studio:{ codename:'— III — studio', name:'hako studio', latin:'箱 · hako-studio · the chamber',
+        status: ver.studio+' · new', warn:false,
+        desc:'The agent with a face. The same <code>hako.c</code> compiled to WebAssembly, so it runs <b>on your device, in your browser</b> — no install, no account, no backend, and nothing proxied through us. Open it hosted, run the container, or serve it from the binary with <code>hako --serve</code>; it is one piece of software in three shapes.',
+        sub:'Your key goes straight to the provider · work stays in your browser or a folder you grant · per-folder sessions · files you can save out · themes, model and provider pickers.',
+        meta:[['OPEN','hako.mithraeum.studio'],['VERSION',ver.studio],['RUNS','browser · docker · hako --serve'],['BACKEND','none'],['LICENSE','GPL-3.0']],
+        actions:[['Open studio ↗',repo.app,1,1],['Source ↗',repo.studio,0,1],['Run the container',repo.studio+'#build--run',0,1]] },
+      hakm:{ codename:'— IV — models', name:'hakm', latin:'箱 · hako · in officina',
         status:'koi live', warn:true,
         desc:'Local-first model family. <b>hako-sho</b> (mini · 3B) and <b>hako-koi</b> (mid · 7B · Qwen2.5-Coder + hako wrap) live today on HuggingFace, tool-aware out of the box. A larger <b>koi</b> fine-tune (14B/32B) is queued; <b>samurai</b> (50B+) reserved.',
         sub:'Native C engine — own loader, Q4_K/Q6_K + int8 kernels, BPE. No llama.cpp, no ggml, no ollama. The agent runs it as a one-shot <code>hakm</code> subprocess — no server, no daemon.',
         meta:[['CLI','hakm'],['LIVE','hako-sho · hako-koi'],['ENGINE',ver.engine],['TIERS','mini · mid · max'],['LICENSE','GPL-3.0']],
         actions:[['curl install ↗','#install',1,0],['Source ↗',repo.models,0,1],['Model catalog',repo.models+'#tiers',0,1]] },
     },
-    order: ['hake','hako','hakm'],
+    order: ['hake','hako','studio','hakm'],
   };
 })();
 </script>
@@ -810,10 +796,8 @@ window.MITH = (function(){
   <div class="arch-ghost" aria-hidden="true">
     <svg viewBox="0 0 240 240" fill="none">
       <rect x="6" y="6" width="228" height="228" stroke="var(--ash)" stroke-width="1"/>
-      <line x1="40" y1="108" x2="200" y2="108" stroke="var(--ash)" stroke-width="1" stroke-dasharray="3 4"/>
-      <path d="M40 204 V108 a80 80 0 0 1 160 0 V204" stroke="var(--paper)" stroke-width="3"/>
-      <line x1="20" y1="204" x2="220" y2="204" stroke="var(--paper)" stroke-width="3"/>
-      <circle cx="120" cy="118" r="22" fill="var(--gold)"/>
+      <path d="M60 200V110a60 60 0 0 1 120 0v90" stroke="var(--gold)" stroke-width="1" opacity="0.55"/>
+      <path d="M120 200V50" stroke="var(--ash)" stroke-width="0.5" opacity="0.5"/>
       <circle cx="120" cy="118" r="34" stroke="var(--gold)" stroke-width="0.5" opacity="0.4"/>
     </svg>
   </div>
@@ -821,187 +805,33 @@ window.MITH = (function(){
     <div class="tsh-intro">
       <div class="tsh-eyebrow">— ORDO MITHRAEUM · MMXXVI —</div>
       <h1 class="tsh-h1">Tools for the inner chamber.</h1>
-      <p class="tsh-lede">A modal editor, a terminal agent, and the local models that run them — three C instruments on a from-scratch inference engine. No cloud, no telemetry, no daemon. <span class="di">This page is one of them — type, or tap below.</span></p>
+      <p class="tsh-lede">A modal editor, a terminal agent, and the local models that run them — three C instruments on a from-scratch inference engine. No cloud, no telemetry, no daemon. <span class="di">The agent runs in your browser too — nothing installed, nothing sent anywhere.</span></p>
     </div>
-    <div class="tsh" id="tsh">
-      <div class="tsh-bar">
-        <span class="o g"></span><span class="o"></span><span class="o"></span>
-        <span>箱 visitor@mithraeum — ~</span>
-        <span class="grow">login shell · GPL-3.0</span>
-      </div>
-      <div class="tsh-body" id="tsh-body" role="log" aria-live="polite"></div>
-      <input class="tsh-input" id="tsh-input" autocomplete="off" autocapitalize="off"
-             autocorrect="off" spellcheck="false" aria-label="terminal input" />
-    </div>
-    <div class="tsh-chips" id="tsh-chips">
-      <button data-cmd="help">help</button>
-      <button data-cmd="suite">what is this?</button>
-      <button data-cmd="install">install</button>
-      <button data-cmd="skills">skills</button>
-      <button data-cmd="more">enter ▾</button>
-    </div>
+    <div class="hero-cta" id="hero-cta"></div>
     <div class="tsh-hint">
-      <span>type a command, or <b>tap a chip</b></span>
-      <span><kbd>Tab</kbd> complete · <kbd>↑</kbd> history</span>
       <span class="tsh-scroll" id="tsh-scroll">enter the chamber ▾</span>
     </div>
   </div>
 </section>
 <script>
 (function(){
-  const body=document.getElementById('tsh-body');
-  const input=document.getElementById('tsh-input');
-  const shell=document.getElementById('tsh');
-  if(!body||!input) return;
-  const PROMPT='<span class="tsh-prompt">visitor@mithraeum</span><span class="di">:</span><span class="g">~</span><span class="di">$</span> ';
-  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  let curLine=null, cursor=null, buf='', hist=[], hi=0, booting=true;
-
-  function out(html){const d=document.createElement('span');d.className='tsh-line';d.innerHTML=html;body.appendChild(d);body.scrollTop=body.scrollHeight;return d;}
-  function blank(){out(' ');}
-
-  const V=window.MITH.ver, R=window.MITH.repo;
-  const SUITE=[
-    '<span class="ch">hake</span>  <span class="di">'+V.hake+'</span>  · modal C99 editor — embeds the agent in a split pane',
-    '<span class="ch">hako</span>  <span class="di">'+V.hako+'</span>  · standalone terminal agent — local or 13 cloud providers',
-    '<span class="ch">hakm</span>  <span class="di">'+V.engine+'</span>  · from-scratch C inference engine — no llama.cpp, no ollama',
+  /* The agent itself is the best thing to put in front of someone. */
+  const wrap = document.getElementById('hero-cta');
+  if (!wrap || !window.MITH) return;
+  const R = window.MITH.repo, V = window.MITH.ver;
+  const cta = [
+    ['Open hako studio ↗', R.app, 1, 1],
+    ['Install the suite',  '#install', 0, 0],
+    ['Source ↗',           R.org, 0, 1],
   ];
-  const SKILLS=[
-    'corp       a company in a folder — CEO · DEV · DESIGN · QA · ARCH',
-    'brief      token-lean output — cut length, keep every fact',
-    'memory     durable cross-session memory — index + one-fact files',
-    'sync       change once, update everywhere — docs, versions, repos',
-    'scope      vague ask → goal + non-goals + smallest step',
-    'release    bump version, write changelog, multi-repo push order',
-    'handoff    a START-HERE state doc so the next session resumes fast',
-    'changelog  a diff → one clean CHANGELOG entry, project voice',
-    'ship       the pre-push gate — PASS or BLOCKED, never a vibe',
-  ];
-  const REPOS={
-    'hako-edit':R.edit, 'hako-code':R.code, 'hako':R.models, 'skills':R.skills, 'org':R.org,
-  };
-  const DETAIL={
-    hake:['<span class="g">hake</span> — the editor · <span class="di">hako-edit · '+V.hake+' · GPL-3.0</span>',
-      'Single-file modal text editor in C99. Vim-bound, 40+ syntax modes, 18 themes.',
-      'Embeds <span class="ch">hako</span> in a split Rei pane — talk to a model without leaving your file.',
-      'Zero runtime deps beyond libc + curl.   <span class="di">open hako-edit</span>'],
-    hako:['<span class="g">hako</span> — the agent · <span class="di">hako-code · '+V.hako+' · GPL-3.0</span>',
-      'Standalone terminal AI agent in one C file. Defaults to a local model',
-      '(<span class="pa">hako-sho</span> 3B / <span class="pa">hako-koi</span> 7B) — no key, no cloud. 13 cloud providers when you want them.',
-      'Trust-gated tools, markdown skills, persistent sessions.   <span class="di">open hako-code</span>'],
-    hakm:['<span class="g">hakm</span> — the engine · <span class="di">hako · '+V.engine+' · GPL-3.0</span>',
-      'From-scratch C inference: own GGUF→MLF2 loader, Q4_K/Q6_K + int8 kernels, BPE.',
-      'libc + libm + pthread only. No llama.cpp, no ggml, no ollama, no daemon.',
-      'The agent runs it as a one-shot <span class="ch">hakm</span> subprocess.   <span class="di">open hako</span>'],
-  };
-
-  const CMDS={
-    help(){out('<span class="g">commands</span> —');
-      out('  <span class="ch">ls</span>            list the chambers');
-      out('  <span class="ch">cat</span> &lt;name&gt;    read one — creed · suite · install · skills · releases');
-      out('  <span class="ch">hake</span> · <span class="ch">hako</span> · <span class="ch">hakm</span>   detail on one instrument');
-      out('  <span class="ch">install</span>       one-line install for the suite');
-      out('  <span class="ch">skills</span>        the skill catalog (9)');
-      out('  <span class="ch">open</span> &lt;repo&gt;   github ↗ — hako-edit · hako-code · hako · skills · org');
-      out('  <span class="ch">more</span>          scroll into the page');
-      out('  <span class="ch">clear</span>         wipe the screen');},
-    ls(){out('<span class="g">creed</span>   <span class="g">suite</span>   <span class="g">install</span>   <span class="g">skills</span>   <span class="g">releases</span>   <span class="g">contact</span>');},
-    creed(){out('<span class="g">I</span>   · local first   — your text, your keys, your weights. no telemetry, no daemon.');
-      out('<span class="g">II</span>  · single binary — one C source. no JS runtime to swallow your editor.');
-      out('<span class="g">III</span> · bring your own model — any model, any provider, a peer at your terminal.');},
-    suite(){SUITE.forEach(out);},
-    install(){out('<span class="di"># the agent</span>');out('curl -fsSL <span class="ph">https://mithraeums.github.io/hako.sh</span> | sh');
-      out('<span class="di"># the editor</span>');out('curl -fsSL <span class="ph">https://mithraeums.github.io/hake.sh</span> | sh');
-      out('<span class="di"># the engine — build from source</span>');out('git clone <span class="ph">https://github.com/mithraeums/hako</span> &amp;&amp; cd hako &amp;&amp; make');},
-    skills(){out('<span class="g">skills</span> — 9 · markdown · works in Claude and hako');SKILLS.forEach(s=>out('  '+s));},
-    releases(){out('<span class="ch">hako-code</span> <span class="g">'+V.hako+'</span>  deterministic local tools · permission gate · MCP');
-      out('<span class="ch">hako-edit</span> <span class="g">'+V.hake+'</span>  in-pane agent permissions · install/update from the editor');
-      out('<span class="ch">hako</span>      <span class="g">'+V.engine+'</span>  persistent serve · KV reuse · ~8 tok/s on a CPU-only i3');},
-    contact(){out('github     <span class="ph">github.com/mithraeums</span>');out('discuss    <span class="ph">github.com/orgs/mithraeums/discussions</span>');out('mail       <span class="ph">contact@mithraeum.studio</span>');},
-    whoami(){out('visitor — a hand that writes code by hand.');},
-    mithras(){out('<span class="g">— deus sol invictus mithras —</span>');},
-    clear(){body.innerHTML='';},
-    more(){scrollDown();},
-  };
-  CMDS.sol=CMDS.mithras; CMDS.scroll=CMDS.more; CMDS.down=CMDS.more; CMDS.hello=CMDS.help; CMDS['?']=CMDS.help;
-
-  function scrollDown(){ if(window.mithGo){window.mithGo('suite');} else {const t=document.getElementById('demo');if(t)t.scrollIntoView({behavior:'smooth'});} }
-
-  function run(raw){
-    const line=raw.trim();
-    out(PROMPT+'<span class="tsh-cmd">'+esc(raw)+'</span>');
-    if(!line) return;
-    hist.push(line); hi=hist.length;
-    const [cmd,...rest]=line.split(/\s+/); const arg=rest.join(' ');
-    if(DETAIL[cmd] && !rest.length){DETAIL[cmd].forEach(out);return;}
-    if(cmd==='cat'||cmd==='read'){
-      const a=(rest[0]||'').replace(/\/$/,'').split('/').pop();
-      if(DETAIL[a]){DETAIL[a].forEach(out);return;}
-      if(CMDS[a]&&['creed','suite','install','skills','releases','contact'].includes(a)){CMDS[a]();return;}
-      if(!rest.length){out('<span class="ru">cat</span>: read what? try <span class="ch">cat creed</span>');return;}
-      out('<span class="ru">cat: '+esc(rest[0])+'</span>: no such chamber');return;
-    }
-    if(cmd==='open'||cmd==='cd'){
-      const a=(rest[0]||'').replace(/\/$/,'');
-      if(REPOS[a]){out('opening <span class="ph">'+esc(REPOS[a])+'</span> ↗');window.open(REPOS[a],'_blank','noopener');return;}
-      if(a==='suite'||a===''){CMDS.suite();return;}
-      out('<span class="ru">'+esc(cmd)+': '+esc(a)+'</span>: unknown target');return;
-    }
-    if(CMDS[cmd]){CMDS[cmd]();return;}
-    out('<span class="ru">'+esc(cmd)+'</span>: command not found — type <span class="ch">help</span>');
-  }
-
-  // live input line
-  function drawLine(){
-    if(!curLine) return;
-    curLine.innerHTML=PROMPT+'<span class="tsh-cmd">'+esc(buf)+'</span><span class="tsh-cur"></span>';
-    body.scrollTop=body.scrollHeight;
-  }
-  function newPrompt(){curLine=out('');drawLine();}
-
-  input.addEventListener('input',()=>{buf=input.value;drawLine();});
-  input.addEventListener('keydown',e=>{
-    if(booting) return;
-    if(e.key==='Enter'){
-      e.preventDefault();
-      if(curLine){curLine.innerHTML='';} // finalize via run()
-      const v=buf; buf=''; input.value='';
-      // replace the live line with the executed echo
-      if(curLine){curLine.remove();curLine=null;}
-      run(v); newPrompt();
-    } else if(e.key==='ArrowUp'){
-      e.preventDefault(); if(hist.length){hi=Math.max(0,hi-1);buf=hist[hi]||'';input.value=buf;drawLine();}
-    } else if(e.key==='ArrowDown'){
-      e.preventDefault(); if(hist.length){hi=Math.min(hist.length,hi+1);buf=hist[hi]||'';input.value=buf;drawLine();}
-    } else if(e.key==='Tab'){
-      e.preventDefault();
-      const names=Object.keys(CMDS).concat('cat','open',Object.keys(DETAIL)).filter((v,i,a)=>a.indexOf(v)===i);
-      const m=names.filter(n=>n.startsWith(buf.trim()));
-      if(m.length===1){buf=m[0]+' ';input.value=buf;drawLine();}
-      else if(m.length>1){out(PROMPT+'<span class="tsh-cmd">'+esc(buf)+'</span>');out('<span class="di">'+m.join('   ')+'</span>');newPrompt();}
-    }
-  });
-  // keep focus
-  shell.addEventListener('mousedown',e=>{ if(window.getSelection().toString())return; setTimeout(()=>input.focus(),0); });
-  document.getElementById('tsh-scroll').addEventListener('click',scrollDown);
-
-  // run a command from outside (chip click / auto-demo) — no typing required
-  function exec(cmd){ if(booting) return; if(curLine){curLine.remove();curLine=null;} run(cmd); newPrompt(); input.focus(); }
-  document.querySelectorAll('#tsh-chips button').forEach(b=>b.addEventListener('click',()=>exec(b.dataset.cmd)));
-
-  // boot sequence — short login banner, then auto-run `help` so passive visitors see what's typeable
-  const BOOT=[
-    '<span class="g">箱 mithraeum</span> <span class="di">login · last login: now on ttys001</span>',
-    ' ',
-    '<span class="di">9 chambers mounted · bring your own keys, or run our weights on-device.</span>',
-    '<span class="di">type a command, tap a chip, or</span> <span class="ch">more</span> <span class="di">to scroll in. running</span> <span class="ch">help</span><span class="di">…</span>',
-    ' ',
-  ];
-  let bi=0;
-  (function boot(){
-    if(bi<BOOT.length){out(BOOT[bi++]);setTimeout(boot,bi===1?240:150);}
-    else{booting=false;newPrompt();setTimeout(()=>exec('help'),480);}
-  })();
+  wrap.innerHTML = cta.map(([label, href, primary, ext]) =>
+    '<a class="cta' + (primary ? ' cta-primary' : '') + '" href="' + href + '"' +
+    (ext ? ' target="_blank" rel="noopener"' : '') + '>' + label + '</a>').join('');
+  const note = document.createElement('p');
+  note.className = 'hero-note';
+  note.innerHTML = 'hako studio ' + V.studio + ' · runs on your device, in your browser · ' +
+                   'no account, no backend, your key never leaves the page';
+  wrap.appendChild(note);
 })();
 </script>
 
@@ -1026,6 +856,7 @@ window.MITH = (function(){
     <div class="tabs">
       <div class="tab on" data-scene="hake"><b>hake</b><span>the editor</span></div>
       <div class="tab" data-scene="hako"><b>hako</b><span>the agent</span></div>
+      <div class="tab" data-scene="studio"><b>studio</b><span>in a browser</span></div>
       <div class="tab" data-scene="hakm"><b>hakm</b><span>the engine</span></div>
     </div>
     <div class="stage">
@@ -1200,7 +1031,31 @@ async function sceneHakm(){
   add(s,'<span class="meta">$ </span><span class="cur"> </span>');
   await sleep(2600);
 }
-const SCENES={hake:sceneHake,hako:sceneHako,hakm:sceneHakm};
+/* studio's demo is the thing itself, one link away — a typed re-enactment of a
+   browser would be a worse version of what the visitor can just open. */
+async function sceneStudio(){
+  tbar.textContent='箱 hako studio';tver.textContent=V.studio+' · in a browser';
+  screen.innerHTML='<div class="solo" id="solo"></div>';
+  const s=document.getElementById('solo');
+  await typeInto(s,'<span class="meta">$ </span>','gen',"hako --serve",26);
+  await sleep(280);
+  add(s,'<span class="meta">hako studio '+V.studio+' — http://127.0.0.1:8787</span>');
+  add(s,'<span class="meta">  ui       embedded</span>');
+  await sleep(600);
+  add(s,'<span class="sep">-----</span>');
+  add(s,'<span class="meta">the same page, three ways to run it:</span>');
+  await sleep(400);
+  add(s,'<span class="gen">  hosted     </span><span class="meta">'+R.app.replace('https://','')+' — nothing installed</span>');
+  await sleep(340);
+  add(s,'<span class="gen">  container  </span><span class="meta">docker run -p 8080:80 hako-studio</span>');
+  await sleep(340);
+  add(s,'<span class="gen">  binary     </span><span class="meta">hako --serve — real folders, a shell, local models</span>');
+  await sleep(600);
+  add(s,'<span class="sep">-----</span>');
+  add(s,'<span class="meta">the agent runs on your device. no backend, no account.</span>');
+  await sleep(3200);
+}
+const SCENES={hake:sceneHake,hako:sceneHako,studio:sceneStudio,hakm:sceneHakm};
 
 /* product copy lives in MITH.products (single source) — the active tab just renders it */
 const PRODUCTS=window.MITH.products;
@@ -1277,6 +1132,12 @@ play('hake');
 cd hako && make               # libc + libm + pthread only — no deps</code>
     </div>
 
+    <div style="background: var(--shadow); border: 1px solid var(--rule-strong); padding: 20px 24px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; color: var(--paper); position: relative; overflow-x: auto; margin-top: 14px;">
+      <div style="color: var(--ash); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;">— hako studio · browser UI · already in the binary —</div>
+      <code style="color: var(--bone); white-space: pre;">hako --serve                  # http://127.0.0.1:8787
+hako --serve --lan            # prints the URL to open on your phone</code>
+    </div>
+
     <div style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 24px; color: var(--ash); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">
       <span><b style="color: var(--paper);">macOS</b> universal2 · arm64 + x86_64</span>
       <span><b style="color: var(--paper);">Linux</b> x86_64 · arm64</span>
@@ -1293,6 +1154,10 @@ cd hako && make               # libc + libm + pthread only — no deps</code>
       <div>
         <h4 style="font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif; font-size: 18px; color: var(--paper); margin: 0 0 8px;">13 cloud providers when you want them</h4>
         <p style="color: var(--bone); font-size: 12px; margin: 0;">Anthropic OAuth (Claude Pro/Max sub), GitHub Copilot, GH Models (free), OpenRouter PKCE, plus 9 more over OpenAI-compat. Single <code>:login &lt;name&gt;</code> walks you through.</p>
+      </div>
+      <div>
+        <h4 style="font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif; font-size: 18px; color: var(--paper); margin: 0 0 8px;">Your machine is the server</h4>
+        <p style="color: var(--bone); font-size: 12px; margin: 0;"><code>hako --serve</code> hands you a browser UI out of the same binary — no install, no backend, no account, no database. Bind it to your network and drive your desktop from a phone. Your files, keys and conversations never leave the machine you ran it on, because there is nowhere else for them to go.</p>
       </div>
       <div>
         <h4 style="font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif; font-size: 18px; color: var(--paper); margin: 0 0 8px;">Self-update, sha-verified</h4>

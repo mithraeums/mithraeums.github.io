@@ -527,7 +527,7 @@
   /* ===== TERMINAL HERO (interactive) ===== */
   .term-hero {
     min-height: calc(100vh - 64px);
-    display: flex; flex-direction: column; justify-content: center;
+    display: flex; flex-direction: column; justify-content: flex-start;
     padding: 40px 0 56px;
     border-bottom: 1px solid var(--rule);
     position: relative;
@@ -610,11 +610,17 @@
   .pane::-webkit-scrollbar-thumb { background: var(--stone); }
   /* inside the app shell, sections shed their own borders/heights */
   .pane > section.s, .pane > section.term-hero { border-bottom: none; }
-  .pane .term-hero { min-height: 0; height: 100%; padding: 32px 0; justify-content: center; }
+  .pane .term-hero { min-height: 0; height: 100%; padding: 32px 0; justify-content: flex-start; }
   /* home pane fills; others get comfortable top room and center their content column */
   .pane[data-pane="home"] { display: flex; }
   .pane[data-pane="home"] .term-hero { flex: 1; }
-  .pane-pad { min-height: 100%; display: flex; flex-direction: column; justify-content: center; padding: 56px 0; }
+  .pane-pad { min-height: 100%; display: flex; flex-direction: column; justify-content: flex-start; padding: 56px 0; }
+  /* Auto margins centre exactly like justify-content until the content is taller
+     than the box — then they collapse instead of pushing the top out of reach.
+     `justify-content: center` made the top of a long page unscrollable. */
+  .term-hero > .container { margin-top: auto; margin-bottom: auto; }
+  .pane-pad > :first-child { margin-top: auto; }
+  .pane-pad > :last-child { margin-bottom: auto; }
   /* nav tabs */
   .nav-links .tab-link { position: relative; cursor: pointer; padding-bottom: 4px; }
   .nav-links .tab-link.active { color: var(--gold); }

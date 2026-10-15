@@ -7,7 +7,7 @@
 #
 # Optional:
 #   --purge      also remove ~/.hako/ (state, credentials, sessions, skills)
-#   --models     also remove ollama hako-* models
+#   --models     also remove ~/.hako/models weights (and legacy ollama hako-* tags)
 #   --icons      also remove placed icons / .desktop entries
 
 set -eu
@@ -39,7 +39,7 @@ if [ "$want_hako" = 0 ] && [ "$want_hake" = 0 ] && [ "$want_hakm" = 0 ]; then
 		echo ""
 		echo "    1  hako    the agent"
 		echo "    2  hake    the editor"
-		echo "    3  hakm    the models suite (script only, not ollama models)"
+		echo "    3  hakm    the engine (native binary; --models also clears weights)"
 		echo "    4  all"
 		echo "    a  all + --purge --models --icons   (nuke everything)"
 		echo ""
@@ -101,11 +101,18 @@ if [ "$want_hakm" = 1 ]; then
 	remove_bin hakm
 fi
 
-if [ "$do_models" = 1 ] && command -v ollama >/dev/null 2>&1; then
-	echo ":: removing ollama hako-* models"
-	ollama list 2>/dev/null | awk 'NR>1 && $1 ~ /^hako-/ {print $1}' | while read -r tag; do
-		ollama rm "$tag" >/dev/null 2>&1 && echo "  removed model: $tag" || true
-	done
+if [ "$do_models" = 1 ]; then
+	echo ":: removing hako model weights (~/.hako/models)"
+	if [ -d "${HOME}/.hako/models" ]; then
+		rm -rf "${HOME}/.hako/models" && echo "  removed: ~/.hako/models/"
+	fi
+	# Legacy: old installs kept models as ollama tags. Remove those too if ollama
+	# is still on the box; a no-op for everyone else.
+	if command -v ollama >/dev/null 2>&1; then
+		ollama list 2>/dev/null | awk 'NR>1 && $1 ~ /^hako-/ {print $1}' | while read -r tag; do
+			ollama rm "$tag" >/dev/null 2>&1 && echo "  removed legacy ollama model: $tag" || true
+		done
+	fi
 fi
 
 if [ "$do_icons" = 1 ]; then
@@ -124,5 +131,5 @@ if [ "$do_purge" = 1 ]; then
 fi
 
 echo "done."
-[ "$do_models" = 0 ] && [ "$want_hakm" = 1 ] && echo "note: ollama hako-* models kept. add --models to remove them too."
+[ "$do_models" = 0 ] && [ "$want_hakm" = 1 ] && echo "note: model weights kept. add --models to remove ~/.hako/models too."
 [ "$do_purge"  = 0 ] && echo "note: ~/.hako/ config kept. add --purge to remove it too."

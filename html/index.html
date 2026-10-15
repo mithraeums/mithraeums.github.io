@@ -46,41 +46,41 @@
 <h2>Suite — three instruments, one chamber</h2>
   <article id="hake">
     <h3>hake <small>箱 · hako-edit · the box</small></h3>
-    <p class="status">— I — editor &nbsp;·&nbsp; v0.1.6 · stable</p>
+    <p class="status">— I — editor &nbsp;·&nbsp; v0.1.7 · stable</p>
     <p>A single-file modal text editor in C99. Vim-bound, language-aware, multi-pane. Embeds the <code>hako</code> agent in a split pane, so you can talk to a model without leaving your file.</p>
-    <p class="sub">— Modal editing · 40+ syntax modes · 18 themes · a live runner pane · OS-aware clipboard · zero runtime deps beyond libc + curl.</p>
+    <p class="sub">— Modal editing · 40+ syntax modes · 19 themes · a live runner pane · OS-aware clipboard · zero runtime deps beyond libc + curl.</p>
     <dl>
       <dt>CLI</dt><dd>hake</dd>
-      <dt>VERSION</dt><dd>v0.1.6</dd>
+      <dt>VERSION</dt><dd>v0.1.7</dd>
       <dt>LANG</dt><dd>C99 single file</dd>
-      <dt>THEMES</dt><dd>18</dd>
+      <dt>THEMES</dt><dd>19</dd>
       <dt>LICENSE</dt><dd>GPL-3.0</dd>
     </dl>
     <p class="actions"><a href="#install">curl install ↗</a> &nbsp;·&nbsp; <a href="https://github.com/mithraeums/hako-edit" target="_blank" rel="noopener">Source ↗</a> &nbsp;·&nbsp; <a href="https://github.com/mithraeums/hako-edit/releases" target="_blank" rel="noopener">Releases</a></p>
   </article>
   <article id="hako">
     <h3>hako <small>箱 · hako-code · the agent</small></h3>
-    <p class="status">— II — agent &nbsp;·&nbsp; v0.2.3 · stable</p>
-    <p>A standalone terminal AI agent in one C file. Defaults to any installed hako model (<code>hako-sho</code> 3B / <code>hako-koi</code> 7B) — no key, no cloud. Adds 13 cloud providers (Anthropic OAuth, Copilot, GH Models, OpenRouter, OpenAI-compat) when you want them. <code>hako --serve</code> puts the same agent in a browser tab — <b>hako studio</b>, page and all, compiled into the binary.</p>
-    <p class="sub">— Persistent sessions · skills as markdown · trust-gated tools · prose tool mode for small models · a browser UI with no backend · sha-verified self-update.</p>
+    <p class="status">— II — agent &nbsp;·&nbsp; v0.2.4 · stable</p>
+    <p>A coding agent in one C file — a <b>400 KB binary</b> that links libc and nothing else. No Python, no Node, no package manager. Defaults to any installed hako model (<code>hako-sho</code> 3B / <code>hako-koi</code> 7B) — no key, no cloud — and adds 13 cloud providers when you want them. <code>hako --serve</code> puts the same agent in a browser tab; the page is compiled into the binary.</p>
+    <p class="sub">— Code search built in (grep · glob · web_fetch) · diffs before it writes · context that folds instead of running out · skills you can switch on as modes · streaming on every provider · trust-gated tools · sha-verified self-update.</p>
     <dl>
       <dt>CLI</dt><dd>hako</dd>
-      <dt>VERSION</dt><dd>v0.2.3</dd>
-      <dt>DEFAULT</dt><dd>hako-sho</dd>
+      <dt>VERSION</dt><dd>v0.2.4</dd>
+      <dt>SIZE</dt><dd>~400 KB</dd>
+      <dt>DEPS</dt><dd>libc + curl</dd>
       <dt>PROVIDERS</dt><dd>1 local + 13 cloud</dd>
-      <dt>STUDIO</dt><dd>hako --serve</dd>
       <dt>LICENSE</dt><dd>GPL-3.0</dd>
     </dl>
     <p class="actions"><a href="#install">curl install ↗</a> &nbsp;·&nbsp; <a href="https://github.com/mithraeums/hako-code" target="_blank" rel="noopener">Source ↗</a> &nbsp;·&nbsp; <a href="#skills">Browse skills</a></p>
   </article>
   <article id="hako studio">
     <h3>hako studio <small>箱 · hako-studio · the chamber</small></h3>
-    <p class="status">— III — studio &nbsp;·&nbsp; v0.0.2 · new</p>
+    <p class="status">— III — studio &nbsp;·&nbsp; v0.0.3 · new</p>
     <p>The agent with a face. The same <code>hako.c</code> compiled to WebAssembly, so it runs <b>on your device, in your browser</b> — no install, no account, no backend, and nothing proxied through us. Open it hosted, run the container, or serve it from the binary with <code>hako --serve</code>; it is one piece of software in three shapes.</p>
     <p class="sub">— Your key goes straight to the provider · work stays in your browser or a folder you grant · per-folder sessions · files you can save out · themes, model and provider pickers.</p>
     <dl>
       <dt>OPEN</dt><dd>hako.mithraeum.studio</dd>
-      <dt>VERSION</dt><dd>v0.0.2</dd>
+      <dt>VERSION</dt><dd>v0.0.3</dd>
       <dt>RUNS</dt><dd>browser · docker · hako --serve</dd>
       <dt>BACKEND</dt><dd>none</dd>
       <dt>LICENSE</dt><dd>GPL-3.0</dd>
@@ -95,7 +95,7 @@
     <dl>
       <dt>CLI</dt><dd>hakm</dd>
       <dt>LIVE</dt><dd>hako-sho · hako-koi</dd>
-      <dt>ENGINE</dt><dd>v0.0.3</dd>
+      <dt>ENGINE</dt><dd>v0.0.4</dd>
       <dt>TIERS</dt><dd>mini · mid · max</dd>
       <dt>LICENSE</dt><dd>GPL-3.0</dd>
     </dl>
@@ -137,6 +137,21 @@ git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make<
 
 <h2 id="releases">Releases — latest from each chamber</h2>
   <article>
+    <h3>hako-code <small>v0.2.4 · 2026-09-21</small></h3>
+    <p><b>it runs where nothing else does</b></p>
+    <p>Three weeks on an iPhone and an iPad under iSh &amp;mdash; where Claude Code, Hermes and Codex would not install &amp;mdash; and on a desktop, inside itself, with Claude driving. What that found was a class of bug, not a list: <b>failures that were silent by construction</b>. A backslash landing on a network chunk boundary deleted the chunk. A line longer than the read buffer was quietly cut. An Anthropic overload came back as &amp;ldquo;empty response&amp;rdquo;. A tool call with only a closing tag ended the turn with nothing shown. A 100&amp;nbsp;KB file was truncated without a word and the model rewrote it from the half it saw. A freeze after a successful edit was two readers on one keyboard. Every one is gone, and each has a test. Underneath: the input bar lives <b>in the flow</b> of the terminal &amp;mdash; no absolute cursor moves, no scroll region &amp;mdash; so a phone keyboard appearing no longer duplicates the conversation; type while it works and it queues; <b>ctrl+o</b> is a transcript pager. Local models <b>stream</b>, and the engine keeps its prefilled prompt on disk: a cold first turn on a 3B model went from four minutes to two seconds. <code>grep</code>/<code>glob</code>/<code>web_fetch</code>, context compaction, skills on demand, a diff before every approval, prompt caching, <code>--bench</code>. And you can finally see what happened: the session log carries every system notice, <code>--debug</code> writes a startup trace, and a dead engine reports its own last words.</p>
+  </article>
+  <article>
+    <h3>hako-edit <small>v0.1.7 · 2026-09-21</small></h3>
+    <p><b>the pane shows what the agent did</b></p>
+    <p>The Rei pane catches up with the agent. It was dropping the tool <b>output</b> &amp;mdash; it said &amp;ldquo;ran list_dir&amp;rdquo; and never what it found &amp;mdash; and it never decoded the agent&amp;rsquo;s JSON, so a literal <code>\n</code> sat mid-sentence. Both fixed, along with the same escape-scan bug the agent had. New <code>tools/pipe-conformance.py</code> drives <code>hako --pipe</code> exactly as the pane does and asserts the approval round trip, no model needed &amp;mdash; the check that would have caught a month of silent protocol drift. Ships with hako-code v0.2.4; the wire lives on both sides.</p>
+  </article>
+  <article>
+    <h3>hako <small>engine v0.0.4 · 2026-09-21</small></h3>
+    <p><b>streams · remembers · stays bounded</b></p>
+    <p><code>--serve</code> sends each token as it is sampled, so the agent types a local answer out in real time. The prefilled system prompt persists on disk and comes back on the next run &amp;mdash; <b>255&amp;nbsp;s to 2.3&amp;nbsp;s</b> for a cold first turn on a CPU-only i3 &amp;mdash; and that cache is now <b>bounded</b>: one file per distinct prompt had piled up 359&amp;nbsp;MB before anyone looked, and the device this has to behave on is a phone. A heap overflow waiting for the first small model is fixed and pinned under ASan. Builds on musl and 32-bit x86 (no <code>-march=native</code> under an emulator that advertises instructions it cannot run). <code>hakm list | pull | rm</code>, llama-arch models, Q8_0. Still libc + libm + pthread.</p>
+  </article>
+  <article>
     <h3>hako-code <small>v0.2.3 · 2026-08-14</small></h3>
     <p><b>hako studio — the agent in a browser tab</b></p>
     <p><code>hako --serve</code> opens the same agent in a browser: chat, tool-approval boxes, a folder browser, per-folder sessions you can rename and delete, the model picker, four themes. It is <b>a mode of the binary, not a server</b> &amp;mdash; same loop, same sessions, same credentials, same trust as the terminal, so a conversation started in one finishes in the other. The page itself is compiled into the executable, so one file is the whole product and it works with no network at all. <code>hako --serve --lan</code> prints a URL to open on your phone, and the UI is built for a thumb: drawer navigation, keyboard-aware layout, add it to your home screen. No backend, no database, no account, nothing stored anywhere but your own machine. This release also lifts the agent onto a <b>platform seam</b> — the same <code>hako.c</code> now compiles to WebAssembly, which is what <b>hako studio</b> runs on in a browser — adds <code>--token</code> so you can reach your own machine through a tunnel safely, and brings <code>--serve</code> to Windows.</p>
@@ -158,7 +173,7 @@ git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make<
   </article>
 
 <footer>
-  <p>© MMXXVI · ordo mithraeum · <a href="../LICENSE">GPL-3.0</a> · BUILD 2026-08-14</p>
+  <p>© MMXXVI · ordo mithraeum · <a href="../LICENSE">GPL-3.0</a> · BUILD 2026-10-11</p>
   <p><a href="https://github.com/mithraeums" target="_blank" rel="noopener">source ↗</a> ·
      <a href="index.html" download>⇩ this page</a> ·
      <a href="https://github.com/orgs/mithraeums/discussions" target="_blank" rel="noopener">discussions ↗</a> ·

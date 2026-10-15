@@ -13,7 +13,7 @@
 # Programs:
 #   hako   the agent          (mithraeums/hako-code,  binary `hako`)
 #   hake   the editor         (mithraeums/hako-edit,  binary `hake`)
-#   hakm   the models suite   (mithraeums/hako,       script `hakm` + ollama models)
+#   hakm   the engine         (mithraeums/hako,       native C runtime for the hako models)
 
 set -eu
 
@@ -35,7 +35,7 @@ done
 uname_s="$(uname -s 2>/dev/null || echo unknown)"
 uname_m="$(uname -m 2>/dev/null || echo unknown)"
 is_ish=0
-# iSh: Alpine running under iOS. No /usr/local writable. No GPU. musl x86_64.
+# iSh: Alpine running under iOS. No /usr/local writable. No GPU. musl, 32-bit x86.
 if [ -f /etc/alpine-release ] && (uname -a 2>/dev/null | grep -qi 'ish\|iOS') ; then is_ish=1; fi
 [ "${ISH:-0}" = 1 ] && is_ish=1
 case "$uname_s" in
@@ -58,7 +58,7 @@ if [ "$want_hako" = 0 ] && [ "$want_hake" = 0 ] && [ "$want_hakm" = 0 ] && [ "$w
 		echo ""
 		echo "    1  hako    the agent"
 		echo "    2  hake    the editor"
-		echo "    3  hakm    the models suite (requires ollama)"
+		echo "    3  hakm    the engine (native, no ollama; builds from source on iSh)"
 		echo "    4  all"
 		echo "    u  uninstall instead"
 		echo ""
@@ -105,6 +105,11 @@ if [ "$want_uninstall" = 1 ]; then
 fi
 
 need curl || exit 1
+if [ "$is_ish" = 1 ]; then
+	command -v cc >/dev/null 2>&1 || { echo "iSh builds from source: apk add build-base git curl" >&2; exit 1; }
+	need make || exit 1
+	need git || exit 1
+fi
 
 echo "  installing into: ${PREFIX}/bin"
 echo "  platform: ${os_label}/${uname_m}"
@@ -112,9 +117,9 @@ echo ""
 
 # Per-repo install.sh handles: OS detection, sha256 verify, icon placement
 # (where supported), Gatekeeper xattr strip on macOS, PATH hint.
-# Unified installer selects + delegates. iSh fallback: if pre-built binary
-# is unavailable, per-repo script tells the user to build from source
-# (apk add gcc make musl-dev curl; make).
+# Unified installer selects + delegates. Where there is no release binary
+# (iSh), each per-repo script builds from source: it needs a compiler, make
+# and git, so on iSh we check for them here, before the first download.
 
 if [ "$want_hako" = 1 ]; then
 	echo ":: hako (the agent)"
@@ -129,26 +134,17 @@ if [ "$want_hake" = 1 ]; then
 fi
 
 if [ "$want_hakm" = 1 ]; then
-	echo ":: hakm (the models suite)"
-	if ! command -v ollama >/dev/null 2>&1; then
-		echo "  ollama not found." >&2
-		if [ "$is_ish" = 1 ]; then
-			echo "  iSh cannot run ollama (no GPU). Skipping hakm." >&2
-			echo "  Future: hakm-server (v0.1.7) will run CPU-only on iSh." >&2
-		else
-			echo "  install from https://ollama.com/download then re-run" >&2
-			exit 1
-		fi
-	else
-		curl -fsSL "https://mithraeums.github.io/hakm.sh" | sh
-	fi
+	echo ":: hakm (the engine — native C, no ollama)"
+	# A release binary where one exists; on iSh (32-bit x86) it builds from
+	# source, which is a couple of minutes. Weights are pulled separately.
+	curl -fsSL "https://mithraeums.github.io/hakm.sh" | sh
 	echo ""
 fi
 
 echo "done."
 [ "$want_hako" = 1 ] && echo "  try: hako"
 [ "$want_hake" = 1 ] && echo "  try: hake"
-[ "$want_hakm" = 1 ] && echo "  try: hakm list"
+[ "$want_hakm" = 1 ] && echo "  try: hakm pull hako-sho"
 case ":${PATH}:" in
 	*":${PREFIX}/bin:"*) ;;
 	*) echo ""

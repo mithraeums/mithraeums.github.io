@@ -764,7 +764,7 @@
 
 <script>
 window.MITH = (function(){
-  const ver = { hake: 'v0.1.8', hako: 'v0.2.5', engine: 'v0.0.4', studio: 'v0.0.4' };
+  const ver = { hake: 'v0.1.8', hako: 'v0.2.6', engine: 'v0.0.4', studio: 'v0.0.5' };
   const repo = {
     edit:    'https://github.com/mithraeums/hako-edit',
     code:    'https://github.com/mithraeums/hako-code',
@@ -778,13 +778,19 @@ window.MITH = (function(){
   };
   return {
     ver, repo,
-    build: '2026-10-22',
+    build: '2026-10-23',
     email: 'contact@mithraeum.studio',
     releases: [
-      { repo:'hako-code', tag: ver.hako, title:'your terminal, from your phone',
+      { repo:'hako-code', tag: ver.hako, title:'sign in from anywhere, even iSh',
+        body:'<code>:remote</code> goes through your account only now; tailscale is gone. Signing in where there is no browser beside you is easier: the sign-in link or device code lands on your clipboard (<code>/dev/clipboard</code> on iSh), a pasted code loses the spaces a wrapped line gave it, and enter on an empty prompt takes the clipboard. A phone reconnecting is mentioned once, at the desk, not in the chat.',
+        date:'2026-10-23' },
+      { repo:'hako-studio', tag: ver.studio, title:'the beta, said plainly',
+        body:'&#9776; &rarr; code lists your sessions right in the menu, with <b>add a device</b>. Signed out, it says what the closed beta is, what an account keeps (a random id, your passkey&rsquo;s public key, your account key locked by it, your devices&rsquo; keys) and what it never does: chats, files, prompts, provider keys. <b>Request access</b> is an email from your own mail app. Themes preview as you tap them, and the home-screen app fits the screen.',
+        date:'2026-10-23' },
+      { repo:'hako-code', tag: 'v0.2.5', title:'your terminal, from your phone',
         body:'<code>:remote on</code> shares the session you are in. Link the computer to your account once, then sign in at hako.mithraeum.studio on any device: your code sessions are listed by folder and machine, and opening one puts you in the <b>same chat as the terminal</b>. Every byte is sealed on your devices (Noise XXpsk3) and nothing we run can read it or keeps it. Tools still ask, stop works from either side, and the phone gets less than the desk. Invite beta. Also: <b>sign in with ChatGPT</b> (any plan, free included), and menus that leave no trace in the chat.',
         date:'2026-10-22' },
-      { repo:'hako-studio', tag: ver.studio, title:'code, on any device',
+      { repo:'hako-studio', tag: 'v0.0.4', title:'code, on any device',
         body:'Sign in with a passkey and &#9776; &rarr; code lists the sessions running on your computers, one per shared folder. Open one and the page becomes that session; chat goes back to the browser&rsquo;s own agent. Nothing about accounts shows until you sign in, and the page still runs with no account at all.',
         date:'2026-10-22' },
       { repo:'hako-edit', tag: ver.hake, title:'menus stay out of the chat',

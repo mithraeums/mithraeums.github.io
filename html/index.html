@@ -60,12 +60,12 @@
   </article>
   <article id="hako">
     <h3>hako <small>箱 · hako-code · the agent</small></h3>
-    <p class="status">— II — agent &nbsp;·&nbsp; v0.2.5 · stable</p>
+    <p class="status">— II — agent &nbsp;·&nbsp; v0.2.6 · stable</p>
     <p>A coding agent in one C file — a <b>400 KB binary</b> that links libc and nothing else. No Python, no Node, no package manager. Defaults to any installed hako model (<code>hako-sho</code> 3B / <code>hako-koi</code> 7B) — no key, no cloud — and adds 13 cloud providers when you want them. <code>hako --serve</code> puts the same agent in a browser tab; the page is compiled into the binary.</p>
     <p class="sub">— Code search built in (grep · glob · web_fetch) · diffs before it writes · context that folds instead of running out · skills you can switch on as modes · streaming on every provider · trust-gated tools · sha-verified self-update.</p>
     <dl>
       <dt>CLI</dt><dd>hako</dd>
-      <dt>VERSION</dt><dd>v0.2.5</dd>
+      <dt>VERSION</dt><dd>v0.2.6</dd>
       <dt>SIZE</dt><dd>~400 KB</dd>
       <dt>DEPS</dt><dd>libc + curl</dd>
       <dt>PROVIDERS</dt><dd>1 local + 13 cloud</dd>
@@ -75,12 +75,12 @@
   </article>
   <article id="hako studio">
     <h3>hako studio <small>箱 · hako-studio · the chamber</small></h3>
-    <p class="status">— III — studio &nbsp;·&nbsp; v0.0.4 · new</p>
+    <p class="status">— III — studio &nbsp;·&nbsp; v0.0.5 · new</p>
     <p>The agent with a face. The same <code>hako.c</code> compiled to WebAssembly, so it runs <b>on your device, in your browser</b> — no install, no account needed, no backend, and nothing proxied through us. Open it hosted, run the container, or serve it from the binary with <code>hako --serve</code>; it is one piece of software in three shapes.</p>
     <p class="sub">— Your key goes straight to the provider · work stays in your browser or a folder you grant · per-folder sessions · files you can save out · themes, model and provider pickers · sign in to drive your terminal sessions from any device, end to end encrypted.</p>
     <dl>
       <dt>OPEN</dt><dd>hako.mithraeum.studio</dd>
-      <dt>VERSION</dt><dd>v0.0.4</dd>
+      <dt>VERSION</dt><dd>v0.0.5</dd>
       <dt>RUNS</dt><dd>browser · docker · hako --serve</dd>
       <dt>BACKEND</dt><dd>none</dd>
       <dt>LICENSE</dt><dd>GPL-3.0</dd>
@@ -137,6 +137,16 @@ git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make<
 
 <h2 id="releases">Releases — latest from each chamber</h2>
   <article>
+    <h3>hako-code <small>v0.2.6 · 2026-10-23</small></h3>
+    <p><b>sign in from anywhere, even iSh</b></p>
+    <p><code>:remote</code> goes through your account only now; tailscale is gone. Signing in where there is no browser beside you is easier: the sign-in link or device code lands on your clipboard (<code>/dev/clipboard</code> on iSh), a pasted code loses the spaces a wrapped line gave it, and enter on an empty prompt takes the clipboard. A phone reconnecting is mentioned once, at the desk, not in the chat.</p>
+  </article>
+  <article>
+    <h3>hako-studio <small>v0.0.5 · 2026-10-23</small></h3>
+    <p><b>the beta, said plainly</b></p>
+    <p>&amp;#9776; &amp;rarr; code lists your sessions right in the menu, with <b>add a device</b>. Signed out, it says what the closed beta is, what an account keeps (a random id, your passkey&amp;rsquo;s public key, your account key locked by it, your devices&amp;rsquo; keys) and what it never does: chats, files, prompts, provider keys. <b>Request access</b> is an email from your own mail app. Themes preview as you tap them, and the home-screen app fits the screen.</p>
+  </article>
+  <article>
     <h3>hako-code <small>v0.2.5 · 2026-10-22</small></h3>
     <p><b>your terminal, from your phone</b></p>
     <p><code>:remote on</code> shares the session you are in. Link the computer to your account once, then sign in at hako.mithraeum.studio on any device: your code sessions are listed by folder and machine, and opening one puts you in the <b>same chat as the terminal</b>. Every byte is sealed on your devices (Noise XXpsk3) and nothing we run can read it or keeps it. Tools still ask, stop works from either side, and the phone gets less than the desk. Invite beta. Also: <b>sign in with ChatGPT</b> (any plan, free included), and menus that leave no trace in the chat.</p>
@@ -188,7 +198,7 @@ git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make<
   </article>
 
 <footer>
-  <p>© MMXXVI · ordo mithraeum · <a href="../LICENSE">GPL-3.0</a> · BUILD 2026-10-22</p>
+  <p>© MMXXVI · ordo mithraeum · <a href="../LICENSE">GPL-3.0</a> · BUILD 2026-10-23</p>
   <p><a href="https://github.com/mithraeums" target="_blank" rel="noopener">source ↗</a> ·
      <a href="index.html" download>⇩ this page</a> ·
      <a href="https://github.com/orgs/mithraeums/discussions" target="_blank" rel="noopener">discussions ↗</a> ·

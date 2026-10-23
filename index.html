@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Mithraeum" />
 <meta property="og:url" content="https://mithraeum.studio/" />
 <meta property="og:title" content="Mithraeum — tools for the inner chamber" />
-<meta property="og:description" content="An editor, an agent, a browser workspace and a model engine, in C. The whole suite is under 1 MB and links libc and nothing else." />
+<meta property="og:description" content="An editor, an agent, a browser workspace and a model engine, in C. The whole suite is about 1 MB and links libc and nothing else." />
 <meta property="og:image" content="https://mithraeum.studio/assets/og.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -764,7 +764,7 @@
 
 <script>
 window.MITH = (function(){
-  const ver = { hake: 'v0.1.8', hako: 'v0.2.6', engine: 'v0.0.4', studio: 'v0.0.5' };
+  const ver = { hake: 'v0.1.8', hako: 'v0.2.7', engine: 'v0.0.4', studio: 'v0.0.6' };
   const repo = {
     edit:    'https://github.com/mithraeums/hako-edit',
     code:    'https://github.com/mithraeums/hako-code',
@@ -781,10 +781,10 @@ window.MITH = (function(){
     build: '2026-10-23',
     email: 'contact@mithraeum.studio',
     releases: [
-      { repo:'hako-code', tag: ver.hako, title:'sign in from anywhere, even iSh',
+      { repo:'hako-code', tag: 'v0.2.6', title:'sign in from anywhere, even iSh',
         body:'<code>:remote</code> goes through your account only now; tailscale is gone. Signing in where there is no browser beside you is easier: the sign-in link or device code lands on your clipboard (<code>/dev/clipboard</code> on iSh), a pasted code loses the spaces a wrapped line gave it, and enter on an empty prompt takes the clipboard. A phone reconnecting is mentioned once, at the desk, not in the chat.',
         date:'2026-10-23' },
-      { repo:'hako-studio', tag: ver.studio, title:'the beta, said plainly',
+      { repo:'hako-studio', tag: 'v0.0.5', title:'the beta, said plainly',
         body:'&#9776; &rarr; code lists your sessions right in the menu, with <b>add a device</b>. Signed out, it says what the closed beta is, what an account keeps (a random id, your passkey&rsquo;s public key, your account key locked by it, your devices&rsquo; keys) and what it never does: chats, files, prompts, provider keys. <b>Request access</b> is an email from your own mail app. Themes preview as you tap them, and the home-screen app fits the screen.',
         date:'2026-10-23' },
       { repo:'hako-code', tag: 'v0.2.5', title:'your terminal, from your phone',
@@ -838,9 +838,9 @@ window.MITH = (function(){
         actions:[['curl install ↗','#install',1,0],['Source ↗',repo.edit,0,1],['Releases',repo.edit+'/releases',0,1]] },
       hako:{ codename:'— II — agent', name:'hako', latin:'箱 · hako-code · the agent',
         status: ver.hako+' · stable', warn:false,
-        desc:'A coding agent in one C file — a <b>400 KB binary</b> that links libc and nothing else. No Python, no Node, no package manager. Defaults to any installed hako model (<code>hako-sho</code> 3B / <code>hako-koi</code> 7B) — no key, no cloud — and adds 13 cloud providers when you want them. <code>hako --serve</code> puts the same agent in a browser tab; the page is compiled into the binary.',
+        desc:'A coding agent in one C file — a <b>~650 KB binary</b> that links libc and nothing else. No Python, no Node, no package manager. Defaults to any installed hako model (<code>hako-sho</code> 3B / <code>hako-koi</code> 7B) — no key, no cloud — and adds 13 cloud providers when you want them. <code>hako --serve</code> puts the same agent in a browser tab; the page is compiled into the binary.',
         sub:'Code search built in (grep · glob · web_fetch) · diffs before it writes · context that folds instead of running out · skills you can switch on as modes · streaming on every provider · trust-gated tools · sha-verified self-update.',
-        meta:[['CLI','hako'],['VERSION',ver.hako],['SIZE','~400 KB'],['DEPS','libc + curl'],['PROVIDERS','1 local + 13 cloud'],['LICENSE','GPL-3.0']],
+        meta:[['CLI','hako'],['VERSION',ver.hako],['SIZE','~650 KB'],['DEPS','libc + curl'],['PROVIDERS','1 local + 13 cloud'],['LICENSE','GPL-3.0']],
         actions:[['curl install ↗','#install',1,0],['Source ↗',repo.code,0,1],['Browse skills','#skills',0,0]] },
       studio:{ codename:'— III — studio', name:'hako studio', latin:'箱 · hako-studio · the chamber',
         status: ver.studio+' · new', warn:false,
@@ -899,7 +899,7 @@ window.MITH = (function(){
       </div>
       <div class="riso-art">
         <img src="assets/art/mithras-giustiniani.png" width="960" height="872" alt="Mithras slaying the bull, after an engraving of the Giustiniani relief, 1636–47">
-        <div class="riso-sticker"><small><b>図 1</b> · THE WHOLE SUITE</small><strong>&lt; 1 MB</strong><span>three binaries, compiled. They link libc and nothing else.</span><em>hako 501K · hake 183K<br>hakm 87K · 29,040 lines of C</em></div>
+        <div class="riso-sticker"><small><b>図 1</b> · THE WHOLE SUITE</small><strong>~1 MB</strong><span>three binaries, compiled. They link libc and nothing else.</span><em>hako 654K · hake 259K<br>hakm 88K · 32,672 lines of C</em></div>
         <svg class="riso-cross" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="8" fill="none" stroke="#2636c4" stroke-width="1.5"/><path d="M14 0V28M0 14H28" stroke="#2636c4" stroke-width="1.5"/></svg>
       </div>
     </div>

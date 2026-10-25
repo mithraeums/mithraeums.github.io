@@ -60,27 +60,27 @@
   </article>
   <article id="hako">
     <h3>hako <small>箱 · hako-code · the agent</small></h3>
-    <p class="status">— II — agent &nbsp;·&nbsp; v0.2.7 · stable</p>
-    <p>A coding agent in one C file — a <b>~650 KB binary</b> that links libc and nothing else. No Python, no Node, no package manager. Defaults to any installed hako model (<code>hako-sho</code> 3B / <code>hako-koi</code> 7B) — no key, no cloud — and adds 13 cloud providers when you want them. <code>hako --serve</code> puts the same agent in a browser tab; the page is compiled into the binary.</p>
+    <p class="status">— II — agent &nbsp;·&nbsp; v0.2.8 · stable</p>
+    <p>A coding agent in one C file — a <b>~650 KB binary</b> that links libc and nothing else. No Python, no Node, no package manager. Defaults to any installed hako model (<code>hako-sho</code> 3B / <code>hako-koi</code> 7B) — no key, no cloud — and adds 14 cloud providers when you want them. <code>hako --serve</code> puts the same agent in a browser tab; the page is compiled into the binary.</p>
     <p class="sub">— Code search built in (grep · glob · web_fetch) · diffs before it writes · context that folds instead of running out · skills you can switch on as modes · streaming on every provider · trust-gated tools · sha-verified self-update.</p>
     <dl>
       <dt>CLI</dt><dd>hako</dd>
-      <dt>VERSION</dt><dd>v0.2.7</dd>
+      <dt>VERSION</dt><dd>v0.2.8</dd>
       <dt>SIZE</dt><dd>~650 KB</dd>
       <dt>DEPS</dt><dd>libc + curl</dd>
-      <dt>PROVIDERS</dt><dd>1 local + 13 cloud</dd>
+      <dt>PROVIDERS</dt><dd>1 local + 14 cloud</dd>
       <dt>LICENSE</dt><dd>GPL-3.0</dd>
     </dl>
     <p class="actions"><a href="#install">curl install ↗</a> &nbsp;·&nbsp; <a href="https://github.com/mithraeums/hako-code" target="_blank" rel="noopener">Source ↗</a> &nbsp;·&nbsp; <a href="#skills">Browse skills</a></p>
   </article>
   <article id="hako studio">
     <h3>hako studio <small>箱 · hako-studio · the chamber</small></h3>
-    <p class="status">— III — studio &nbsp;·&nbsp; v0.0.6 · new</p>
+    <p class="status">— III — studio &nbsp;·&nbsp; v0.0.7 · new</p>
     <p>The agent with a face. The same <code>hako.c</code> compiled to WebAssembly, so it runs <b>on your device, in your browser</b> — no install, no account needed, no backend, and nothing proxied through us. Open it hosted, run the container, or serve it from the binary with <code>hako --serve</code>; it is one piece of software in three shapes.</p>
     <p class="sub">— Your key goes straight to the provider · work stays in your browser or a folder you grant · per-folder sessions · files you can save out · themes, model and provider pickers · sign in to drive your terminal sessions from any device, end to end encrypted.</p>
     <dl>
       <dt>OPEN</dt><dd>hako.mithraeum.studio</dd>
-      <dt>VERSION</dt><dd>v0.0.6</dd>
+      <dt>VERSION</dt><dd>v0.0.7</dd>
       <dt>RUNS</dt><dd>browser · docker · hako --serve</dd>
       <dt>BACKEND</dt><dd>none</dd>
       <dt>LICENSE</dt><dd>GPL-3.0</dd>
@@ -136,6 +136,16 @@ git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make<
 </ul>
 
 <h2 id="releases">Releases — latest from each chamber</h2>
+  <article>
+    <h3>hako-code <small>v0.2.8 · 2026-10-25</small></h3>
+    <p><b>Nous Portal, and four provider fixes</b></p>
+    <p><code>:login nous</code> signs in with your Nous account in the browser (or <code>:login nous-api</code> takes a key), and its whole catalog shows in <code>:models</code>. groq works again; a provider&amp;rsquo;s error is an error, not the model&amp;rsquo;s answer; a key pasted after a browser sign-in is the one used; a provider with no model set gets its own default. <code>:remote on</code> answers the relay&amp;rsquo;s keepalive and reconnects, so the phone keeps the computer. Keys and tokens reach curl in a private file, never on its command line.</p>
+  </article>
+  <article>
+    <h3>hako-studio <small>v0.0.7 · 2026-10-25</small></h3>
+    <p><b>code and chat, side by side</b></p>
+    <p>Signed in, chat lists your code sessions above this browser&amp;rsquo;s chats, and code lists code only; each row says which it is (&amp;#9635; code, &amp;#9675; chat). With no provider picked, a prompt says to pick one instead of asking for a &amp;ldquo;none&amp;rdquo; key, and Nous Portal is in the key list.</p>
+  </article>
   <article>
     <h3>hako-code <small>v0.2.6 · 2026-10-23</small></h3>
     <p><b>sign in from anywhere, even iSh</b></p>
@@ -198,7 +208,7 @@ git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make<
   </article>
 
 <footer>
-  <p>© MMXXVI · ordo mithraeum · <a href="../LICENSE">GPL-3.0</a> · BUILD 2026-10-23</p>
+  <p>© MMXXVI · ordo mithraeum · <a href="../LICENSE">GPL-3.0</a> · BUILD 2026-10-25</p>
   <p><a href="https://github.com/mithraeums" target="_blank" rel="noopener">source ↗</a> ·
      <a href="index.html" download>⇩ this page</a> ·
      <a href="https://github.com/orgs/mithraeums/discussions" target="_blank" rel="noopener">discussions ↗</a> ·

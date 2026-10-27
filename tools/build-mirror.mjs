@@ -145,7 +145,7 @@ ${skills}
 ${releases}
 
 <footer>
-  <p>© MMXXVI · ordo mithraeum · <a href="../LICENSE">GPL-3.0</a> · BUILD ${esc(MITH.build)}</p>
+  <p>© MMXXVI · ordo mithraeum · <a href="../LICENSE">GPL-3.0</a> · <a href="../privacy">privacy</a> · BUILD ${esc(MITH.build)}</p>
   <p><a href="${R.org}" target="_blank" rel="noopener">source ↗</a> ·
      <a href="index.html" download>⇩ this page</a> ·
      <a href="${R.discuss}" target="_blank" rel="noopener">discussions ↗</a> ·

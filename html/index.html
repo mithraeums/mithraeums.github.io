@@ -60,12 +60,12 @@
   </article>
   <article id="hako">
     <h3>hako <small>箱 · hako-code · the agent</small></h3>
-    <p class="status">— II — agent &nbsp;·&nbsp; v0.2.8 · stable</p>
+    <p class="status">— II — agent &nbsp;·&nbsp; v0.2.9 · stable</p>
     <p>A coding agent in one C file — a <b>~650 KB binary</b> that links libc and nothing else. No Python, no Node, no package manager. Defaults to any installed hako model (<code>hako-sho</code> 3B / <code>hako-koi</code> 7B) — no key, no cloud — and adds 14 cloud providers when you want them. <code>hako --serve</code> puts the same agent in a browser tab; the page is compiled into the binary.</p>
     <p class="sub">— Code search built in (grep · glob · web_fetch) · diffs before it writes · context that folds instead of running out · skills you can switch on as modes · streaming on every provider · trust-gated tools · sha-verified self-update.</p>
     <dl>
       <dt>CLI</dt><dd>hako</dd>
-      <dt>VERSION</dt><dd>v0.2.8</dd>
+      <dt>VERSION</dt><dd>v0.2.9</dd>
       <dt>SIZE</dt><dd>~650 KB</dd>
       <dt>DEPS</dt><dd>libc + curl</dd>
       <dt>PROVIDERS</dt><dd>1 local + 14 cloud</dd>
@@ -75,12 +75,12 @@
   </article>
   <article id="hako studio">
     <h3>hako studio <small>箱 · hako-studio · the chamber</small></h3>
-    <p class="status">— III — studio &nbsp;·&nbsp; v0.0.7 · new</p>
+    <p class="status">— III — studio &nbsp;·&nbsp; v0.0.8 · new</p>
     <p>The agent with a face. The same <code>hako.c</code> compiled to WebAssembly, so it runs <b>on your device, in your browser</b> — no install, no account needed, no backend, and nothing proxied through us. Open it hosted, run the container, or serve it from the binary with <code>hako --serve</code>; it is one piece of software in three shapes.</p>
     <p class="sub">— Your key goes straight to the provider · work stays in your browser or a folder you grant · per-folder sessions · files you can save out · themes, model and provider pickers · sign in to drive your terminal sessions from any device, end to end encrypted.</p>
     <dl>
       <dt>OPEN</dt><dd>hako.mithraeum.studio</dd>
-      <dt>VERSION</dt><dd>v0.0.7</dd>
+      <dt>VERSION</dt><dd>v0.0.8</dd>
       <dt>RUNS</dt><dd>browser · docker · hako --serve</dd>
       <dt>BACKEND</dt><dd>none</dd>
       <dt>LICENSE</dt><dd>GPL-3.0</dd>
@@ -136,6 +136,16 @@ git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make<
 </ul>
 
 <h2 id="releases">Releases — latest from each chamber</h2>
+  <article>
+    <h3>hako-studio <small>v0.0.8 · 2026-10-27</small></h3>
+    <p><b>sign in with GitHub or Google</b></p>
+    <p>Sign in with GitHub or Google as well as a passkey or an emailed code. We ask GitHub for no permissions and Google for <code>openid</code> only, and keep a keyed hash of the account id, never your name, email or a token. The menu ends in an account row: your code sessions, <b>add a device</b> (a QR code another phone or browser scans to get your account key, sealed end to end), switch account, sign out. An invite finishes a sign-in that stopped at &amp;ldquo;invite needed&amp;rdquo;. What we keep is on the &lt;a href="privacy"&gt;privacy&lt;/a&gt; page.</p>
+  </article>
+  <article>
+    <h3>hako-code <small>v0.2.9 · 2026-10-27</small></h3>
+    <p><b>pair and link by QR code</b></p>
+    <p><code>:remote pair</code> draws a QR code: a device that signed in without a passkey scans it, signs in, and gets your account key, sealed under a secret only the code carries. The first <code>:remote on</code> shows a QR code too, so a phone signed in to hako links the computer with no browser on it: over ssh, on iSh, on a server. Sign-in links no longer open a browser over ssh or with no display.</p>
+  </article>
   <article>
     <h3>hako-code <small>v0.2.8 · 2026-10-25</small></h3>
     <p><b>Nous Portal, and four provider fixes</b></p>
@@ -208,7 +218,7 @@ git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make<
   </article>
 
 <footer>
-  <p>© MMXXVI · ordo mithraeum · <a href="../LICENSE">GPL-3.0</a> · <a href="../privacy">privacy</a> · BUILD 2026-10-25</p>
+  <p>© MMXXVI · ordo mithraeum · <a href="../LICENSE">GPL-3.0</a> · <a href="../privacy">privacy</a> · BUILD 2026-10-27</p>
   <p><a href="https://github.com/mithraeums" target="_blank" rel="noopener">source ↗</a> ·
      <a href="index.html" download>⇩ this page</a> ·
      <a href="https://github.com/orgs/mithraeums/discussions" target="_blank" rel="noopener">discussions ↗</a> ·

@@ -764,7 +764,7 @@
 
 <script>
 window.MITH = (function(){
-  const ver = { hake: 'v0.1.8', hako: 'v0.2.9', engine: 'v0.0.4', studio: 'v0.0.8' };
+  const ver = { hake: 'v0.1.8', hako: 'v0.2.10', engine: 'v0.0.4', studio: 'v0.0.9' };
   const repo = {
     edit:    'https://github.com/mithraeums/hako-edit',
     code:    'https://github.com/mithraeums/hako-code',
@@ -778,9 +778,15 @@ window.MITH = (function(){
   };
   return {
     ver, repo,
-    build: '2026-10-27',
+    build: '2026-10-28',
     email: 'contact@mithraeum.studio',
     releases: [
+      { repo:'hako-studio', tag: 'v0.0.9', title:'images, and a session that stays',
+        body:'Paste a screenshot, drop a file or pick a photo and it waits on the tray; send, and the model sees it with your words. A phone photo is shrunk on the phone first. A code session reconnects by itself after a network change or a phone waking up, transcript and all, and opens in about half the time it took. On an iPhone, the input bar sits on the keyboard instead of jumping to the top of the screen.',
+        date:'2026-10-28' },
+      { repo:'hako-code', tag: 'v0.2.10', title:'images',
+        body:'<code>ctrl+v</code> pastes the clipboard&rsquo;s image as <code>[image #1]</code>, and a dragged or typed image path becomes one when you send. Anthropic, OpenAI and every compatible host, a ChatGPT sign-in and ollama see it; the local engine says it cannot and the turn runs on the words. Images stay in <code>~/.hako</code>, never in your project. <code>:trust</code> now reaches the model at once, and a phone that reconnects is announced once per <code>:remote on</code>.',
+        date:'2026-10-28' },
       { repo:'hako-studio', tag: 'v0.0.8', title:'sign in with GitHub or Google',
         body:'Sign in with GitHub or Google as well as a passkey or an emailed code. We ask GitHub for no permissions and Google for <code>openid</code> only, and keep a keyed hash of the account id, never your name, email or a token. The menu ends in an account row: your code sessions, <b>add a device</b> (a QR code another phone or browser scans to get your account key, sealed end to end), switch account, sign out. An invite finishes a sign-in that stopped at &ldquo;invite needed&rdquo;. What we keep is on the <a href="privacy">privacy</a> page.',
         date:'2026-10-27' },

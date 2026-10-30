@@ -83,7 +83,12 @@ const out = `<!doctype html>
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="referrer" content="no-referrer" />
 <style>
-  :root{ --void:#0a0a09; --bone:#c8c2b2; --paper:#d8d2c2; --chalk:#e8e2d2; --ash:#6a665c; --gold:#b89656; --rule:#ffffff22; }
+  :root{ --void:#ece7da; --bone:#2c2a25; --paper:#1d1c19; --chalk:#14130f; --ash:#6e685a; --gold:#14130f; --rule:#14130f22; --pre:#e3ddcd; color-scheme:light; }
+  /* no script here, so the theme switch is three radios and :has(); it cannot be remembered, a reload goes back to system */
+  @media (prefers-color-scheme: dark){ :root:not(:has(#t-paper:checked)){ --void:#0d0c0a; --bone:#d8d2c2; --paper:#e6e0d1; --chalk:#e6e0d1; --ash:#9a9484; --gold:#e6e0d1; --rule:#e6e0d122; --pre:#151410; color-scheme:dark; } }
+  :root:has(#t-night:checked){ --void:#0d0c0a; --bone:#d8d2c2; --paper:#e6e0d1; --chalk:#e6e0d1; --ash:#9a9484; --gold:#e6e0d1; --rule:#e6e0d122; --pre:#151410; color-scheme:dark; }
+  :root:has(#t-paper:checked){ --void:#ece7da; --bone:#2c2a25; --paper:#1d1c19; --chalk:#14130f; --ash:#6e685a; --gold:#14130f; --rule:#14130f22; --pre:#e3ddcd; color-scheme:light; }
+  .theme{ font-size:12px; color:var(--ash); margin:0 0 18px; } .theme label{ margin-right:12px; cursor:pointer; } .theme input{ accent-color:var(--chalk); }
   *{box-sizing:border-box}
   body{ margin:0 auto; max-width:760px; padding:32px 20px 64px;
     background:var(--void); color:var(--bone);
@@ -100,7 +105,7 @@ const out = `<!doctype html>
   dl{ display:grid; grid-template-columns:auto 1fr; gap:2px 14px; font-size:13px; margin:8px 0; }
   dt{ color:var(--ash); } dd{ margin:0; color:var(--paper); }
   ul{ list-style:none; padding:0; } li{ margin:6px 0; } li b{ color:var(--gold); }
-  pre{ background:#14130f; border:1px solid var(--rule); padding:14px 16px; overflow-x:auto; font-size:13px; color:var(--paper); }
+  pre{ background:var(--pre); border:1px solid var(--rule); padding:14px 16px; overflow-x:auto; font-size:13px; color:var(--paper); }
   code{ color:var(--paper); }
   footer{ margin-top:48px; border-top:1px solid var(--rule); padding-top:20px; color:var(--ash); font-size:12px; }
   .note{ color:var(--ash); font-size:12px; border:1px solid var(--rule); padding:10px 14px; margin:18px 0; }
@@ -108,6 +113,7 @@ const out = `<!doctype html>
 </head>
 <body>
 
+<p class="theme">theme: <label><input type="radio" name="theme" id="t-system" checked> system</label><label><input type="radio" name="theme" id="t-paper"> paper</label><label><input type="radio" name="theme" id="t-night"> night</label></p>
 <p class="eyebrow">— ORDO MITHRAEUM · MMXXVI —</p>
 <h1>Tools for the inner chamber.</h1>
 <p class="lede">A modal editor, a terminal agent, and the local models that run them — three C instruments on a from-scratch inference engine. No cloud, no telemetry, no daemon. Bring your own keys, or run our weights on-device.</p>

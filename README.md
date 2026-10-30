@@ -1,6 +1,9 @@
 <p align="center">
   <a href="https://mithraeums.github.io">
-    <img src="assets/banner-mithraeum.png" alt="Mithraeum — tools for the inner chamber" width="100%"/>
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="assets/banner-mithraeum-night.png"/>
+      <img src="assets/banner-mithraeum.png" alt="Mithraeum — tools for the inner chamber" width="100%"/>
+    </picture>
   </a>
 </p>
 

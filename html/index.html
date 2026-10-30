@@ -13,7 +13,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="referrer" content="no-referrer" />
 <style>
-  :root{ --void:#0a0a09; --bone:#c8c2b2; --paper:#d8d2c2; --chalk:#e8e2d2; --ash:#6a665c; --gold:#b89656; --rule:#ffffff22; }
+  :root{ --void:#ece7da; --bone:#2c2a25; --paper:#1d1c19; --chalk:#14130f; --ash:#6e685a; --gold:#14130f; --rule:#14130f22; --pre:#e3ddcd; color-scheme:light; }
+  /* no script here, so the theme switch is three radios and :has(); it cannot be remembered, a reload goes back to system */
+  @media (prefers-color-scheme: dark){ :root:not(:has(#t-paper:checked)){ --void:#0d0c0a; --bone:#d8d2c2; --paper:#e6e0d1; --chalk:#e6e0d1; --ash:#9a9484; --gold:#e6e0d1; --rule:#e6e0d122; --pre:#151410; color-scheme:dark; } }
+  :root:has(#t-night:checked){ --void:#0d0c0a; --bone:#d8d2c2; --paper:#e6e0d1; --chalk:#e6e0d1; --ash:#9a9484; --gold:#e6e0d1; --rule:#e6e0d122; --pre:#151410; color-scheme:dark; }
+  :root:has(#t-paper:checked){ --void:#ece7da; --bone:#2c2a25; --paper:#1d1c19; --chalk:#14130f; --ash:#6e685a; --gold:#14130f; --rule:#14130f22; --pre:#e3ddcd; color-scheme:light; }
+  .theme{ font-size:12px; color:var(--ash); margin:0 0 18px; } .theme label{ margin-right:12px; cursor:pointer; } .theme input{ accent-color:var(--chalk); }
   *{box-sizing:border-box}
   body{ margin:0 auto; max-width:760px; padding:32px 20px 64px;
     background:var(--void); color:var(--bone);
@@ -30,7 +35,7 @@
   dl{ display:grid; grid-template-columns:auto 1fr; gap:2px 14px; font-size:13px; margin:8px 0; }
   dt{ color:var(--ash); } dd{ margin:0; color:var(--paper); }
   ul{ list-style:none; padding:0; } li{ margin:6px 0; } li b{ color:var(--gold); }
-  pre{ background:#14130f; border:1px solid var(--rule); padding:14px 16px; overflow-x:auto; font-size:13px; color:var(--paper); }
+  pre{ background:var(--pre); border:1px solid var(--rule); padding:14px 16px; overflow-x:auto; font-size:13px; color:var(--paper); }
   code{ color:var(--paper); }
   footer{ margin-top:48px; border-top:1px solid var(--rule); padding-top:20px; color:var(--ash); font-size:12px; }
   .note{ color:var(--ash); font-size:12px; border:1px solid var(--rule); padding:10px 14px; margin:18px 0; }
@@ -38,6 +43,7 @@
 </head>
 <body>
 
+<p class="theme">theme: <label><input type="radio" name="theme" id="t-system" checked> system</label><label><input type="radio" name="theme" id="t-paper"> paper</label><label><input type="radio" name="theme" id="t-night"> night</label></p>
 <p class="eyebrow">— ORDO MITHRAEUM · MMXXVI —</p>
 <h1>Tools for the inner chamber.</h1>
 <p class="lede">A modal editor, a terminal agent, and the local models that run them — three C instruments on a from-scratch inference engine. No cloud, no telemetry, no daemon. Bring your own keys, or run our weights on-device.</p>
@@ -46,26 +52,26 @@
 <h2>Suite — three instruments, one chamber</h2>
   <article id="hake">
     <h3>hake <small>箱 · hako-edit · the box</small></h3>
-    <p class="status">— I — editor &nbsp;·&nbsp; v0.1.8 · stable</p>
-    <p>A single-file modal text editor in C99. Vim-bound, language-aware, multi-pane. Embeds the <code>hako</code> agent in a split pane, so you can talk to a model without leaving your file.</p>
-    <p class="sub">— Modal editing · 40+ syntax modes · 19 themes · a live runner pane · OS-aware clipboard · zero runtime deps beyond libc + curl.</p>
+    <p class="status">— I — editor &nbsp;·&nbsp; v0.2.0 · stable</p>
+    <p>A single-file modal text editor in C99. Vim keys by default, emacs or nano with a flag; language-aware, multi-pane. Embeds the <code>hako</code> agent in a split pane, so you can talk to a model without leaving your file.</p>
+    <p class="sub">— Vim, emacs or nano keys · 40+ syntax modes · 20 themes · a live runner pane and a console · OS-aware clipboard · zero runtime deps beyond libc + curl.</p>
     <dl>
       <dt>CLI</dt><dd>hake</dd>
-      <dt>VERSION</dt><dd>v0.1.8</dd>
+      <dt>VERSION</dt><dd>v0.2.0</dd>
       <dt>LANG</dt><dd>C99 single file</dd>
-      <dt>THEMES</dt><dd>19</dd>
+      <dt>THEMES</dt><dd>20</dd>
       <dt>LICENSE</dt><dd>GPL-3.0</dd>
     </dl>
     <p class="actions"><a href="#install">curl install ↗</a> &nbsp;·&nbsp; <a href="https://github.com/mithraeums/hako-edit" target="_blank" rel="noopener">Source ↗</a> &nbsp;·&nbsp; <a href="https://github.com/mithraeums/hako-edit/releases" target="_blank" rel="noopener">Releases</a></p>
   </article>
   <article id="hako">
     <h3>hako <small>箱 · hako-code · the agent</small></h3>
-    <p class="status">— II — agent &nbsp;·&nbsp; v0.2.10 · stable</p>
+    <p class="status">— II — agent &nbsp;·&nbsp; v0.3.0 · stable</p>
     <p>A coding agent in one C file — a <b>~650 KB binary</b> that links libc and nothing else. No Python, no Node, no package manager. Defaults to any installed hako model (<code>hako-sho</code> 3B / <code>hako-koi</code> 7B) — no key, no cloud — and adds 14 cloud providers when you want them. <code>hako --serve</code> puts the same agent in a browser tab; the page is compiled into the binary.</p>
     <p class="sub">— Code search built in (grep · glob · web_fetch) · diffs before it writes · context that folds instead of running out · skills you can switch on as modes · streaming on every provider · trust-gated tools · sha-verified self-update.</p>
     <dl>
       <dt>CLI</dt><dd>hako</dd>
-      <dt>VERSION</dt><dd>v0.2.10</dd>
+      <dt>VERSION</dt><dd>v0.3.0</dd>
       <dt>SIZE</dt><dd>~650 KB</dd>
       <dt>DEPS</dt><dd>libc + curl</dd>
       <dt>PROVIDERS</dt><dd>1 local + 14 cloud</dd>
@@ -75,12 +81,12 @@
   </article>
   <article id="hako studio">
     <h3>hako studio <small>箱 · hako-studio · the chamber</small></h3>
-    <p class="status">— III — studio &nbsp;·&nbsp; v0.0.9 · new</p>
+    <p class="status">— III — studio &nbsp;·&nbsp; v0.1.0 · new</p>
     <p>The agent with a face. The same <code>hako.c</code> compiled to WebAssembly, so it runs <b>on your device, in your browser</b> — no install, no account needed, no backend, and nothing proxied through us. Open it hosted, run the container, or serve it from the binary with <code>hako --serve</code>; it is one piece of software in three shapes.</p>
     <p class="sub">— Your key goes straight to the provider · work stays in your browser or a folder you grant · per-folder sessions · files you can save out · themes, model and provider pickers · sign in to drive your terminal sessions from any device, end to end encrypted.</p>
     <dl>
       <dt>OPEN</dt><dd>hako.mithraeum.studio</dd>
-      <dt>VERSION</dt><dd>v0.0.9</dd>
+      <dt>VERSION</dt><dd>v0.1.0</dd>
       <dt>RUNS</dt><dd>browser · docker · hako --serve</dd>
       <dt>BACKEND</dt><dd>none</dd>
       <dt>LICENSE</dt><dd>GPL-3.0</dd>
@@ -91,7 +97,7 @@
     <h3>hakm <small>箱 · hako · in officina</small></h3>
     <p class="status">— IV — models &nbsp;·&nbsp; koi live</p>
     <p>Local-first model family. <b>hako-sho</b> (mini · 3B) and <b>hako-koi</b> (mid · 7B · Qwen2.5-Coder + hako wrap) live today on HuggingFace, tool-aware out of the box. A larger <b>koi</b> fine-tune (14B/32B) is queued; <b>samurai</b> (50B+) reserved.</p>
-    <p class="sub">— Native C engine — own loader, Q4_K/Q6_K + int8 kernels, BPE. No llama.cpp, no ggml, no ollama. The agent runs it as a one-shot <code>hakm</code> subprocess — no server, no daemon.</p>
+    <p class="sub">— Native C engine — own loader, Q4_K/Q6_K + int8 kernels, BPE. No llama.cpp, no ggml, no ollama. The agent starts it as a <code>hakm</code> subprocess and stops it when you quit — no server, no daemon.</p>
     <dl>
       <dt>CLI</dt><dd>hakm</dd>
       <dt>LIVE</dt><dd>hako-sho · hako-koi</dd>
@@ -131,11 +137,28 @@ git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make<
     <li><b>06</b> <a href="https://github.com/mithraeums/skills/tree/main/release" target="_blank" rel="noopener">release/</a> — Bump version consistently, write the changelog, generate a multi-repo push-order checklist.</li>
     <li><b>07</b> <a href="https://github.com/mithraeums/skills/tree/main/handoff" target="_blank" rel="noopener">handoff/</a> — Write a START-HERE state doc (done / next / gotchas) so the next session resumes in seconds.</li>
     <li><b>08</b> <a href="https://github.com/mithraeums/skills/tree/main/changelog" target="_blank" rel="noopener">changelog/</a> — Turn a diff or session log into one clean CHANGELOG entry, in the project’s own voice. Single-repo; the focused half of release.</li>
-    <li><b>09</b> <a href="https://github.com/mithraeums/skills/tree/main/ship" target="_blank" rel="noopener">ship/</a> — The pre-push gate: build matrix · sanitizers · version-drift · CHANGELOG sync · cruft · docs. Returns PASS or BLOCKED, never a vibe.</li>
+    <li><b>09</b> <a href="https://github.com/mithraeums/skills/tree/main/debug" target="_blank" rel="noopener">debug/</a> — Find the real cause before touching code: read the evidence, reproduce, shrink, then fix with a test that fails on the old code.</li>
+    <li><b>10</b> <a href="https://github.com/mithraeums/skills/tree/main/gitflow" target="_blank" rel="noopener">gitflow/</a> — A reviewed push flow for agent-written code: check · push · merge · tag, y/N at every step, commits under your name only.</li>
+    <li><b>11</b> <a href="https://github.com/mithraeums/skills/tree/main/ship" target="_blank" rel="noopener">ship/</a> — The pre-push gate: build matrix · sanitizers · version-drift · CHANGELOG sync · cruft · docs. Returns PASS or BLOCKED, never a vibe.</li>
     <li><b>··</b> <em>your skill here</em> — open a PR; the folder name becomes the invocation.</li>
 </ul>
 
 <h2 id="releases">Releases — latest from each chamber</h2>
+  <article>
+    <h3>hako-studio <small>v0.1.0 · 2026-10-29</small></h3>
+    <p><b>a new menu, and a page that greets you</b></p>
+    <p>The menu starts with the wordmark (HAKO in chat, CODE in code), then new, search, files and settings, your recents and your account; <code>ctrl+b</code> folds it away. An empty chat is a landing: a greeting for the time of day, the composer under it and the folder&amp;rsquo;s newest files as cards. Replies render their markdown, built as page elements so nothing a model writes can run in the page. <code>:</code> or <code>/</code> opens the command menu, a speaker reads a reply aloud with this device&amp;rsquo;s own voice, and the default theme follows your system&amp;rsquo;s light or dark.</p>
+  </article>
+  <article>
+    <h3>hako-code <small>v0.3.0 · 2026-10-29</small></h3>
+    <p><b>one rc, one menu, your colors</b></p>
+    <p>One rc for the whole suite: <code>~/.hakorc</code> (or <code>$HAKORC</code>, or <code>~/.config/hako/hakorc</code>), with the project&amp;rsquo;s own <code>.hakorc</code> on top once you trust the folder, and your own themes in it. Type <code>:</code> or <code>/</code> and a command menu opens under the line: <code>:</code> runs hako, <code>/</code> drives the model, every skill is <code>/&amp;lt;skill&amp;gt;</code>, and hake and the studio draw the same menu. The default theme is your terminal&amp;rsquo;s own colors. <code>:voice</code> reads replies aloud, the bar says when an update is out, and a file written earlier reaches the model as one line instead of the whole file on every turn. A phone on <code>:remote</code> can no longer set <code>:editor</code> and run it on your computer.</p>
+  </article>
+  <article>
+    <h3>hako-edit <small>v0.2.0 · 2026-10-29</small></h3>
+    <p><b>lighter, like vim, with emacs and nano too</b></p>
+    <p>With no file you get vim&amp;rsquo;s start screen, and one window has no status bar, title bar or line numbers until a second pane opens. <code>hake --emacs</code> and <code>hake --nano</code> bring those keys, with every pane and <code>:</code> command still there. <code>:console</code> is a shell line under the runner, sandboxed if you ask (<code>console_sandbox=1</code>: no network, writes only to the project). A new highlighter reads tokens: multi-line strings, nested comments, and full markdown with fenced code in its own language. It reads the same rc as hako, and the Rei pane looks like hako and has its command menu.</p>
+  </article>
   <article>
     <h3>hako-studio <small>v0.0.9 · 2026-10-28</small></h3>
     <p><b>images, and a session that stays</b></p>
@@ -228,7 +251,7 @@ git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make<
   </article>
 
 <footer>
-  <p>© MMXXVI · ordo mithraeum · <a href="../LICENSE">GPL-3.0</a> · <a href="../privacy">privacy</a> · BUILD 2026-10-28</p>
+  <p>© MMXXVI · ordo mithraeum · <a href="../LICENSE">GPL-3.0</a> · <a href="../privacy">privacy</a> · BUILD 2026-10-29</p>
   <p><a href="https://github.com/mithraeums" target="_blank" rel="noopener">source ↗</a> ·
      <a href="index.html" download>⇩ this page</a> ·
      <a href="https://github.com/orgs/mithraeums/discussions" target="_blank" rel="noopener">discussions ↗</a> ·

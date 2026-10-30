@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
+<script>try{var t=localStorage.getItem('mith-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <title>Privacy · Mithraeum</title>
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="referrer" content="no-referrer" />
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
-<meta name="theme-color" content="#ece7da" />
+<meta name="theme-color" content="#ece7da" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0d0c0a" media="(prefers-color-scheme: dark)" />
 <meta name="description" content="What reaches Mithraeum when you use hako, hake, hakm and hako studio, and what we keep." />
 <link rel="canonical" href="https://mithraeum.studio/privacy" />
 <style>
@@ -16,29 +18,32 @@
   @font-face { font-family: 'EB Garamond'; src: url(assets/fonts/ebgaramond.woff2) format('woff2'); font-weight: 400 800; font-display: swap; }
   @font-face { font-family: 'IBM Plex Mono'; src: url(assets/fonts/plexmono.woff2) format('woff2'); font-weight: 400; font-display: swap; }
   @font-face { font-family: 'IBM Plex Mono'; src: url(assets/fonts/plexmono-medium.woff2) format('woff2'); font-weight: 500 600; font-display: swap; }
-  :root { --washi: #ece7da; --sumi: #14130f; --ink: #2c2a25; --ash: #6e685a; --blue: #2636c4; --red: #e2402e; --rule: #14130f1f; }
+  :root { --washi: #ece7da; --sumi: #14130f; --ink: #2c2a25; --ash: #6e685a; --rule: #14130f1f; --card: #f4f0e6; --ghost: #14130f22; color-scheme: light; }
+  /* night: the system's dark mode unless the reader picked paper on the site, or a picked night */
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --washi: #0d0c0a; --sumi: #e6e0d1; --ink: #d8d2c2; --ash: #9a9484; --rule: #e6e0d11a; --card: #151410; --ghost: #e6e0d129; color-scheme: dark; } }
+  :root[data-theme="dark"] { --washi: #0d0c0a; --sumi: #e6e0d1; --ink: #d8d2c2; --ash: #9a9484; --rule: #e6e0d11a; --card: #151410; --ghost: #e6e0d129; color-scheme: dark; }
   * { box-sizing: border-box; }
   html, body { margin: 0; background: var(--washi); color: var(--ink); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 15px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
-  ::selection { background: var(--blue); color: var(--washi); }
-  .nav { border-bottom: 2px solid var(--blue); }
+  ::selection { background: var(--sumi); color: var(--washi); }
+  .nav { border-bottom: 1px solid var(--sumi); }
   .nav .in, main, footer .in { max-width: 760px; margin: 0 auto; padding: 0 20px; }
   .nav .in { display: flex; align-items: baseline; gap: 12px; padding-top: 14px; padding-bottom: 12px; }
-  .nav a { color: var(--blue); text-decoration: none; }
+  .nav a { color: var(--sumi); text-decoration: none; }
   .jp { font-family: 'Dela Gothic One', sans-serif; font-size: 20px; }
   .lat { font-size: 10px; letter-spacing: .24em; color: var(--ash); text-transform: uppercase; }
   main { padding-top: 40px; padding-bottom: 56px; }
-  h1 { font-family: 'Dela Gothic One', sans-serif; font-weight: 400; color: var(--blue); font-size: clamp(34px, 8vw, 52px); line-height: 1.05; margin: 0 0 6px; text-shadow: 3px 2px 0 var(--red); }
+  h1 { font-family: 'Dela Gothic One', sans-serif; font-weight: 400; color: var(--sumi); font-size: clamp(34px, 8vw, 52px); line-height: 1.05; margin: 0 0 6px; text-shadow: 3px 2px 0 var(--ghost); }
   .date { color: var(--ash); font-size: 12px; letter-spacing: .08em; margin: 0 0 28px; }
   h2 { font-family: 'EB Garamond', Georgia, serif; font-weight: 600; font-size: 24px; color: var(--sumi); margin: 36px 0 8px; }
   p, li { max-width: 68ch; }
   ul { padding-left: 1.2em; }
   li { margin: 4px 0; }
-  li::marker { color: var(--red); }
-  a { color: var(--blue); }
+  li::marker { color: var(--ash); }
+  a { color: var(--sumi); }
   code { font-size: .92em; background: #14130f0d; padding: 1px 4px; border-radius: 3px; }
-  .short { border: 2px solid var(--sumi); box-shadow: 6px 5px 0 var(--red); padding: 4px 20px; background: #f4f0e6; }
+  .short { border: 1px solid var(--sumi); box-shadow: 6px 5px 0 var(--ghost); padding: 4px 20px; background: var(--card); }
   .short h2 { margin-top: 14px; }
-  footer { border-top: 2px solid var(--blue); color: var(--ash); font-size: 12px; }
+  footer { border-top: 1px solid var(--sumi); color: var(--ash); font-size: 12px; }
   footer .in { padding-top: 14px; padding-bottom: 20px; display: flex; flex-wrap: wrap; gap: 6px 18px; }
   footer a { color: var(--ink); }
 </style>

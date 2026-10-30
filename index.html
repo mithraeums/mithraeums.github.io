@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Mithraeum" />
 <meta property="og:url" content="https://mithraeum.studio/" />
 <meta property="og:title" content="Mithraeum — tools for the inner chamber" />
-<meta property="og:description" content="An editor, an agent, a browser workspace and a model engine, in C. The whole suite is about 1 MB and links libc and nothing else." />
+<meta property="og:description" content="An editor, an agent, a browser workspace and a model engine, in C. The whole suite is about 1.2 MB and links libc and nothing else." />
 <meta property="og:image" content="https://mithraeum.studio/assets/og.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -762,12 +762,12 @@
   .riso-art { position: relative; justify-self: end; width: min(100%, 640px); }
   .riso-art img { width: 100%; height: auto; display: block; filter: var(--art); mix-blend-mode: var(--art-blend); }
   .riso-art::after { content: ''; position: absolute; inset: -14px; border: 1px solid var(--sumi); pointer-events: none; }
-  .riso-sticker { position: absolute; left: -6%; bottom: 8%; width: 230px; background: var(--sumi); color: var(--void); padding: 14px 16px; transform: rotate(2deg); display: grid; gap: 4px; box-shadow: inset 0 0 0 5px var(--sumi), inset 0 0 0 6px var(--void); }
+  .riso-sticker { position: absolute; left: -6%; bottom: 8%; width: 250px; background: var(--sumi); color: var(--void); padding: 14px 16px; transform: rotate(2deg); display: grid; gap: 4px; box-shadow: inset 0 0 0 5px var(--sumi), inset 0 0 0 6px var(--void); }
   .riso-sticker small { font-size: 10px; letter-spacing: .22em; }
   .riso-sticker span { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 20px; line-height: 1.2; }
   .riso-sticker small b, .riso-sticker strong { font-family: 'Dela Gothic One', sans-serif; font-weight: 400; }
-  .riso-sticker strong { font-size: 46px; line-height: 1; letter-spacing: -0.01em; margin: 2px 0 2px; }
-  .riso-sticker em { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-style: normal; font-size: 10px; letter-spacing: .08em; line-height: 1.5; opacity: .85; margin-top: 4px; }
+  .riso-sticker strong { font-size: 40px; line-height: 1; letter-spacing: -0.01em; margin: 2px 0 2px; white-space: nowrap; }
+  .riso-sticker em { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-style: normal; font-size: 10px; letter-spacing: .08em; line-height: 1.5; opacity: .85; margin-top: 4px; color: inherit; }
   .brand .hide-sm { }
   @media (max-width: 640px) { .brand .lat { display: none; } }
   .riso-cross { position: absolute; right: 2%; top: 2%; width: 34px; height: 34px; }
@@ -905,9 +905,9 @@ window.MITH = (function(){
         actions:[['curl install ↗','#install',1,0],['Source ↗',repo.edit,0,1],['Releases',repo.edit+'/releases',0,1]] },
       hako:{ codename:'— II — agent', name:'hako', latin:'箱 · hako-code · the agent',
         status: ver.hako+' · stable', warn:false,
-        desc:'A coding agent in one C file — a <b>~650 KB binary</b> that links libc and nothing else. No Python, no Node, no package manager. Defaults to any installed hako model (<code>hako-sho</code> 3B / <code>hako-koi</code> 7B) — no key, no cloud — and adds 14 cloud providers when you want them. <code>hako --serve</code> puts the same agent in a browser tab; the page is compiled into the binary.',
+        desc:'A coding agent in one C file — a <b>~800 KB binary</b> that links libc and nothing else. No Python, no Node, no package manager. Defaults to any installed hako model (<code>hako-sho</code> 3B / <code>hako-koi</code> 7B) — no key, no cloud — and adds 14 cloud providers when you want them. <code>hako --serve</code> puts the same agent in a browser tab; the page is compiled into the binary.',
         sub:'Code search built in (grep · glob · web_fetch) · diffs before it writes · context that folds instead of running out · skills you can switch on as modes · streaming on every provider · trust-gated tools · sha-verified self-update.',
-        meta:[['CLI','hako'],['VERSION',ver.hako],['SIZE','~650 KB'],['DEPS','libc + curl'],['PROVIDERS','1 local + 14 cloud'],['LICENSE','GPL-3.0']],
+        meta:[['CLI','hako'],['VERSION',ver.hako],['SIZE','~800 KB'],['DEPS','libc + curl'],['PROVIDERS','1 local + 14 cloud'],['LICENSE','GPL-3.0']],
         actions:[['curl install ↗','#install',1,0],['Source ↗',repo.code,0,1],['Browse skills','#skills',0,0]] },
       studio:{ codename:'— III — studio', name:'hako studio', latin:'箱 · hako-studio · the chamber',
         status: ver.studio+' · new', warn:false,
@@ -967,7 +967,7 @@ window.MITH = (function(){
       </div>
       <div class="riso-art">
         <img src="assets/art/mithras-giustiniani.png" width="960" height="872" alt="Mithras slaying the bull, after an engraving of the Giustiniani relief, 1636–47">
-        <div class="riso-sticker"><small><b>図 1</b> · THE WHOLE SUITE</small><strong>~1 MB</strong><span>three binaries, compiled. They link libc and nothing else.</span><em>hako 654K · hake 259K<br>hakm 88K · 32,672 lines of C</em></div>
+        <div class="riso-sticker"><small><b>図 1</b> · THE WHOLE SUITE</small><strong>~1.2 MB</strong><span>three binaries, compiled. They link libc and nothing else.</span><em>hako 793K · hake 310K<br>hakm 88K · 37,085 lines of C</em></div>
         <svg class="riso-cross" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M14 0V28M0 14H28" stroke="currentColor" stroke-width="1.5"/></svg>
       </div>
     </div>

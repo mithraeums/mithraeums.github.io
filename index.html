@@ -802,7 +802,7 @@
 
 <script>
 window.MITH = (function(){
-  const ver = { hake: 'v0.2.0', hako: 'v0.3.0', engine: 'v0.0.4', studio: 'v0.1.0' };
+  const ver = { hake: 'v0.2.0', hako: 'v0.3.0', engine: 'v0.0.6', studio: 'v0.1.0' };
   const repo = {
     edit:    'https://github.com/mithraeums/hako-edit',
     code:    'https://github.com/mithraeums/hako-code',
@@ -819,6 +819,9 @@ window.MITH = (function(){
     build: '2026-10-29',
     email: 'contact@mithraeum.studio',
     releases: [
+      { repo:'hako', tag: 'engine ' + ver.engine, title:'a trainer, a quantizer, qwen3',
+        body:'<code>hakm-train</code> trains a model of our own from scratch, on the CPU, in C: its own BPE, then the engine&rsquo;s own shape, written as a file hakm runs and quantizes as is (4.5M params on wikitext-2: validation perplexity <b>171 to 60</b> in 13 minutes on an i3, every gradient checked against a finite difference). <code>hakm quantize</code> is our own quantizer and <code>--ppl</code> the number to judge it by: Qwen3-0.6B scores 21.16 at bf16, 22.72 at q4_k. Hugging Face safetensors convert straight in, Qwen3 runs, and the x86 release builds use AVX2 now: <b>~3x</b> faster decode on the i3.',
+        date:'2026-11-01' },
       { repo:'hako-studio', tag: 'v0.1.0', title:'a new menu, and a page that greets you',
         body:'The menu starts with the wordmark (HAKO in chat, CODE in code), then new, search, files and settings, your recents and your account; <code>ctrl+b</code> folds it away. An empty chat is a landing: a greeting for the time of day, the composer under it and the folder&rsquo;s newest files as cards. Replies render their markdown, built as page elements so nothing a model writes can run in the page. <code>:</code> or <code>/</code> opens the command menu, a speaker reads a reply aloud with this device&rsquo;s own voice, and the default theme follows your system&rsquo;s light or dark.',
         date:'2026-10-29' },
@@ -867,7 +870,7 @@ window.MITH = (function(){
       { repo:'hako-edit', tag: 'v0.1.7', title:'the pane shows what the agent did',
         body:'The Rei pane catches up with the agent. It was dropping the tool <b>output</b> &mdash; it said &ldquo;ran list_dir&rdquo; and never what it found &mdash; and it never decoded the agent&rsquo;s JSON, so a literal <code>\\n</code> sat mid-sentence. Both fixed, along with the same escape-scan bug the agent had. New <code>tools/pipe-conformance.py</code> drives <code>hako --pipe</code> exactly as the pane does and asserts the approval round trip, no model needed &mdash; the check that would have caught a month of silent protocol drift. Ships with hako-code v0.2.4; the wire lives on both sides.',
         date:'2026-09-21' },
-      { repo:'hako', tag: 'engine ' + ver.engine, title:'streams · remembers · stays bounded',
+      { repo:'hako', tag: 'engine v0.0.4', title:'streams · remembers · stays bounded',
         body:'<code>--serve</code> sends each token as it is sampled, so the agent types a local answer out in real time. The prefilled system prompt persists on disk and comes back on the next run &mdash; <b>255&nbsp;s to 2.3&nbsp;s</b> for a cold first turn on a CPU-only i3 &mdash; and that cache is now <b>bounded</b>: one file per distinct prompt had piled up 359&nbsp;MB before anyone looked, and the device this has to behave on is a phone. A heap overflow waiting for the first small model is fixed and pinned under ASan. Builds on musl and 32-bit x86 (no <code>-march=native</code> under an emulator that advertises instructions it cannot run). <code>hakm list | pull | rm</code>, llama-arch models, Q8_0. Still libc + libm + pthread.',
         date:'2026-09-21' },
       { repo:'hako-code', tag: 'v0.2.3', title:'hako studio — the agent in a browser tab',
@@ -967,7 +970,7 @@ window.MITH = (function(){
       </div>
       <div class="riso-art">
         <img src="assets/art/mithras-giustiniani.png" width="960" height="872" alt="Mithras slaying the bull, after an engraving of the Giustiniani relief, 1636–47">
-        <div class="riso-sticker"><small><b>図 1</b> · THE WHOLE SUITE</small><strong>~1.2 MB</strong><span>three binaries, compiled. They link libc and nothing else.</span><em>hako 793K · hake 310K<br>hakm 88K · 37,085 lines of C</em></div>
+        <div class="riso-sticker"><small><b>図 1</b> · THE WHOLE SUITE</small><strong>~1.2 MB</strong><span>three binaries, compiled. They link libc and nothing else.</span><em>hako 793K · hake 310K<br>hakm 109K · 39,124 lines of C</em></div>
         <svg class="riso-cross" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M14 0V28M0 14H28" stroke="currentColor" stroke-width="1.5"/></svg>
       </div>
     </div>

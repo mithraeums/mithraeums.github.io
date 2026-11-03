@@ -101,7 +101,7 @@
     <dl>
       <dt>CLI</dt><dd>hakm</dd>
       <dt>LIVE</dt><dd>hako-sho · hako-koi</dd>
-      <dt>ENGINE</dt><dd>v0.0.4</dd>
+      <dt>ENGINE</dt><dd>v0.0.6</dd>
       <dt>TIERS</dt><dd>mini · mid · max</dd>
       <dt>LICENSE</dt><dd>GPL-3.0</dd>
     </dl>
@@ -144,6 +144,11 @@ git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make<
 </ul>
 
 <h2 id="releases">Releases — latest from each chamber</h2>
+  <article>
+    <h3>hako <small>engine v0.0.6 · 2026-11-01</small></h3>
+    <p><b>a trainer, a quantizer, qwen3</b></p>
+    <p><code>hakm-train</code> trains a model of our own from scratch, on the CPU, in C: its own BPE, then the engine&amp;rsquo;s own shape, written as a file hakm runs and quantizes as is (4.5M params on wikitext-2: validation perplexity <b>171 to 60</b> in 13 minutes on an i3, every gradient checked against a finite difference). <code>hakm quantize</code> is our own quantizer and <code>--ppl</code> the number to judge it by: Qwen3-0.6B scores 21.16 at bf16, 22.72 at q4_k. Hugging Face safetensors convert straight in, Qwen3 runs, and the x86 release builds use AVX2 now: <b>~3x</b> faster decode on the i3.</p>
+  </article>
   <article>
     <h3>hako-studio <small>v0.1.0 · 2026-10-29</small></h3>
     <p><b>a new menu, and a page that greets you</b></p>

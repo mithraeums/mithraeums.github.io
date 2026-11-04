@@ -66,12 +66,12 @@
   </article>
   <article id="hako">
     <h3>hako <small>箱 · hako-code · the agent</small></h3>
-    <p class="status">— II — agent &nbsp;·&nbsp; v0.3.0 · stable</p>
+    <p class="status">— II — agent &nbsp;·&nbsp; v0.3.3 · stable</p>
     <p>A coding agent in one C file — a <b>~800 KB binary</b> that links libc and nothing else. No Python, no Node, no package manager. Defaults to any installed hako model (<code>hako-sho</code> 3B / <code>hako-koi</code> 7B) — no key, no cloud — and adds 14 cloud providers when you want them. <code>hako --serve</code> puts the same agent in a browser tab; the page is compiled into the binary.</p>
     <p class="sub">— Code search built in (grep · glob · web_fetch) · diffs before it writes · context that folds instead of running out · skills you can switch on as modes · streaming on every provider · trust-gated tools · sha-verified self-update.</p>
     <dl>
       <dt>CLI</dt><dd>hako</dd>
-      <dt>VERSION</dt><dd>v0.3.0</dd>
+      <dt>VERSION</dt><dd>v0.3.3</dd>
       <dt>SIZE</dt><dd>~800 KB</dd>
       <dt>DEPS</dt><dd>libc + curl</dd>
       <dt>PROVIDERS</dt><dd>1 local + 14 cloud</dd>
@@ -81,12 +81,12 @@
   </article>
   <article id="hako studio">
     <h3>hako studio <small>箱 · hako-studio · the chamber</small></h3>
-    <p class="status">— III — studio &nbsp;·&nbsp; v0.1.0 · new</p>
+    <p class="status">— III — studio &nbsp;·&nbsp; v0.1.1 · new</p>
     <p>The agent with a face. The same <code>hako.c</code> compiled to WebAssembly, so it runs <b>on your device, in your browser</b> — no install, no account needed, no backend, and nothing proxied through us. Open it hosted, run the container, or serve it from the binary with <code>hako --serve</code>; it is one piece of software in three shapes.</p>
     <p class="sub">— Your key goes straight to the provider · work stays in your browser or a folder you grant · per-folder sessions · files you can save out · themes, model and provider pickers · sign in to drive your terminal sessions from any device, end to end encrypted.</p>
     <dl>
       <dt>OPEN</dt><dd>hako.mithraeum.studio</dd>
-      <dt>VERSION</dt><dd>v0.1.0</dd>
+      <dt>VERSION</dt><dd>v0.1.1</dd>
       <dt>RUNS</dt><dd>browser · docker · hako --serve</dd>
       <dt>BACKEND</dt><dd>none</dd>
       <dt>LICENSE</dt><dd>GPL-3.0</dd>
@@ -144,6 +144,16 @@ git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make<
 </ul>
 
 <h2 id="releases">Releases — latest from each chamber</h2>
+  <article>
+    <h3>hako-code <small>v0.3.3 · 2026-11-04</small></h3>
+    <p><b>pinned chats, and a fix the fuzzer found</b></p>
+    <p>hako keeps a chat&amp;rsquo;s pin or archive beside it (<code>POST /api/session/mark</code>), so every browser on that computer sees the same list, and the chat list and the resume picker show the newest first. With a cloud model, <code>run_shell</code> may name a path outside the project when you ask; the file tools still stay inside it, and the local model keeps the strict rule its bench scores best with. <code>make fuzz</code> found that a tool call cut short after an escaped backslash could make the context slimmer read and write past its buffer: fixed, and pinned by a test. <code>install.sh</code> stops on a release without a <code>.sha256</code>, and gcc builds clean at <code>-O0</code>.</p>
+  </article>
+  <article>
+    <h3>hako-studio <small>v0.1.1 · 2026-11-04</small></h3>
+    <p><b>pinned chats, and a user menu</b></p>
+    <p>Pin a chat above recents, or archive, rename or delete it from its &amp;ctdot; menu; hako keeps the pins, so every device on that computer sees them. Recents shows the newest 12, and <b>view all</b> opens every chat with search and an archived tab. You sit at the foot of the menu, a name and a picture kept in this browser, with settings behind it. The default theme is mithraeum, the site&amp;rsquo;s paper by day and night in the dark; terminal is the plain black and white. Each release now carries the built site, for any static HTTPS host.</p>
+  </article>
   <article>
     <h3>hako <small>engine v0.0.6 · 2026-11-01</small></h3>
     <p><b>a trainer, a quantizer, qwen3</b></p>

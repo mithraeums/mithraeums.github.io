@@ -12,10 +12,10 @@
 </p>
 
 <p align="center">
-  <a href="https://mithraeums.github.io"><img src="https://img.shields.io/badge/site-mithraeums.github.io-e2402e?style=flat-square&labelColor=14130f" alt="site"/></a>
-  <a href="https://github.com/mithraeums"><img src="https://img.shields.io/badge/org-github.com%2Fmithraeums-2636c4?style=flat-square&labelColor=14130f" alt="org"/></a>
-  <img src="https://img.shields.io/badge/license-GPL--3.0-2636c4?style=flat-square&labelColor=14130f" alt="GPL-3.0"/>
-  <img src="https://img.shields.io/badge/year-MMXXVI-2636c4?style=flat-square&labelColor=14130f" alt="MMXXVI"/>
+  <a href="https://mithraeums.github.io"><img src="https://img.shields.io/badge/site-mithraeums.github.io-ece7da?style=flat-square&labelColor=14130f" alt="site"/></a>
+  <a href="https://github.com/mithraeums"><img src="https://img.shields.io/badge/org-github.com%2Fmithraeums-ece7da?style=flat-square&labelColor=14130f" alt="org"/></a>
+  <img src="https://img.shields.io/badge/license-GPL--3.0-ece7da?style=flat-square&labelColor=14130f" alt="GPL-3.0"/>
+  <img src="https://img.shields.io/badge/year-MMXXVI-ece7da?style=flat-square&labelColor=14130f" alt="MMXXVI"/>
 </p>
 
 <br>
@@ -29,25 +29,25 @@
     <td width="40" align="center"><sub><b>I</b></sub></td>
     <td width="200"><b><a href="https://github.com/mithraeums/hako-edit">hako-edit</a></b><br/><sub>箱 · the box · <code>hake</code></sub></td>
     <td>Modal text editor in a single C file. Vim-bound, language-aware, 19 themes. <code>:rei</code> answers from inside.</td>
-    <td align="right"><sub><a href="https://github.com/mithraeums/hako-edit/releases"><img src="https://img.shields.io/github/v/tag/mithraeums/hako-edit?sort=semver&style=flat-square&label=&color=e2402e" alt="latest hako-edit tag"/></a></sub></td>
+    <td align="right"><sub><a href="https://github.com/mithraeums/hako-edit/releases"><img src="https://img.shields.io/github/v/tag/mithraeums/hako-edit?sort=semver&style=flat-square&label=&color=ece7da" alt="latest hako-edit tag"/></a></sub></td>
   </tr>
   <tr>
     <td align="center"><sub><b>II</b></sub></td>
     <td><b><a href="https://github.com/mithraeums/hako-code">hako-code</a></b><br/><sub>箱 · the agent · <code>hako</code></sub></td>
     <td>Standalone terminal AI agent. Same C99 stack. 13+ providers, persistent sessions, sha-verified self-update.</td>
-    <td align="right"><sub><a href="https://github.com/mithraeums/hako-code/releases"><img src="https://img.shields.io/github/v/tag/mithraeums/hako-code?sort=semver&style=flat-square&label=&color=e2402e" alt="latest hako-code tag"/></a></sub></td>
+    <td align="right"><sub><a href="https://github.com/mithraeums/hako-code/releases"><img src="https://img.shields.io/github/v/tag/mithraeums/hako-code?sort=semver&style=flat-square&label=&color=ece7da" alt="latest hako-code tag"/></a></sub></td>
   </tr>
   <tr>
     <td align="center"><sub><b>III</b></sub></td>
     <td><b><a href="https://github.com/mithraeums/hako">hako</a></b><br/><sub>· in officina · <code>hakm</code></sub></td>
     <td>Local models for the cursor on a from-scratch C engine. <code>hako-sho</code> (3B) + <code>hako-koi</code> (7B) live on HuggingFace; larger fine-tunes queued.</td>
-    <td align="right"><sub><a href="https://github.com/mithraeums/hako/releases"><img src="https://img.shields.io/github/v/tag/mithraeums/hako?sort=semver&style=flat-square&label=&color=e2402e" alt="latest hako tag"/></a></sub></td>
+    <td align="right"><sub><a href="https://github.com/mithraeums/hako/releases"><img src="https://img.shields.io/github/v/tag/mithraeums/hako?sort=semver&style=flat-square&label=&color=ece7da" alt="latest hako tag"/></a></sub></td>
   </tr>
   <tr>
     <td align="center"><sub><b>IV</b></sub></td>
     <td><b><a href="https://github.com/mithraeums/hako-studio">hako-studio</a></b><br/><sub>箱 · in a browser · <a href="https://hako.mithraeum.studio">hako.mithraeum.studio</a></sub></td>
     <td>The same agent, compiled to WebAssembly, in a tab. Static page, no backend; also served by <code>hako --serve</code>.</td>
-    <td align="right"><sub><a href="https://github.com/mithraeums/hako-studio/releases"><img src="https://img.shields.io/github/v/tag/mithraeums/hako-studio?sort=semver&style=flat-square&label=&color=e2402e" alt="latest hako-studio tag"/></a></sub></td>
+    <td align="right"><sub><a href="https://github.com/mithraeums/hako-studio/releases"><img src="https://img.shields.io/github/v/tag/mithraeums/hako-studio?sort=semver&style=flat-square&label=&color=ece7da" alt="latest hako-studio tag"/></a></sub></td>
   </tr>
   <tr>
     <td align="center"><sub><b>V</b></sub></td>

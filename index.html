@@ -802,7 +802,7 @@
 
 <script>
 window.MITH = (function(){
-  const ver = { hake: 'v0.2.0', hako: 'v0.3.3', engine: 'v0.0.6', studio: 'v0.1.1' };
+  const ver = { hake: 'v0.2.0', hako: 'v0.4.0', engine: 'v0.0.6', studio: 'v0.2.0' };
   const repo = {
     edit:    'https://github.com/mithraeums/hako-edit',
     code:    'https://github.com/mithraeums/hako-code',
@@ -819,6 +819,12 @@ window.MITH = (function(){
     build: '2026-10-29',
     email: 'contact@mithraeum.studio',
     releases: [
+      { repo:'hako-code', tag: 'v0.4.0', title:'several models on one chat',
+        body:'Start a second hako on a folder and it opens its own chat; <code>:join</code> puts it on the first one&rsquo;s. Each keeps its own model and is named for it, <code>@name</code> asks one of them, and each hears what the others said. <code>:say</code> is a line for the people only, and a memory note says which hako saved it. A hako never writes over a file that changed since it read it, and two never write at once. <code>delegate</code> hands a side task to a subagent, read only unless you are in auto mode. <code>:remote on</code> opens a relay stream of its own, so two hakos on one computer no longer take turns, and one hako no longer logs another out, for any provider.',
+        date:'2026-11-11' },
+      { repo:'hako-studio', tag: 'v0.2.0', title:'sessions switch in place',
+        body:'Switching sessions no longer reloads the page: each code session you open keeps its own end-to-end session, up to eight, so going back is instant, and the menu marks one out of sight that is asking you something, working or finished. Code lists live sessions only, and every window gets its own stream on the relay, so two windows no longer knock each other offline. A session with several hakos says so with a pill, and <code>@</code> completes the live ones. The home-screen app reaches the bottom of the screen on iOS 26.',
+        date:'2026-11-11' },
       { repo:'hako-code', tag: 'v0.3.3', title:'pinned chats, and a fix the fuzzer found',
         body:'hako keeps a chat&rsquo;s pin or archive beside it (<code>POST /api/session/mark</code>), so every browser on that computer sees the same list, and the chat list and the resume picker show the newest first. With a cloud model, <code>run_shell</code> may name a path outside the project when you ask; the file tools still stay inside it, and the local model keeps the strict rule its bench scores best with. <code>make fuzz</code> found that a tool call cut short after an escaped backslash could make the context slimmer read and write past its buffer: fixed, and pinned by a test. <code>install.sh</code> stops on a release without a <code>.sha256</code>, and gcc builds clean at <code>-O0</code>.',
         date:'2026-11-04' },
@@ -976,7 +982,7 @@ window.MITH = (function(){
       </div>
       <div class="riso-art">
         <img src="assets/art/mithras-giustiniani.png" width="960" height="872" alt="Mithras slaying the bull, after an engraving of the Giustiniani relief, 1636–47">
-        <div class="riso-sticker"><small><b>図 1</b> · THE WHOLE SUITE</small><strong>~1.2 MB</strong><span>three binaries, compiled. They link libc and nothing else.</span><em>hako 813K · hake 310K<br>hakm 109K · 39,307 lines of C</em></div>
+        <div class="riso-sticker"><small><b>図 1</b> · THE WHOLE SUITE</small><strong>~1.3 MB</strong><span>three binaries, compiled. They link libc and nothing else.</span><em>hako 864K · hake 310K<br>hakm 109K · 40,688 lines of C</em></div>
         <svg class="riso-cross" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M14 0V28M0 14H28" stroke="currentColor" stroke-width="1.5"/></svg>
       </div>
     </div>

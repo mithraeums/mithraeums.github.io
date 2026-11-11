@@ -66,12 +66,12 @@
   </article>
   <article id="hako">
     <h3>hako <small>箱 · hako-code · the agent</small></h3>
-    <p class="status">— II — agent &nbsp;·&nbsp; v0.3.3 · stable</p>
+    <p class="status">— II — agent &nbsp;·&nbsp; v0.4.0 · stable</p>
     <p>A coding agent in one C file — a <b>~800 KB binary</b> that links libc and nothing else. No Python, no Node, no package manager. Defaults to any installed hako model (<code>hako-sho</code> 3B / <code>hako-koi</code> 7B) — no key, no cloud — and adds 14 cloud providers when you want them. <code>hako --serve</code> puts the same agent in a browser tab; the page is compiled into the binary.</p>
     <p class="sub">— Code search built in (grep · glob · web_fetch) · diffs before it writes · context that folds instead of running out · skills you can switch on as modes · streaming on every provider · trust-gated tools · sha-verified self-update.</p>
     <dl>
       <dt>CLI</dt><dd>hako</dd>
-      <dt>VERSION</dt><dd>v0.3.3</dd>
+      <dt>VERSION</dt><dd>v0.4.0</dd>
       <dt>SIZE</dt><dd>~800 KB</dd>
       <dt>DEPS</dt><dd>libc + curl</dd>
       <dt>PROVIDERS</dt><dd>1 local + 14 cloud</dd>
@@ -81,12 +81,12 @@
   </article>
   <article id="hako studio">
     <h3>hako studio <small>箱 · hako-studio · the chamber</small></h3>
-    <p class="status">— III — studio &nbsp;·&nbsp; v0.1.1 · new</p>
+    <p class="status">— III — studio &nbsp;·&nbsp; v0.2.0 · new</p>
     <p>The agent with a face. The same <code>hako.c</code> compiled to WebAssembly, so it runs <b>on your device, in your browser</b> — no install, no account needed, no backend, and nothing proxied through us. Open it hosted, run the container, or serve it from the binary with <code>hako --serve</code>; it is one piece of software in three shapes.</p>
     <p class="sub">— Your key goes straight to the provider · work stays in your browser or a folder you grant · per-folder sessions · files you can save out · themes, model and provider pickers · sign in to drive your terminal sessions from any device, end to end encrypted.</p>
     <dl>
       <dt>OPEN</dt><dd>hako.mithraeum.studio</dd>
-      <dt>VERSION</dt><dd>v0.1.1</dd>
+      <dt>VERSION</dt><dd>v0.2.0</dd>
       <dt>RUNS</dt><dd>browser · docker · hako --serve</dd>
       <dt>BACKEND</dt><dd>none</dd>
       <dt>LICENSE</dt><dd>GPL-3.0</dd>
@@ -144,6 +144,16 @@ git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make<
 </ul>
 
 <h2 id="releases">Releases — latest from each chamber</h2>
+  <article>
+    <h3>hako-code <small>v0.4.0 · 2026-11-11</small></h3>
+    <p><b>several models on one chat</b></p>
+    <p>Start a second hako on a folder and it opens its own chat; <code>:join</code> puts it on the first one&amp;rsquo;s. Each keeps its own model and is named for it, <code>@name</code> asks one of them, and each hears what the others said. <code>:say</code> is a line for the people only, and a memory note says which hako saved it. A hako never writes over a file that changed since it read it, and two never write at once. <code>delegate</code> hands a side task to a subagent, read only unless you are in auto mode. <code>:remote on</code> opens a relay stream of its own, so two hakos on one computer no longer take turns, and one hako no longer logs another out, for any provider.</p>
+  </article>
+  <article>
+    <h3>hako-studio <small>v0.2.0 · 2026-11-11</small></h3>
+    <p><b>sessions switch in place</b></p>
+    <p>Switching sessions no longer reloads the page: each code session you open keeps its own end-to-end session, up to eight, so going back is instant, and the menu marks one out of sight that is asking you something, working or finished. Code lists live sessions only, and every window gets its own stream on the relay, so two windows no longer knock each other offline. A session with several hakos says so with a pill, and <code>@</code> completes the live ones. The home-screen app reaches the bottom of the screen on iOS 26.</p>
+  </article>
   <article>
     <h3>hako-code <small>v0.3.3 · 2026-11-04</small></h3>
     <p><b>pinned chats, and a fix the fuzzer found</b></p>

@@ -802,7 +802,7 @@
 
 <script>
 window.MITH = (function(){
-  const ver = { hake: 'v0.2.0', hako: 'v0.4.0', engine: 'v0.0.6', studio: 'v0.2.0' };
+  const ver = { hake: 'v0.2.0', hako: 'v0.4.2', engine: 'v0.0.6', studio: 'v0.2.0' };
   const repo = {
     edit:    'https://github.com/mithraeums/hako-edit',
     code:    'https://github.com/mithraeums/hako-code',
@@ -819,6 +819,9 @@ window.MITH = (function(){
     build: '2026-10-29',
     email: 'contact@mithraeum.studio',
     releases: [
+      { repo:'hako-code', tag: 'v0.4.2', title:'shared chats that hold together',
+        body:'What another hako says shows as it is said, in the middle of this one&rsquo;s turn too, and a model can hand a line to another with <code>@name</code>; three in a row hand it back to a person. Arrivals, leaves and renames are said, <code>:join</code> takes a chat&rsquo;s name, and each line is logged once. <code>~/.hako/credentials</code> is sealed now (XChaCha20-Poly1305), its key in the login keychain on a Mac or a 0600 key file elsewhere. ChatGPT sign-in works again, and every provider&rsquo;s default and model list is current. v0.4.2 brings back the FreeBSD build, which v0.4.1 lacked. Every redraw is one frame, so menus, the spinner and streaming no longer flicker, and in Rex the pane shows hako working, waiting on you or done.',
+        date:'2026-11-13' },
       { repo:'hako-code', tag: 'v0.4.0', title:'several models on one chat',
         body:'Start a second hako on a folder and it opens its own chat; <code>:join</code> puts it on the first one&rsquo;s. Each keeps its own model and is named for it, <code>@name</code> asks one of them, and each hears what the others said. <code>:say</code> is a line for the people only, and a memory note says which hako saved it. A hako never writes over a file that changed since it read it, and two never write at once. <code>delegate</code> hands a side task to a subagent, read only unless you are in auto mode. <code>:remote on</code> opens a relay stream of its own, so two hakos on one computer no longer take turns, and one hako no longer logs another out, for any provider.',
         date:'2026-11-11' },
@@ -920,9 +923,9 @@ window.MITH = (function(){
         actions:[['curl install ↗','#install',1,0],['Source ↗',repo.edit,0,1],['Releases',repo.edit+'/releases',0,1]] },
       hako:{ codename:'— II — agent', name:'hako', latin:'箱 · hako-code · the agent',
         status: ver.hako+' · stable', warn:false,
-        desc:'A coding agent in one C file — a <b>~800 KB binary</b> that links libc and nothing else. No Python, no Node, no package manager. Defaults to any installed hako model (<code>hako-sho</code> 3B / <code>hako-koi</code> 7B) — no key, no cloud — and adds 14 cloud providers when you want them. <code>hako --serve</code> puts the same agent in a browser tab; the page is compiled into the binary.',
+        desc:'A coding agent in one C file — a <b>~900 KB binary</b> that links libc and nothing else. No Python, no Node, no package manager. Defaults to any installed hako model (<code>hako-sho</code> 3B / <code>hako-koi</code> 7B) — no key, no cloud — and adds 14 cloud providers when you want them. <code>hako --serve</code> puts the same agent in a browser tab; the page is compiled into the binary.',
         sub:'Code search built in (grep · glob · web_fetch) · diffs before it writes · context that folds instead of running out · skills you can switch on as modes · streaming on every provider · trust-gated tools · sha-verified self-update.',
-        meta:[['CLI','hako'],['VERSION',ver.hako],['SIZE','~800 KB'],['DEPS','libc + curl'],['PROVIDERS','1 local + 14 cloud'],['LICENSE','GPL-3.0']],
+        meta:[['CLI','hako'],['VERSION',ver.hako],['SIZE','~900 KB'],['DEPS','libc + curl'],['PROVIDERS','1 local + 14 cloud'],['LICENSE','GPL-3.0']],
         actions:[['curl install ↗','#install',1,0],['Source ↗',repo.code,0,1],['Browse skills','#skills',0,0]] },
       studio:{ codename:'— III — studio', name:'hako studio', latin:'箱 · hako-studio · the chamber',
         status: ver.studio+' · new', warn:false,
@@ -982,7 +985,7 @@ window.MITH = (function(){
       </div>
       <div class="riso-art">
         <img src="assets/art/mithras-giustiniani.png" width="960" height="872" alt="Mithras slaying the bull, after an engraving of the Giustiniani relief, 1636–47">
-        <div class="riso-sticker"><small><b>図 1</b> · THE WHOLE SUITE</small><strong>~1.3 MB</strong><span>three binaries, compiled. They link libc and nothing else.</span><em>hako 864K · hake 310K<br>hakm 109K · 40,688 lines of C</em></div>
+        <div class="riso-sticker"><small><b>図 1</b> · THE WHOLE SUITE</small><strong>~1.3 MB</strong><span>three binaries, compiled. They link libc and nothing else.</span><em>hako 898K · hake 310K<br>hakm 109K · 41,616 lines of C</em></div>
         <svg class="riso-cross" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M14 0V28M0 14H28" stroke="currentColor" stroke-width="1.5"/></svg>
       </div>
     </div>

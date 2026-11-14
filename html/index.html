@@ -66,13 +66,13 @@
   </article>
   <article id="hako">
     <h3>hako <small>箱 · hako-code · the agent</small></h3>
-    <p class="status">— II — agent &nbsp;·&nbsp; v0.4.0 · stable</p>
-    <p>A coding agent in one C file — a <b>~800 KB binary</b> that links libc and nothing else. No Python, no Node, no package manager. Defaults to any installed hako model (<code>hako-sho</code> 3B / <code>hako-koi</code> 7B) — no key, no cloud — and adds 14 cloud providers when you want them. <code>hako --serve</code> puts the same agent in a browser tab; the page is compiled into the binary.</p>
+    <p class="status">— II — agent &nbsp;·&nbsp; v0.4.2 · stable</p>
+    <p>A coding agent in one C file — a <b>~900 KB binary</b> that links libc and nothing else. No Python, no Node, no package manager. Defaults to any installed hako model (<code>hako-sho</code> 3B / <code>hako-koi</code> 7B) — no key, no cloud — and adds 14 cloud providers when you want them. <code>hako --serve</code> puts the same agent in a browser tab; the page is compiled into the binary.</p>
     <p class="sub">— Code search built in (grep · glob · web_fetch) · diffs before it writes · context that folds instead of running out · skills you can switch on as modes · streaming on every provider · trust-gated tools · sha-verified self-update.</p>
     <dl>
       <dt>CLI</dt><dd>hako</dd>
-      <dt>VERSION</dt><dd>v0.4.0</dd>
-      <dt>SIZE</dt><dd>~800 KB</dd>
+      <dt>VERSION</dt><dd>v0.4.2</dd>
+      <dt>SIZE</dt><dd>~900 KB</dd>
       <dt>DEPS</dt><dd>libc + curl</dd>
       <dt>PROVIDERS</dt><dd>1 local + 14 cloud</dd>
       <dt>LICENSE</dt><dd>GPL-3.0</dd>
@@ -144,6 +144,11 @@ git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make<
 </ul>
 
 <h2 id="releases">Releases — latest from each chamber</h2>
+  <article>
+    <h3>hako-code <small>v0.4.2 · 2026-11-13</small></h3>
+    <p><b>shared chats that hold together</b></p>
+    <p>What another hako says shows as it is said, in the middle of this one&amp;rsquo;s turn too, and a model can hand a line to another with <code>@name</code>; three in a row hand it back to a person. Arrivals, leaves and renames are said, <code>:join</code> takes a chat&amp;rsquo;s name, and each line is logged once. <code>~/.hako/credentials</code> is sealed now (XChaCha20-Poly1305), its key in the login keychain on a Mac or a 0600 key file elsewhere. ChatGPT sign-in works again, and every provider&amp;rsquo;s default and model list is current. v0.4.2 brings back the FreeBSD build, which v0.4.1 lacked. Every redraw is one frame, so menus, the spinner and streaming no longer flicker, and in Rex the pane shows hako working, waiting on you or done.</p>
+  </article>
   <article>
     <h3>hako-code <small>v0.4.0 · 2026-11-11</small></h3>
     <p><b>several models on one chat</b></p>

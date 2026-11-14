@@ -25,10 +25,12 @@ eval(m[0].replace(/^window\.MITH/, 'window.MITH'));
 const MITH = window.MITH;
 if (!MITH || !MITH.ver) { console.error('MITH did not evaluate to an object'); process.exit(1); }
 
-const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+// an & that already starts an entity (&rsquo; &mdash; &#8217;) is MITH's own markup, kept as is
+const AMP = /&(?!(?:#\d+|#x[0-9a-f]+|[a-z][a-z0-9]*);)/gi;
+const esc = (s) => String(s).replace(AMP, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 // keep the tiny inline tags MITH uses for copy (<code>, <b>) but escape everything else
 const rich = (s) => String(s)
-  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  .replace(AMP, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
   .replace(/&lt;(\/?)(code|b)&gt;/g, '<$1$2>');
 
 const R = MITH.repo;

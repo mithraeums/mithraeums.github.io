@@ -762,7 +762,7 @@
   .riso-art { position: relative; justify-self: end; width: min(100%, 640px); }
   .riso-art img { width: 100%; height: auto; display: block; filter: var(--art); mix-blend-mode: var(--art-blend); }
   .riso-art::after { content: ''; position: absolute; inset: -14px; border: 1px solid var(--sumi); pointer-events: none; }
-  .riso-sticker { position: absolute; left: -6%; bottom: 8%; width: 250px; background: var(--sumi); color: var(--void); padding: 14px 16px; transform: rotate(2deg); display: grid; gap: 4px; box-shadow: inset 0 0 0 5px var(--sumi), inset 0 0 0 6px var(--void); }
+  .riso-sticker { position: absolute; z-index: 1; left: -6%; bottom: 8%; width: 250px; background: var(--sumi); color: var(--void); padding: 14px 16px; transform: rotate(2deg); display: grid; gap: 4px; box-shadow: inset 0 0 0 5px var(--sumi), inset 0 0 0 6px var(--void); }
   .riso-sticker small { font-size: 10px; letter-spacing: .22em; }
   .riso-sticker span { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 20px; line-height: 1.2; }
   .riso-sticker small b, .riso-sticker strong { font-family: 'Dela Gothic One', sans-serif; font-weight: 400; }

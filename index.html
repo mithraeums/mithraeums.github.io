@@ -627,6 +627,12 @@
   .nav-links .tab-link.active::after {
     content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px; background: var(--gold);
   }
+  /* prev / next under the panes, beside the tabs (made by the pane script, so the no-JS mirror never shows them) */
+  .pane-arrows { position: absolute; right: max(16px, env(safe-area-inset-right, 0px)); bottom: 12px; display: flex; gap: 6px; z-index: 5; }
+  .pane-arrows button { font: 500 13px 'IBM Plex Mono', ui-monospace, Menlo, monospace; width: 34px; height: 30px; padding: 0;
+    background: var(--void); border: 1px solid var(--rule-strong); color: var(--bone); cursor: pointer; }
+  .pane-arrows button:hover, .pane-arrows button:focus-visible { color: var(--paper); border-color: var(--paper); }
+  .pane-arrows button:disabled { opacity: .35; cursor: default; border-color: var(--rule-strong); color: var(--bone); }
   .nav-links .nav-ext { color: var(--ash); }
   .nav-links .nav-ext:hover { color: var(--paper); }
   .slim-foot {
@@ -1350,6 +1356,7 @@ hako --serve --lan            # prints the URL to open on your phone</code>
     cur=name;
     track.style.transform='translateX('+(-indexOf(name)*100)+'%)';
     setActive(name);
+    if(prev){ prev.disabled=indexOf(name)===0; next.disabled=indexOf(name)===PANES.length-1; }
     // reset the pane's own scroll to the top
     const pane=track.children[indexOf(name)];
     if(pane) pane.scrollTop=0;
@@ -1359,6 +1366,15 @@ hako --serve --lan            # prints the URL to open on your phone</code>
     document.title = name==='home' ? 'Mithraeum' : 'Mithraeum · '+name;
   }
   window.mithGo=go; // bridge for the terminal (more / enter chip)
+
+  // little arrows, as on the Spelaeum site: one pane back or on, stopping at the ends like the arrow keys
+  const arrows=document.createElement('div');
+  arrows.className='pane-arrows';
+  arrows.innerHTML='<button type="button" aria-label="previous page">&larr;</button><button type="button" aria-label="next page">&rarr;</button>';
+  track.parentNode.appendChild(arrows);
+  const prev=arrows.children[0], next=arrows.children[1];
+  prev.addEventListener('click',()=>go(PANES[Math.max(0,indexOf(cur)-1)]));
+  next.addEventListener('click',()=>go(PANES[Math.min(PANES.length-1,indexOf(cur)+1)]));
 
   document.addEventListener('click',function(e){
     const a=e.target.closest('a[href^="#"], [data-go]');

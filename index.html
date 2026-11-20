@@ -808,7 +808,7 @@
 
 <script>
 window.MITH = (function(){
-  const ver = { hake: 'v0.2.0', hako: 'v0.4.2', engine: 'v0.0.6', studio: 'v0.2.0' };
+  const ver = { hake: 'v0.2.1', hako: 'v0.4.3', engine: 'v0.0.6', studio: 'v0.2.1' };
   const repo = {
     edit:    'https://github.com/mithraeums/hako-edit',
     code:    'https://github.com/mithraeums/hako-code',
@@ -825,6 +825,15 @@ window.MITH = (function(){
     build: '2026-10-29',
     email: 'contact@mithraeum.studio',
     releases: [
+      { repo:'hako-code', tag: 'v0.4.3', title:'talk to it while it works',
+        body:'A line sent while a turn runs goes into that turn after the tool it is running, as yours: <code>ctrl-t</code> in the terminal, <code>send now</code> in studio, <code>ctrl-t</code> in hake&rsquo;s Rei pane. Enter still queues it for after. <code>:mode auto</code> from a phone mid-turn takes at once, the waiting call included. A small model&rsquo;s broken tool call no longer gets a chat stuck for good, a write that is only a receipt of an old one is refused, and a local model&rsquo;s tool call no longer starts on screen as text. A page on a chat of several hakos knows which one said what.',
+        date:'2026-11-19' },
+      { repo:'hako-studio', tag: 'v0.2.1', title:'type while it works, and a deeper look',
+        body:'A message typed while a turn runs waits above the field: <code>send now</code> puts it into the running turn, <code>&times;</code> drops it, and otherwise it goes when the turn ends. A turn&rsquo;s tool calls fold into one row, <i>worked 42s &middot; 6 steps</i>, so the reply reads as the main thing. The header shows each hako on the chat and a pulse while it works, and each reply says which one gave it. Backgrounds drawn from the theme&rsquo;s inks (rays, stars, dusk, or your own image), a paper grain, serif titles and a little motion. A long chat follows its end again.',
+        date:'2026-11-19' },
+      { repo:'hako-edit', tag: 'v0.2.1', title:'the Rei pane steers',
+        body:'<code>ctrl-t</code> while a turn runs puts the line into that turn, and a line sent with enter waits for the turn to end instead of being dropped. <code>:login</code> in the pane asks for the key with it hidden, drawn as stars. <code>install.sh</code> stops on a release it cannot verify.',
+        date:'2026-11-19' },
       { repo:'hako-code', tag: 'v0.4.2', title:'shared chats that hold together',
         body:'What another hako says shows as it is said, in the middle of this one&rsquo;s turn too, and a model can hand a line to another with <code>@name</code>; three in a row hand it back to a person. Arrivals, leaves and renames are said, <code>:join</code> takes a chat&rsquo;s name, and each line is logged once. <code>~/.hako/credentials</code> is sealed now (XChaCha20-Poly1305), its key in the login keychain on a Mac or a 0600 key file elsewhere. ChatGPT sign-in works again, and every provider&rsquo;s default and model list is current. v0.4.2 brings back the FreeBSD build, which v0.4.1 lacked. Every redraw is one frame, so menus, the spinner and streaming no longer flicker, and in Rex the pane shows hako working, waiting on you or done.',
         date:'2026-11-13' },
@@ -991,7 +1000,7 @@ window.MITH = (function(){
       </div>
       <div class="riso-art">
         <img src="assets/art/mithras-giustiniani.png" width="960" height="872" alt="Mithras slaying the bull, after an engraving of the Giustiniani relief, 1636–47">
-        <div class="riso-sticker"><small><b>図 1</b> · THE WHOLE SUITE</small><strong>~1.3 MB</strong><span>three binaries, compiled. They link libc and nothing else.</span><em>hako 898K · hake 310K<br>hakm 109K · 41,616 lines of C</em></div>
+        <div class="riso-sticker"><small><b>図 1</b> · THE WHOLE SUITE</small><strong>~1.3 MB</strong><span>three binaries, compiled. They link libc and nothing else.</span><em>hako 927K · hake 314K<br>hakm 109K · 42,117 lines of C</em></div>
         <svg class="riso-cross" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M14 0V28M0 14H28" stroke="currentColor" stroke-width="1.5"/></svg>
       </div>
     </div>

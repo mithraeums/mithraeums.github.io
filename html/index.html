@@ -52,12 +52,12 @@
 <h2>Suite — three instruments, one chamber</h2>
   <article id="hake">
     <h3>hake <small>箱 · hako-edit · the box</small></h3>
-    <p class="status">— I — editor &nbsp;·&nbsp; v0.2.0 · stable</p>
+    <p class="status">— I — editor &nbsp;·&nbsp; v0.2.1 · stable</p>
     <p>A single-file modal text editor in C99. Vim keys by default, emacs or nano with a flag; language-aware, multi-pane. Embeds the <code>hako</code> agent in a split pane, so you can talk to a model without leaving your file.</p>
     <p class="sub">— Vim, emacs or nano keys · 40+ syntax modes · 20 themes · a live runner pane and a console · OS-aware clipboard · zero runtime deps beyond libc + curl.</p>
     <dl>
       <dt>CLI</dt><dd>hake</dd>
-      <dt>VERSION</dt><dd>v0.2.0</dd>
+      <dt>VERSION</dt><dd>v0.2.1</dd>
       <dt>LANG</dt><dd>C99 single file</dd>
       <dt>THEMES</dt><dd>20</dd>
       <dt>LICENSE</dt><dd>GPL-3.0</dd>
@@ -66,12 +66,12 @@
   </article>
   <article id="hako">
     <h3>hako <small>箱 · hako-code · the agent</small></h3>
-    <p class="status">— II — agent &nbsp;·&nbsp; v0.4.2 · stable</p>
+    <p class="status">— II — agent &nbsp;·&nbsp; v0.4.3 · stable</p>
     <p>A coding agent in one C file — a <b>~900 KB binary</b> that links libc and nothing else. No Python, no Node, no package manager. Defaults to any installed hako model (<code>hako-sho</code> 3B / <code>hako-koi</code> 7B) — no key, no cloud — and adds 14 cloud providers when you want them. <code>hako --serve</code> puts the same agent in a browser tab; the page is compiled into the binary.</p>
     <p class="sub">— Code search built in (grep · glob · web_fetch) · diffs before it writes · context that folds instead of running out · skills you can switch on as modes · streaming on every provider · trust-gated tools · sha-verified self-update.</p>
     <dl>
       <dt>CLI</dt><dd>hako</dd>
-      <dt>VERSION</dt><dd>v0.4.2</dd>
+      <dt>VERSION</dt><dd>v0.4.3</dd>
       <dt>SIZE</dt><dd>~900 KB</dd>
       <dt>DEPS</dt><dd>libc + curl</dd>
       <dt>PROVIDERS</dt><dd>1 local + 14 cloud</dd>
@@ -81,12 +81,12 @@
   </article>
   <article id="hako studio">
     <h3>hako studio <small>箱 · hako-studio · the chamber</small></h3>
-    <p class="status">— III — studio &nbsp;·&nbsp; v0.2.0 · new</p>
+    <p class="status">— III — studio &nbsp;·&nbsp; v0.2.1 · new</p>
     <p>The agent with a face. The same <code>hako.c</code> compiled to WebAssembly, so it runs <b>on your device, in your browser</b> — no install, no account needed, no backend, and nothing proxied through us. Open it hosted, run the container, or serve it from the binary with <code>hako --serve</code>; it is one piece of software in three shapes.</p>
     <p class="sub">— Your key goes straight to the provider · work stays in your browser or a folder you grant · per-folder sessions · files you can save out · themes, model and provider pickers · sign in to drive your terminal sessions from any device, end to end encrypted.</p>
     <dl>
       <dt>OPEN</dt><dd>hako.mithraeum.studio</dd>
-      <dt>VERSION</dt><dd>v0.2.0</dd>
+      <dt>VERSION</dt><dd>v0.2.1</dd>
       <dt>RUNS</dt><dd>browser · docker · hako --serve</dd>
       <dt>BACKEND</dt><dd>none</dd>
       <dt>LICENSE</dt><dd>GPL-3.0</dd>
@@ -144,6 +144,21 @@ git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make<
 </ul>
 
 <h2 id="releases">Releases — latest from each chamber</h2>
+  <article>
+    <h3>hako-code <small>v0.4.3 · 2026-11-19</small></h3>
+    <p><b>talk to it while it works</b></p>
+    <p>A line sent while a turn runs goes into that turn after the tool it is running, as yours: <code>ctrl-t</code> in the terminal, <code>send now</code> in studio, <code>ctrl-t</code> in hake&rsquo;s Rei pane. Enter still queues it for after. <code>:mode auto</code> from a phone mid-turn takes at once, the waiting call included. A small model&rsquo;s broken tool call no longer gets a chat stuck for good, a write that is only a receipt of an old one is refused, and a local model&rsquo;s tool call no longer starts on screen as text. A page on a chat of several hakos knows which one said what.</p>
+  </article>
+  <article>
+    <h3>hako-studio <small>v0.2.1 · 2026-11-19</small></h3>
+    <p><b>type while it works, and a deeper look</b></p>
+    <p>A message typed while a turn runs waits above the field: <code>send now</code> puts it into the running turn, <code>&times;</code> drops it, and otherwise it goes when the turn ends. A turn&rsquo;s tool calls fold into one row, &lt;i&gt;worked 42s &middot; 6 steps&lt;/i&gt;, so the reply reads as the main thing. The header shows each hako on the chat and a pulse while it works, and each reply says which one gave it. Backgrounds drawn from the theme&rsquo;s inks (rays, stars, dusk, or your own image), a paper grain, serif titles and a little motion. A long chat follows its end again.</p>
+  </article>
+  <article>
+    <h3>hako-edit <small>v0.2.1 · 2026-11-19</small></h3>
+    <p><b>the Rei pane steers</b></p>
+    <p><code>ctrl-t</code> while a turn runs puts the line into that turn, and a line sent with enter waits for the turn to end instead of being dropped. <code>:login</code> in the pane asks for the key with it hidden, drawn as stars. <code>install.sh</code> stops on a release it cannot verify.</p>
+  </article>
   <article>
     <h3>hako-code <small>v0.4.2 · 2026-11-13</small></h3>
     <p><b>shared chats that hold together</b></p>

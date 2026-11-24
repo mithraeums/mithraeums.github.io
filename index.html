@@ -170,6 +170,9 @@
   }
   .brand svg { display: block; }
   .nav-links { display: flex; gap: 32px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ash); margin-left: auto; }
+  /* a phone scrolls the links sideways; the active link's underline hangs a few px below, and that
+     made the row scroll up and down inside the bar too, out of frame. sideways only */
+  .nav-links { overflow-y: hidden; overscroll-behavior: contain; touch-action: pan-x; padding-bottom: 2px; }
   .theme-btn { flex: none; margin-left: 26px; width: 30px; height: 30px; display: grid; place-items: center; padding: 0;
     background: transparent; border: 1px solid var(--rule-strong); border-radius: 50%; color: var(--ash); cursor: pointer; }
   .theme-btn:hover, .theme-btn:focus-visible { color: var(--paper); border-color: var(--paper); }
@@ -386,19 +389,22 @@
 
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 0;
   }
+  @media (max-width: 1000px) { .skills-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .skills-grid { grid-template-columns: 1fr; } .skill { padding: 12px 0 !important; gap: 10px !important; } .skill-meta { display: none; } }
   .skill {
     border-top: 1px solid var(--rule);
-    padding: 28px 24px 28px 0;
+    padding: 18px 20px 18px 0;
     display: grid;
-    grid-template-columns: 24px 1fr auto;
-    gap: 16px;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
     align-items: baseline;
   }
-  .skill:nth-child(odd) { padding-right: 32px; }
-  .skill:nth-child(even) { padding-left: 24px; }
+  .skill-num { white-space: nowrap; }
+  .skill-meta { display: none; }      /* every one is v1 markdown: said once, in the lede */
+  .skill + .skill { padding-left: 0; }
   .skill-num { font-family: 'EB Garamond', Georgia, 'Times New Roman', serif; color: var(--gold); font-size: 11px; letter-spacing: 0.2em; }
   .skill-body h4 {
     margin: 0 0 6px;
@@ -429,6 +435,28 @@
     letter-spacing: 0.04em;
   }
 
+  /* install: one block, the platforms, four short notes, the manuals in a line */
+  .inst-lede { max-width: 680px; color: var(--bone); font-size: 13px; margin: -28px 0 18px; }
+  .inst { background: var(--shadow); border: 1px solid var(--rule-strong); padding: 16px 20px; margin: 0; font: 12.5px/1.75 'IBM Plex Mono', ui-monospace, monospace; color: var(--paper); overflow-x: auto; }
+  .inst .c { color: var(--ash); }
+  .inst-plat { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 12px 0 0; color: var(--ash); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+  .inst-plat b { color: var(--paper); font-weight: 500; }
+  .inst-feats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; margin-top: 28px; }
+  .inst-feats h4 { font-family: 'EB Garamond', Georgia, serif; font-weight: 500; font-size: 17px; color: var(--paper); margin: 0 0 6px; }
+  .inst-feats p { color: var(--bone); font-size: 12px; margin: 0; line-height: 1.6; }
+  .inst-docs { margin: 26px 0 0; color: var(--ash); font-size: 12px; }
+  .inst-docs a { color: var(--paper); text-decoration: underline; text-underline-offset: 3px; }
+  @media (max-width: 900px) { .inst-feats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 520px) { .inst-feats { grid-template-columns: 1fr; gap: 16px; } .inst { font-size: 11.5px; padding: 12px 14px; } }
+  /* releases: earlier ones folded, one line each, opening to their note */
+  .rel-older { margin-top: 18px; border-top: 1px solid var(--rule); padding-top: 12px; font-size: 12px; }
+  .rel-older > summary { cursor: pointer; color: var(--ash); letter-spacing: .12em; text-transform: uppercase; font-size: 11px; padding: 6px 0; }
+  .rel-line { border-bottom: 1px solid var(--rule); }
+  .rel-line summary { cursor: pointer; display: grid; grid-template-columns: 92px 150px 1fr; gap: 12px; padding: 8px 0; list-style: none; }
+  .rel-line summary::-webkit-details-marker { display: none; }
+  .rel-line .d { color: var(--ash); } .rel-line .r { color: var(--ash); text-transform: lowercase; } .rel-line .t { color: var(--paper); font-family: 'EB Garamond', Georgia, serif; font-size: 15px; }
+  .rel-line p { margin: 0 0 12px; color: var(--bone); max-width: 720px; }
+  @media (max-width: 600px) { .rel-line summary { grid-template-columns: 1fr; gap: 0; } }
   .releases {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -601,7 +629,14 @@
   }
 
   :root { --navh: 66px; --footh: 44px; }
-  body { overflow: hidden; } 
+  body { overflow: hidden; }
+  /* a phone: the page itself never moves, only a pane scrolls. Without this a drag
+     on the nav or the footer pulled the whole page up or down (the document bounced),
+     and quick taps on the arrows zoomed it (double-tap zoom; pinch still zooms) */
+  html, body { overscroll-behavior: none; touch-action: manipulation; }
+  body { position: fixed; inset: 0; height: 100dvh; }
+  .nav, .slim-foot { touch-action: pan-x; }
+  .pane { overscroll-behavior: contain; }
   .app {
     position: relative; overflow: hidden;
     height: calc(100vh - var(--navh) - var(--footh));
@@ -765,6 +800,18 @@
   .side-a a:hover .d { text-decoration: underline; text-underline-offset: 3px; }
   .side-a .n { color: var(--ash); } .side-a .j { font-family: 'Dela Gothic One', sans-serif; }
   .side-a .d { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 16px; color: var(--sumi); }
+  /* spelaeum: another work of the order, set apart from the suite by a hairline */
+  /* the sticker's opposite: paper with an ink rule, tilted the other way, at the frame's top */
+  .riso-tag { position: absolute; z-index: 1; left: -4%; top: 6%; width: 220px; background: var(--void); color: var(--sumi); padding: 11px 14px 12px;
+    transform: rotate(-2.5deg); display: grid; gap: 3px; text-decoration: none; border: 1px solid var(--sumi); box-shadow: 4px 4px 0 var(--sumi); }
+  .riso-tag small { font-size: 9.5px; letter-spacing: .2em; } .riso-tag small b { font-family: 'Dela Gothic One', sans-serif; font-weight: 400; }
+  .riso-tag strong { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-weight: 500; font-size: 28px; line-height: 1.05; }
+  .riso-tag span { font-family: 'EB Garamond', Georgia, serif; font-size: 15px; line-height: 1.25; }
+  @media (hover: hover) { .riso-tag:hover { transform: rotate(-1deg) translate(-1px, -1px); box-shadow: 5px 5px 0 var(--sumi); } }
+  .nav-links a.nav-sib { font-style: italic; font-family: 'EB Garamond', Georgia, serif; font-size: 1.08em; }
+  .spel-art { color: var(--sumi); mix-blend-mode: normal; filter: none; height: 210px; }
+  .spel-lede { max-width: 640px; color: var(--bone); font-size: 13.5px; line-height: 1.7; margin: -18px 0 26px; }
+  .spel-open { max-width: 640px; color: var(--ash); font-size: 12px; margin: 22px 0 18px; }
   .riso-art { position: relative; justify-self: end; width: min(100%, 640px); }
   .riso-art img { width: 100%; height: auto; display: block; filter: var(--art); mix-blend-mode: var(--art-blend); }
   .riso-art::after { content: ''; position: absolute; inset: -14px; border: 1px solid var(--sumi); pointer-events: none; }
@@ -790,6 +837,8 @@
     .riso-sticker strong { font-size: 30px; }
     .riso-sticker small { letter-spacing: .12em; }
     .riso-sticker em { font-size: 8.5px; letter-spacing: .02em; }
+    .riso-tag { left: -3%; top: -7%; width: 158px; padding: 7px 10px 8px; box-shadow: 3px 3px 0 var(--sumi); }
+    .riso-tag small { font-size: 8px; letter-spacing: .1em; } .riso-tag strong { font-size: 21px; } .riso-tag span { font-size: 12.5px; }
     .riso-top span:not(:first-child) { display: none; }
   }
 
@@ -808,7 +857,7 @@
 
 <script>
 window.MITH = (function(){
-  const ver = { hake: 'v0.2.1', hako: 'v0.4.3', engine: 'v0.0.6', studio: 'v0.2.1' };
+  const ver = { hake: 'v0.2.1', hako: 'v0.4.3', engine: 'v0.0.6', studio: 'v0.2.1', spel: 'v0.0.1' };
   const repo = {
     edit:    'https://github.com/mithraeums/hako-edit',
     code:    'https://github.com/mithraeums/hako-code',
@@ -819,11 +868,25 @@ window.MITH = (function(){
     org:     'https://github.com/mithraeums',
     discuss: 'https://github.com/orgs/mithraeums/discussions',
     site:    'https://mithraeums.github.io',
+    spel:    'https://github.com/mithraeums/spelaeum',
+    cave:    'https://spelaeum.mithraeum.studio',
+    mirror:  'https://huggingface.co/datasets/mithraeum/spelaeum',
   };
   return {
     ver, repo,
     build: '2026-10-29',
     email: 'contact@mithraeum.studio',
+    /* another work of the order: its own site, featured here, not part of the suite */
+    spelaeum: {
+      title: 'Trained by whoever shows up.',
+      lede: 'One open model, trained in rounds by many machines. The data is fixed and public; the computing is everyone&rsquo;s spare hardware, from a gaming PC to the phone in a drawer. Work that makes the model better goes into the chain under your name.',
+      points: [
+        ['Press start once', 'Open the page and a browser tab trains, sends its work, waits for the round to close and takes the next. The <code>spel</code> CLI does the same on a machine that stays on.'],
+        ['Anything with a processor', 'A tab, a terminal, a farm of phones behind one relay, a GPU through WebGPU or OpenCL. The same C everywhere, every check done the same way.'],
+        ['Credit, counted in work', 'Every job that passes its check is recorded in the chain under its trainer&rsquo;s key. Seven grades, Corax to Pater, each ten times the last.'],
+      ],
+      open: 'Nothing there needs us: the code, the method, the chain and the weights are GPL-3.0. Anyone can replay the chain, host the model or run their own.',
+    },
     releases: [
       { repo:'hako-code', tag: 'v0.4.3', title:'talk to it while it works',
         body:'A line sent while a turn runs goes into that turn after the tool it is running, as yours: <code>ctrl-t</code> in the terminal, <code>send now</code> in studio, <code>ctrl-t</code> in hake&rsquo;s Rei pane. Enter still queues it for after. <code>:mode auto</code> from a phone mid-turn takes at once, the waiting call included. A small model&rsquo;s broken tool call no longer gets a chat stuck for good, a write that is only a receipt of an old one is refused, and a local model&rsquo;s tool call no longer starts on screen as text. A page on a chat of several hakos knows which one said what.',
@@ -971,6 +1034,7 @@ window.MITH = (function(){
       <a href="#install" class="tab-link" data-go="install">Install</a>
       <a href="#skills" class="tab-link" data-go="skills">Skills</a>
       <a href="#releases" class="tab-link" data-go="releases">Releases</a>
+      <a href="#spelaeum" class="tab-link nav-sib" data-go="spelaeum">Spelaeum</a>
       <a href="https://github.com/mithraeums" target="_blank" rel="noopener" class="nav-ext">GitHub ↗</a>
     </div>
     <button class="theme-btn" id="theme-btn" type="button" aria-label="theme: system" title="theme: system"></button>
@@ -1001,6 +1065,7 @@ window.MITH = (function(){
       <div class="riso-art">
         <img src="assets/art/mithras-giustiniani.png" width="960" height="872" alt="Mithras slaying the bull, after an engraving of the Giustiniani relief, 1636–47">
         <div class="riso-sticker"><small><b>図 1</b> · THE WHOLE SUITE</small><strong>~1.3 MB</strong><span>three binaries, compiled. They link libc and nothing else.</span><em>hako 927K · hake 314K<br>hakm 109K · 42,117 lines of C</em></div>
+        <a class="riso-tag tab-link" href="#spelaeum" data-go="spelaeum"><small><b>図 2</b> · ALSO OF THE ORDER</small><strong>Spelaeum</strong><span>an open model, trained by whoever shows up →</span></a>
         <svg class="riso-cross" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M14 0V28M0 14H28" stroke="currentColor" stroke-width="1.5"/></svg>
       </div>
     </div>
@@ -1171,71 +1236,37 @@ play('hake');
 <div class="pane" data-pane="install">
 <section class="s" id="hako-install">
   <div class="container">
-    <div class="section-head with-art three">
-      <div class="section-eyebrow">— II.b — Install</div>
-      <h2>One line, <em>either chamber</em>.</h2>
+    <div class="section-head with-art">
+      <div>
+        <div class="section-eyebrow">II · Install</div>
+        <h2>One line, <em>each instrument</em>.</h2>
+      </div>
       <img class="head-art" src="assets/art/cautopates.png" width="360" height="648" alt="Cautopates, the torchbearer with his torch lowered, after a 1564 engraving">
     </div>
-    <p style="max-width: 720px; color: var(--bone); font-size: 13px; margin: -32px 0 28px;">
-      Each installer fetches the latest release for your OS and arch, verifies the sha256 sidecar, drops the binary into <code style="color: var(--paper);">~/.local/bin</code> (or <code style="color: var(--paper);">/usr/local/bin</code> if writable). Where there is no release binary — iSh is 32-bit x86 — it builds from source instead. No package manager, no daemon, no telemetry. Same script shape across the suite — different binary at the end.
-    </p>
+    <p class="inst-lede">Each installer fetches the latest release for your OS and arch, checks its sha256 and puts the binary in <code>~/.local/bin</code>. Where there is no release binary (iSh is 32-bit x86) it builds from source. No package manager, no daemon, no telemetry.</p>
+    <pre class="inst"><span class="c"># the agent, the editor, the engine</span>
+curl -fsSL https://mithraeums.github.io/hako.sh | sh
+curl -fsSL https://mithraeums.github.io/hake.sh | sh
+curl -fsSL https://mithraeums.github.io/hakm.sh | sh
+hakm pull hako-sho                <span class="c"># 3B weights, from Hugging Face</span>
+hako --serve                      <span class="c"># studio, already inside hako</span>
 
-    <div style="background: var(--shadow); border: 1px solid var(--rule-strong); padding: 20px 24px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: var(--paper); position: relative; overflow-x: auto;">
-      <div style="color: var(--ash); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;">— hako · agent · <code style="color:var(--gold);">hako</code> —</div>
-      <code style="color: var(--bone); white-space: pre;">curl -fsSL https://mithraeums.github.io/hako.sh | sh</code>
+<span class="c"># or with Homebrew</span>
+brew install mithraeums/tap/hako mithraeums/tap/hake mithraeums/tap/hakm</pre>
+    <div class="inst-plat">
+      <span><b>macOS</b> arm64 + x86_64</span><span><b>Linux</b> x86_64 · arm64</span><span><b>FreeBSD</b> x86_64</span><span><b>Windows</b> x86_64</span><span><b>iSh</b> source build</span>
     </div>
-
-    <div style="background: var(--shadow); border: 1px solid var(--rule-strong); padding: 20px 24px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: var(--paper); position: relative; overflow-x: auto; margin-top: 14px;">
-      <div style="color: var(--ash); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;">— hake · editor · <code style="color:var(--gold);">hake</code> —</div>
-      <code style="color: var(--bone); white-space: pre;">curl -fsSL https://mithraeums.github.io/hake.sh | sh</code>
+    <div class="inst-feats">
+      <div><h4>Local model, zero config</h4><p><code>hakm pull hako-sho</code>, then <code>hako</code>. The model stays resident in a <code>hakm</code> subprocess: no key, no <code>:login</code>, no cloud round-trip.</p></div>
+      <div><h4>14 cloud providers</h4><p>Claude and ChatGPT sign-in, Copilot, GitHub Models, OpenRouter, Nous and nine more. <code>:login &lt;name&gt;</code> walks you through.</p></div>
+      <div><h4>Your machine is the server</h4><p><code>hako --serve</code> is a browser UI from the same binary, and <code>:remote on</code> puts your terminal on your phone. Files and keys stay on your machine.</p></div>
+      <div><h4>Self-update, sha-checked</h4><p><code>hako --update</code> pulls the latest release, checks its sha256 and swaps the binary in place.</p></div>
     </div>
-
-    <div style="background: var(--shadow); border: 1px solid var(--rule-strong); padding: 20px 24px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: var(--paper); position: relative; overflow-x: auto; margin-top: 14px;">
-      <div style="color: var(--ash); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;">— hakm · engine · native C, no ollama · <code style="color:var(--gold);">hakm</code> —</div>
-      <code style="color: var(--bone); white-space: pre;">curl -fsSL https://mithraeums.github.io/hakm.sh | sh
-hakm pull hako-sho            # 3B weights from huggingface.co/mithraeum</code>
-    </div>
-
-    <div style="background: var(--shadow); border: 1px solid var(--rule-strong); padding: 20px 24px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: var(--paper); position: relative; overflow-x: auto; margin-top: 14px;">
-      <div style="color: var(--ash); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;">— hako studio · browser UI · already in the binary —</div>
-      <code style="color: var(--bone); white-space: pre;">hako --serve                  # http://127.0.0.1:8787
-hako --serve --lan            # prints the URL to open on your phone</code>
-    </div>
-
-    <div style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 24px; color: var(--ash); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">
-      <span><b style="color: var(--paper);">macOS</b> universal2 · arm64 + x86_64</span>
-      <span><b style="color: var(--paper);">Linux</b> x86_64 · arm64</span>
-      <span><b style="color: var(--paper);">FreeBSD</b> x86_64</span>
-      <span><b style="color: var(--paper);">Windows</b> x86_64 · MinGW</span>
-      <span><b style="color: var(--paper);">iSh</b> i686 · source build</span>
-    </div>
-
-    <div style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px;">
-      <div>
-        <h4 style="font-family: 'EB Garamond', Georgia, 'Times New Roman', serif; font-size: 18px; color: var(--paper); margin: 0 0 8px;">Local model, zero config</h4>
-        <p style="color: var(--bone); font-size: 12px; margin: 0;"><code>hakm pull hako-sho</code>, launch <code>hako</code>. The agent keeps the model resident in a <code>hakm</code> <b>subprocess</b> and streams its answer — no key, no <code>:login</code>, no ollama, no daemon, no cloud round-trip.</p>
-      </div>
-      <div>
-        <h4 style="font-family: 'EB Garamond', Georgia, 'Times New Roman', serif; font-size: 18px; color: var(--paper); margin: 0 0 8px;">14 cloud providers when you want them</h4>
-        <p style="color: var(--bone); font-size: 12px; margin: 0;">Anthropic OAuth (Claude Pro/Max sub), GitHub Copilot, GH Models (free), OpenRouter PKCE, plus 9 more over OpenAI-compat. Single <code>:login &lt;name&gt;</code> walks you through.</p>
-      </div>
-      <div>
-        <h4 style="font-family: 'EB Garamond', Georgia, 'Times New Roman', serif; font-size: 18px; color: var(--paper); margin: 0 0 8px;">Your machine is the server</h4>
-        <p style="color: var(--bone); font-size: 12px; margin: 0;"><code>hako --serve</code> hands you a browser UI out of the same binary — no install, no backend, no account, no database. Bind it to your network and drive your desktop from a phone. Your files, keys and conversations never leave the machine you ran it on, because there is nowhere else for them to go.</p>
-      </div>
-      <div>
-        <h4 style="font-family: 'EB Garamond', Georgia, 'Times New Roman', serif; font-size: 18px; color: var(--paper); margin: 0 0 8px;">Self-update, sha-verified</h4>
-        <p style="color: var(--bone); font-size: 12px; margin: 0;"><code>hako --update</code> pulls the latest release, verifies the sha256 sidecar, atomically replaces the binary. No reinstall, no rebuild, no package manager.</p>
-      </div>
-    </div>
-
-    <div style="margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap;">
-      <a class="btn gold" href="https://github.com/mithraeums/hako-code#readme" target="_blank" rel="noopener">hako-code manual ↗</a>
-      <a class="btn gold" href="https://github.com/mithraeums/hako-edit#readme" target="_blank" rel="noopener">hako-edit manual ↗</a>
-      <a class="btn gold" href="https://github.com/mithraeums/hako#readme" target="_blank" rel="noopener">hako (models) manual ↗</a>
-      <a class="btn" href="https://github.com/mithraeums/hako-code/releases" target="_blank" rel="noopener">hako-code releases</a>
-      <a class="btn" href="https://github.com/mithraeums/hako-edit/releases" target="_blank" rel="noopener">hako-edit releases</a>
-    </div>
+    <p class="inst-docs">Each repo&rsquo;s README is its manual:
+      <a href="https://github.com/mithraeums/hako-code#readme" target="_blank" rel="noopener">hako ↗</a> ·
+      <a href="https://github.com/mithraeums/hako-edit#readme" target="_blank" rel="noopener">hake ↗</a> ·
+      <a href="https://github.com/mithraeums/hako-studio#readme" target="_blank" rel="noopener">studio ↗</a> ·
+      <a href="https://github.com/mithraeums/hako#readme" target="_blank" rel="noopener">hakm ↗</a></p>
   </div>
 </section>
 
@@ -1249,7 +1280,7 @@ hako --serve --lan            # prints the URL to open on your phone</code>
       <h2>Behaviors for <em>hako-code</em>, by name.</h2>
     </div>
     <p style="max-width: 640px; color: var(--bone); font-size: 13px; margin: -32px 0 32px;">
-      Each skill is a folder in <a href="https://github.com/mithraeums/skills" target="_blank" rel="noopener" style="color: var(--gold);">mithraeums/skills</a> containing a <code style="color: var(--paper);">SKILL.md</code> and any helpers. hako-code loads them on startup. Open a PR to add yours — the rite is the README.
+      Each skill is a folder in <a href="https://github.com/mithraeums/skills" target="_blank" rel="noopener" style="color: var(--gold);">mithraeums/skills</a>: a <code style="color: var(--paper);">SKILL.md</code> and any helpers, markdown only, so they work in Claude too. hako-code loads them on startup. Open a PR to add yours — the rite is the README.
     </p>
     <div class="skills-grid" id="skills-grid"></div>
     <div style="margin-top: 32px; display: flex; gap: 14px;">
@@ -1273,6 +1304,42 @@ hako --serve --lan            # prints the URL to open on your phone</code>
     <div class="releases" id="releases-grid"></div>
   </div>
 </section>
+
+</div>
+
+<div class="pane" data-pane="spelaeum">
+<section class="s" id="spelaeum">
+  <div class="container">
+    <div class="section-head with-art">
+      <div>
+        <div class="section-eyebrow">Also of the order · Spelaeum</div>
+        <h2 id="spel-title"></h2>
+      </div>
+      <svg class="head-art spel-art" viewBox="0 0 400 340" width="400" height="340" role="img" aria-label="contour lines descending to a low point, like a survey of a cave"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M224.3 170.0 L225.0 171.7 L225.4 173.4 L225.4 175.2 L224.8 176.9 L223.6 178.4 L221.9 179.6 L219.9 180.6 L217.7 181.3 L215.5 181.8 L213.3 182.1 L211.4 182.4 L209.7 182.8 L208.1 183.3 L206.6 183.9 L205.2 184.7 L203.6 185.5 L201.9 186.3 L200.0 187.0 L198.0 187.5 L195.9 187.7 L193.8 187.7 L191.7 187.3 L189.7 186.8 L187.8 186.1 L185.9 185.3 L184.1 184.4 L182.3 183.5 L180.6 182.4 L179.0 181.2 L177.5 179.9 L176.4 178.4 L175.7 176.7 L175.5 175.0 L175.8 173.2 L176.5 171.6 L177.6 170.0 L178.8 168.6 L180.1 167.3 L181.2 166.2 L182.1 165.0 L182.7 163.8 L183.0 162.5 L183.3 161.1 L183.6 159.5 L184.1 157.9 L184.8 156.2 L186.0 154.7 L187.5 153.5 L189.3 152.5 L191.4 151.9 L193.5 151.7 L195.8 151.7 L197.9 151.9 L200.0 152.2 L202.0 152.6 L203.9 152.9 L205.9 153.3 L207.8 153.7 L209.7 154.2 L211.5 154.8 L213.3 155.5 L214.9 156.5 L216.2 157.6 L217.4 158.9 L218.3 160.2 L219.1 161.6 L219.8 163.0 L220.6 164.3 L221.4 165.6 L222.4 167.0 L223.4 168.4 L224.3 170.0Z" opacity="0.94"/><path d="M238.1 170.0 L238.5 172.6 L238.5 175.2 L238.0 177.8 L236.8 180.2 L234.9 182.4 L232.4 184.2 L229.4 185.7 L226.1 186.7 L222.8 187.4 L219.7 187.9 L216.9 188.4 L214.4 189.0 L212.1 189.8 L210.1 191.0 L207.9 192.6 L205.6 194.3 L203.0 196.0 L200.0 197.6 L196.7 198.8 L193.2 199.4 L189.7 199.4 L186.2 198.8 L183.0 197.7 L180.2 196.2 L177.6 194.4 L175.3 192.4 L173.2 190.4 L171.3 188.3 L169.5 186.3 L167.9 184.1 L166.5 181.9 L165.4 179.6 L164.7 177.2 L164.6 174.8 L165.0 172.3 L165.9 170.0 L167.1 167.8 L168.4 165.8 L169.7 163.8 L170.8 161.9 L171.6 159.9 L172.3 157.8 L172.8 155.5 L173.4 153.0 L174.3 150.4 L175.6 147.9 L177.6 145.6 L180.1 143.7 L183.1 142.3 L186.4 141.6 L190.0 141.5 L193.5 142.0 L196.9 142.8 L200.0 143.8 L202.9 144.8 L205.6 145.7 L208.3 146.4 L211.0 146.9 L213.9 147.3 L216.9 147.8 L219.9 148.4 L222.9 149.2 L225.7 150.4 L228.2 152.0 L230.3 153.8 L232.1 155.9 L233.5 158.1 L234.7 160.4 L235.7 162.7 L236.6 165.1 L237.4 167.5 L238.1 170.0Z" opacity="0.88"/><path d="M250.3 170.0 L249.7 173.3 L248.9 176.6 L247.7 179.7 L246.0 182.8 L243.8 185.6 L241.0 188.0 L237.7 190.1 L234.1 191.8 L230.4 193.1 L226.7 194.2 L223.2 195.2 L220.0 196.4 L217.0 197.8 L214.2 199.7 L211.2 201.9 L208.0 204.4 L204.2 206.9 L200.0 209.1 L195.3 210.7 L190.4 211.6 L185.4 211.5 L180.7 210.4 L176.5 208.4 L172.9 205.8 L169.9 202.7 L167.5 199.5 L165.5 196.3 L163.8 193.2 L162.0 190.3 L160.2 187.5 L158.4 184.8 L156.5 182.1 L154.9 179.2 L153.6 176.2 L152.8 173.1 L152.7 170.0 L153.1 166.9 L154.0 163.8 L155.3 160.9 L156.8 158.0 L158.2 155.2 L159.7 152.3 L161.2 149.3 L162.8 146.2 L164.7 143.1 L167.0 140.1 L170.0 137.4 L173.6 135.1 L177.7 133.6 L182.2 132.8 L186.9 132.8 L191.6 133.6 L196.0 134.8 L200.0 136.3 L203.7 137.7 L207.2 138.9 L210.7 139.7 L214.3 140.1 L218.2 140.2 L222.5 140.3 L227.1 140.5 L231.9 141.1 L236.5 142.2 L240.7 144.0 L244.3 146.4 L247.1 149.3 L249.1 152.6 L250.3 156.1 L250.8 159.6 L250.9 163.2 L250.7 166.6 L250.3 170.0Z" opacity="0.82"/><path d="M259.9 170.0 L258.0 173.9 L256.3 177.6 L254.7 181.2 L253.1 184.7 L251.2 188.2 L249.0 191.5 L246.3 194.7 L243.0 197.5 L239.4 200.0 L235.5 202.2 L231.4 204.2 L227.4 206.1 L223.4 208.2 L219.3 210.4 L215.1 212.8 L210.5 215.4 L205.5 218.0 L200.0 220.2 L194.1 221.8 L187.9 222.4 L181.8 221.9 L176.0 220.2 L170.9 217.5 L166.7 213.9 L163.4 209.8 L160.9 205.5 L158.9 201.3 L157.1 197.4 L155.2 193.9 L153.0 190.7 L150.3 187.7 L147.2 184.6 L144.0 181.4 L141.0 177.9 L138.5 174.1 L136.8 170.0 L136.2 165.7 L136.7 161.5 L138.2 157.4 L140.5 153.5 L143.3 149.9 L146.5 146.4 L149.7 143.2 L153.1 140.0 L156.6 136.9 L160.3 134.0 L164.4 131.2 L168.8 128.9 L173.8 127.1 L179.0 126.1 L184.4 125.8 L189.9 126.2 L195.1 127.1 L200.0 128.4 L204.6 129.7 L209.1 130.7 L213.6 131.4 L218.4 131.6 L223.6 131.5 L229.3 131.3 L235.5 131.3 L242.0 131.9 L248.3 133.2 L254.1 135.4 L259.0 138.5 L262.5 142.5 L264.7 147.0 L265.4 151.9 L265.0 156.7 L263.7 161.4 L261.9 165.9 L259.9 170.0Z" opacity="0.76"/><path d="M267.7 170.0 L264.9 174.3 L262.6 178.4 L261.1 182.5 L260.1 186.7 L259.2 191.0 L258.1 195.6 L256.5 200.1 L254.1 204.6 L250.7 208.7 L246.6 212.3 L241.7 215.4 L236.4 218.0 L230.8 220.3 L225.0 222.4 L219.1 224.3 L213.0 226.1 L206.6 227.8 L200.0 229.2 L193.1 230.1 L186.1 230.2 L179.1 229.4 L172.6 227.4 L166.7 224.4 L161.7 220.5 L157.7 216.1 L154.5 211.3 L151.8 206.7 L149.4 202.3 L146.8 198.4 L143.6 194.8 L139.8 191.4 L135.4 187.9 L130.6 184.2 L126.0 179.9 L122.0 175.2 L119.1 170.0 L117.8 164.5 L118.3 159.0 L120.5 153.8 L124.2 149.0 L129.0 144.8 L134.4 141.1 L140.0 138.0 L145.5 135.2 L150.8 132.5 L155.8 129.9 L160.8 127.3 L165.8 124.8 L170.9 122.5 L176.4 120.6 L182.1 119.2 L188.1 118.4 L194.0 118.2 L200.0 118.4 L205.9 119.0 L211.7 119.6 L217.5 120.1 L223.7 120.4 L230.2 120.6 L237.3 120.8 L244.7 121.3 L252.4 122.4 L259.8 124.4 L266.5 127.5 L272.0 131.6 L275.9 136.6 L277.9 142.3 L278.1 148.3 L276.7 154.3 L274.1 160.0 L270.9 165.3 L267.7 170.0Z" opacity="0.70"/><path d="M276.0 170.0 L273.0 174.9 L271.0 179.5 L269.9 184.3 L269.6 189.3 L269.8 194.8 L269.8 200.7 L269.1 206.8 L267.2 212.9 L263.8 218.6 L259.0 223.6 L252.9 227.6 L245.9 230.6 L238.3 232.6 L230.5 233.8 L222.7 234.5 L215.0 234.8 L207.5 235.1 L200.0 235.2 L192.5 235.2 L185.0 234.9 L177.5 234.0 L170.2 232.5 L163.3 230.0 L157.0 226.8 L151.4 222.8 L146.7 218.4 L142.5 213.8 L138.6 209.3 L134.7 204.8 L130.5 200.6 L125.7 196.4 L120.4 192.1 L114.9 187.4 L109.6 182.1 L105.1 176.3 L102.0 170.0 L100.8 163.4 L101.9 156.8 L105.2 150.7 L110.5 145.2 L117.3 140.6 L124.8 136.9 L132.6 134.0 L140.0 131.6 L146.8 129.4 L152.7 127.1 L158.1 124.4 L163.1 121.4 L168.2 118.0 L173.5 114.6 L179.4 111.3 L185.8 108.6 L192.7 106.6 L200.0 105.4 L207.5 105.0 L215.0 105.3 L222.5 106.0 L230.0 107.1 L237.7 108.4 L245.5 110.0 L253.4 111.9 L261.3 114.3 L268.9 117.5 L275.8 121.6 L281.4 126.6 L285.4 132.4 L287.5 138.9 L287.6 145.7 L286.0 152.4 L283.1 158.8 L279.6 164.7 L276.0 170.0Z" opacity="0.64"/><path d="M288.1 170.0 L285.7 175.7 L284.1 181.3 L283.3 187.0 L283.3 193.1 L283.7 199.7 L283.7 206.8 L283.0 214.3 L280.7 221.6 L276.7 228.4 L270.7 234.2 L263.1 238.6 L254.2 241.5 L244.6 242.9 L234.9 243.0 L225.4 242.2 L216.4 240.9 L208.0 239.7 L200.0 238.7 L192.2 238.2 L184.3 237.9 L176.2 237.7 L167.9 237.3 L159.5 236.2 L151.2 234.4 L143.4 231.6 L136.1 228.0 L129.6 223.6 L123.8 218.7 L118.5 213.5 L113.5 208.0 L108.6 202.5 L103.6 196.7 L98.8 190.7 L94.3 184.2 L90.7 177.3 L88.6 170.0 L88.3 162.6 L90.3 155.3 L94.5 148.5 L100.9 142.5 L108.8 137.6 L117.6 133.7 L126.5 130.8 L134.9 128.4 L142.4 126.2 L148.9 123.6 L154.4 120.4 L159.3 116.3 L164.2 111.6 L169.6 106.3 L175.8 101.1 L182.9 96.3 L191.1 92.5 L200.0 90.0 L209.3 88.9 L218.7 89.3 L227.8 91.0 L236.5 93.6 L244.8 96.8 L252.7 100.5 L260.3 104.4 L267.6 108.6 L274.6 113.2 L281.1 118.2 L286.7 123.8 L291.1 129.9 L294.0 136.6 L295.2 143.6 L294.9 150.6 L293.2 157.5 L290.8 163.9 L288.1 170.0Z" opacity="0.58"/><path d="M305.9 170.0 L304.3 177.0 L302.7 183.8 L301.4 190.7 L300.3 197.8 L299.3 205.3 L298.0 213.1 L295.7 221.1 L292.1 228.9 L286.6 236.0 L279.3 242.0 L270.3 246.5 L260.0 249.2 L249.0 250.1 L237.9 249.4 L227.3 247.7 L217.5 245.6 L208.5 243.6 L200.0 242.2 L191.8 241.7 L183.3 242.1 L174.3 243.0 L164.6 244.1 L154.2 244.8 L143.5 244.5 L132.9 243.0 L122.9 240.0 L113.9 235.6 L106.3 229.9 L100.0 223.3 L95.0 216.2 L91.0 208.7 L87.7 201.1 L85.0 193.5 L82.9 185.7 L81.4 177.9 L80.9 170.0 L81.7 162.1 L84.2 154.4 L88.5 147.2 L94.6 140.8 L102.2 135.2 L110.6 130.7 L119.3 127.0 L127.7 123.8 L135.3 120.7 L141.9 117.3 L147.7 113.1 L153.0 108.0 L158.3 101.9 L164.3 95.3 L171.4 88.6 L179.7 82.5 L189.4 77.6 L200.0 74.5 L211.1 73.4 L222.1 74.5 L232.5 77.6 L242.0 82.1 L250.4 87.6 L257.9 93.5 L264.7 99.6 L271.1 105.4 L277.4 111.0 L283.6 116.6 L289.6 122.2 L295.2 128.1 L300.1 134.4 L303.8 141.2 L306.2 148.3 L307.2 155.6 L307.0 162.9 L305.9 170.0Z" opacity="0.52"/><path d="M328.7 170.0 L327.5 178.5 L325.0 186.8 L321.7 194.8 L318.0 202.7 L314.0 210.5 L309.7 218.2 L304.8 225.9 L299.0 233.3 L292.0 240.1 L283.6 245.9 L273.9 250.4 L263.2 253.3 L251.8 254.6 L240.3 254.4 L229.2 253.1 L218.8 251.4 L209.2 249.8 L200.0 248.9 L190.9 249.0 L181.4 250.2 L171.1 252.1 L159.7 254.4 L147.2 256.2 L134.1 256.9 L121.0 255.9 L108.6 253.0 L97.7 247.9 L88.9 241.0 L82.4 232.7 L78.2 223.6 L76.1 214.0 L75.4 204.6 L75.6 195.4 L76.3 186.6 L77.2 178.2 L78.3 170.0 L79.7 162.0 L81.7 154.1 L84.7 146.5 L89.0 139.2 L94.5 132.5 L101.1 126.5 L108.4 121.1 L116.0 116.3 L123.5 111.7 L130.7 107.1 L137.5 102.0 L144.1 96.2 L150.9 89.7 L158.3 82.8 L166.9 75.9 L176.8 69.7 L187.9 64.9 L200.0 62.1 L212.4 61.6 L224.6 63.7 L235.9 68.0 L245.8 74.0 L254.3 81.2 L261.5 88.8 L267.8 96.2 L273.7 103.1 L279.7 109.3 L286.3 114.8 L293.5 120.1 L301.1 125.5 L308.8 131.3 L315.9 137.9 L321.8 145.1 L326.0 153.1 L328.3 161.4 L328.7 170.0Z" opacity="0.46"/><path d="M353.1 170.0 L351.1 180.1 L346.6 189.7 L340.2 198.6 L332.8 206.8 L324.8 214.3 L316.8 221.4 L309.0 228.1 L301.1 234.6 L293.0 240.9 L284.4 246.7 L275.1 251.7 L265.0 255.8 L254.2 258.6 L243.1 260.3 L232.0 261.0 L221.1 261.0 L210.4 260.8 L200.0 261.0 L189.5 261.8 L178.4 263.3 L166.5 265.3 L153.4 267.5 L139.3 269.1 L124.6 269.5 L109.9 268.0 L96.2 264.3 L84.4 258.1 L75.1 249.8 L69.0 239.9 L66.0 229.0 L65.6 217.7 L67.3 206.8 L70.0 196.5 L73.0 187.1 L75.5 178.3 L77.2 170.0 L78.1 161.9 L78.6 153.7 L79.2 145.3 L80.5 136.9 L83.0 128.4 L87.0 120.3 L92.6 112.7 L99.5 105.8 L107.4 99.5 L115.9 93.7 L124.8 88.1 L133.8 82.6 L143.1 77.0 L152.8 71.3 L163.3 65.8 L174.7 60.9 L187.0 57.2 L200.0 55.2 L213.2 55.3 L226.0 57.8 L237.8 62.4 L248.3 68.8 L257.3 76.4 L264.9 84.3 L271.6 92.1 L278.0 99.2 L284.8 105.4 L292.6 110.8 L301.6 115.8 L311.5 120.9 L322.1 126.6 L332.3 133.3 L341.3 141.2 L348.1 150.1 L352.1 159.9 L353.1 170.0Z" opacity="0.40"/><path d="M373.9 170.0 L370.4 181.4 L363.4 191.9 L353.8 201.4 L342.6 209.6 L331.1 216.6 L319.9 222.7 L309.7 228.5 L300.6 234.3 L292.3 240.3 L284.3 246.6 L276.3 253.0 L267.6 259.2 L258.1 264.9 L247.6 269.6 L236.3 273.3 L224.5 275.8 L212.3 277.5 L200.0 278.5 L187.4 279.3 L174.5 280.0 L161.1 280.7 L146.9 281.2 L132.1 281.0 L116.9 279.6 L102.0 276.6 L88.2 271.5 L76.4 264.2 L67.2 254.9 L61.3 244.0 L58.7 232.2 L59.0 220.1 L61.5 208.4 L65.1 197.5 L68.7 187.6 L71.3 178.6 L72.6 170.0 L72.2 161.5 L70.6 152.6 L68.6 143.2 L67.1 133.1 L66.9 122.7 L68.9 112.3 L73.4 102.5 L80.4 93.5 L89.5 85.8 L100.3 79.5 L112.1 74.3 L124.3 70.1 L136.6 66.5 L149.0 63.2 L161.3 60.1 L173.9 57.3 L186.8 55.1 L200.0 53.8 L213.3 53.9 L226.5 55.6 L239.0 59.1 L250.6 64.1 L261.0 70.4 L270.2 77.3 L278.7 84.4 L286.8 91.2 L295.4 97.4 L304.8 103.0 L315.3 108.5 L327.0 114.2 L339.1 120.6 L350.9 128.1 L361.3 137.1 L369.1 147.3 L373.5 158.4 L373.9 170.0Z" opacity="0.34"/></g><circle cx="200" cy="170" r="3" fill="currentColor"/></svg>
+    </div>
+    <p class="spel-lede" id="spel-lede"></p>
+    <div class="creed-strip" id="spel-points"></div>
+    <p class="spel-open" id="spel-open"></p>
+    <div class="hero-cta" id="spel-cta"></div>
+  </div>
+</section>
+<script>
+(function(){
+  const S = window.MITH && window.MITH.spelaeum; if (!S) return;
+  const R = window.MITH.repo, V = window.MITH.ver;
+  const t = S.title.replace(/^(Trained by )(.*?)(\.)$/, '$1<em>$2</em>$3');
+  document.getElementById('spel-title').innerHTML = t;
+  document.getElementById('spel-lede').innerHTML = S.lede;
+  document.getElementById('spel-points').innerHTML = S.points.map(([b, d]) => '<div class="cs"><b>' + b + '</b><span>' + d + '</span></div>').join('');
+  document.getElementById('spel-open').innerHTML = S.open;
+  const cta = [['Enter the cave ↗', R.cave, 1], ['Source ↗', R.spel, 0], ['The mirror ↗', R.mirror, 0]];
+  const w = document.getElementById('spel-cta');
+  w.innerHTML = cta.map(([l, h, p]) => '<a class="cta' + (p ? ' cta-primary' : '') + '" href="' + h + '" target="_blank" rel="noopener">' + l + '</a>').join('');
+  const note = document.createElement('p'); note.className = 'hero-note';
+  note.textContent = 'spelaeum ' + V.spel + ' · its own site, its own repo · runs on the hako engine';
+  w.appendChild(note);
+})();
+</script>
 
 </div>
 </div>
@@ -1303,13 +1370,21 @@ hako --serve --lan            # prints the URL to open on your phone</code>
 
   const rg = document.getElementById('releases-grid');
   if (rg) {
-    rg.innerHTML = M.releases.map(r => `
+    /* the newest of each repo up front; every other one folded under them, a line each */
+    const seen = new Set(), top = [], rest = [];
+    for (const r of M.releases) (seen.has(r.repo) ? rest : top).push(r), seen.add(r.repo);
+    rg.innerHTML = top.map(r => `
       <div class="release">
         <div class="release-tag"><span>${r.repo}</span><b>${r.tag}</b></div>
         <h3 class="release-version">${r.title}</h3>
         <p class="release-msg">${r.body}</p>
         <div class="release-date">${r.date}</div>
       </div>`).join('');
+    const older = document.createElement('details');
+    older.className = 'rel-older';
+    older.innerHTML = '<summary>every earlier release (' + rest.length + ')</summary>' + rest.map(r => `
+      <details class="rel-line"><summary><span class="d">${r.date}</span><span class="r">${r.repo} ${r.tag}</span><span class="t">${r.title}</span></summary><p>${r.body}</p></details>`).join('');
+    rg.after(older);
   }
 
   const sg = document.getElementById('skills-grid');
@@ -1319,7 +1394,7 @@ hako --serve --lan            # prints the URL to open on your phone</code>
       const href = M.repo.skills + '/tree/main/' + s.slug;
       return `
       <div class="skill">
-        <div class="skill-num">— ${num} —</div>
+        <div class="skill-num">${num}</div>
         <div class="skill-body">
           <h4><a href="${href}" target="_blank" rel="noopener">${s.title}<span class="ext">/</span></a></h4>
           <p>${s.summary}</p>
@@ -1330,7 +1405,7 @@ hako --serve --lan            # prints the URL to open on your phone</code>
     const gnum = String(M.skills.length + 1).padStart(2, '0');
     sg.innerHTML = rows + `
       <div class="skill" style="opacity:0.35;">
-        <div class="skill-num">— ${gnum} —</div>
+        <div class="skill-num">${gnum}</div>
         <div class="skill-body">
           <h4 style="font-style:italic;color:var(--ash);">your skill here</h4>
           <p style="color:var(--ash);">Open a PR against <code>mithraeums/skills</code>. Folder name becomes the invocation.</p>
@@ -1346,12 +1421,17 @@ hako --serve --lan            # prints the URL to open on your phone</code>
 
 <script>
 (function(){
-  const PANES=['home','suite','install','skills','releases'];
+  const PANES=['home','suite','install','skills','releases','spelaeum'];
   const track=document.getElementById('track');
   if(!track) return;
+  /* the frame only ever shows a pane through the track's slide: a #skills in the address made
+     the browser scroll it to that section too, and the page landed one pane off */
+  const app=track.parentElement;
+  const pin=()=>{ if(app.scrollLeft||app.scrollTop){ app.scrollLeft=0; app.scrollTop=0; } };
+  app.addEventListener('scroll', pin); window.addEventListener('hashchange', ()=>setTimeout(pin, 0)); setTimeout(pin, 0);
   const SECT={home:'home', demo:'suite', creed:'suite', software:'suite',
               'hako-install':'install', skills:'skills', releases:'releases',
-              suite:'suite', install:'install'};
+              suite:'suite', install:'install', spelaeum:'spelaeum'};
   let cur='home';
 
   function indexOf(name){ const i=PANES.indexOf(name); return i<0?0:i; }

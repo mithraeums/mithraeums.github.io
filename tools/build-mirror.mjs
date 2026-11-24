@@ -70,6 +70,18 @@ const releases = MITH.releases.map((r) =>
     <p>${rich(r.body)}</p>
   </article>`).join('\n');
 
+// spelaeum: another work of the order, with its own site
+const SP = MITH.spelaeum;
+const spel = SP ? `<h2 id="spelaeum">Spelaeum — also of the order</h2>
+<p><b>${esc(SP.title)}</b></p>
+<p>${rich(SP.lede)}</p>
+<dl>
+${SP.points.map(([b, d]) => `  <dt>${esc(b)}</dt><dd>${rich(d)}</dd>`).join('\n')}
+</dl>
+<p>${rich(SP.open)}</p>
+<p class="actions">${link('Enter the cave ↗', R.cave)} &nbsp;·&nbsp; ${link('Source ↗', R.spel)} &nbsp;·&nbsp; ${link('The mirror ↗', R.mirror)} &nbsp;·&nbsp; spelaeum ${esc(MITH.ver.spel)}</p>
+` : '';
+
 const out = `<!doctype html>
 <!--
   Mithraeum — plain mirror of ${R.site}
@@ -139,7 +151,11 @@ curl -fsSL ${R.site}/hako.sh | sh
 curl -fsSL ${R.site}/hake.sh | sh
 
 # the engine — build from source (libc + libm + pthread only)
-git clone ${R.models} &amp;&amp; cd hako &amp;&amp; make</pre>
+git clone ${R.models} &amp;&amp; cd hako &amp;&amp; make
+
+# or with Homebrew
+brew install mithraeums/tap/hako mithraeums/tap/hake mithraeums/tap/hakm</pre>
+<p>Each repo&rsquo;s README is its manual: ${link('hako', R.code + '#readme')} · ${link('hake', R.edit + '#readme')} · ${link('studio', R.studio + '#readme')} · ${link('hakm', R.models + '#readme')}.</p>
 <p>Each installer fetches the latest signed release for your OS/arch, verifies the sha256 sidecar, drops the binary in <code>~/.local/bin</code>. No package manager, no daemon, no telemetry.</p>
 
 <h2 id="skills">Skills — behaviors for hako, by name</h2>
@@ -152,6 +168,7 @@ ${skills}
 <h2 id="releases">Releases — latest from each chamber</h2>
 ${releases}
 
+${spel}
 <footer>
   <p>© MMXXVI · ordo mithraeum · <a href="../LICENSE">GPL-3.0</a> · <a href="../privacy">privacy</a> · BUILD ${esc(MITH.build)}</p>
   <p><a href="${R.org}" target="_blank" rel="noopener">source ↗</a> ·

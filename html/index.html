@@ -123,7 +123,11 @@ curl -fsSL https://mithraeums.github.io/hako.sh | sh
 curl -fsSL https://mithraeums.github.io/hake.sh | sh
 
 # the engine — build from source (libc + libm + pthread only)
-git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make</pre>
+git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make
+
+# or with Homebrew
+brew install mithraeums/tap/hako mithraeums/tap/hake mithraeums/tap/hakm</pre>
+<p>Each repo&rsquo;s README is its manual: <a href="https://github.com/mithraeums/hako-code#readme" target="_blank" rel="noopener">hako</a> · <a href="https://github.com/mithraeums/hako-edit#readme" target="_blank" rel="noopener">hake</a> · <a href="https://github.com/mithraeums/hako-studio#readme" target="_blank" rel="noopener">studio</a> · <a href="https://github.com/mithraeums/hako#readme" target="_blank" rel="noopener">hakm</a>.</p>
 <p>Each installer fetches the latest signed release for your OS/arch, verifies the sha256 sidecar, drops the binary in <code>~/.local/bin</code>. No package manager, no daemon, no telemetry.</p>
 
 <h2 id="skills">Skills — behaviors for hako, by name</h2>
@@ -294,6 +298,17 @@ git clone https://github.com/mithraeums/hako &amp;&amp; cd hako &amp;&amp; make<
     <p><b>faster prefill · steady under pressure</b></p>
     <p>The Q4_K prefill kernel drops half its per-group MACs: the min term is activation-only, so <code>scale·Σx</code> is folded once per activation and reused across every weight row — <b>~1.3× prefill</b> on a CPU-only i3, greedy output bit-identical (a <code>make test_kdot</code> proves it against a scalar reference). A repetition penalty joins the sampler (<code>--rep</code>, default off so tool turns stay deterministic), and <code>hakm_ctx_new</code> now guards its allocations and fails clean instead of segfaulting when RAM runs short. Still <b>libc + libm + pthread</b>, no llama.cpp, no ollama.</p>
   </article>
+
+<h2 id="spelaeum">Spelaeum — also of the order</h2>
+<p><b>Trained by whoever shows up.</b></p>
+<p>One open model, trained in rounds by many machines. The data is fixed and public; the computing is everyone&rsquo;s spare hardware, from a gaming PC to the phone in a drawer. Work that makes the model better goes into the chain under your name.</p>
+<dl>
+  <dt>Press start once</dt><dd>Open the page and a browser tab trains, sends its work, waits for the round to close and takes the next. The <code>spel</code> CLI does the same on a machine that stays on.</dd>
+  <dt>Anything with a processor</dt><dd>A tab, a terminal, a farm of phones behind one relay, a GPU through WebGPU or OpenCL. The same C everywhere, every check done the same way.</dd>
+  <dt>Credit, counted in work</dt><dd>Every job that passes its check is recorded in the chain under its trainer&rsquo;s key. Seven grades, Corax to Pater, each ten times the last.</dd>
+</dl>
+<p>Nothing there needs us: the code, the method, the chain and the weights are GPL-3.0. Anyone can replay the chain, host the model or run their own.</p>
+<p class="actions"><a href="https://spelaeum.mithraeum.studio" target="_blank" rel="noopener">Enter the cave ↗</a> &nbsp;·&nbsp; <a href="https://github.com/mithraeums/spelaeum" target="_blank" rel="noopener">Source ↗</a> &nbsp;·&nbsp; <a href="https://huggingface.co/datasets/mithraeum/spelaeum" target="_blank" rel="noopener">The mirror ↗</a> &nbsp;·&nbsp; spelaeum v0.0.1</p>
 
 <footer>
   <p>© MMXXVI · ordo mithraeum · <a href="../LICENSE">GPL-3.0</a> · <a href="../privacy">privacy</a> · BUILD 2026-10-29</p>

@@ -812,6 +812,11 @@
   .spel-art { color: var(--sumi); mix-blend-mode: normal; filter: none; height: 210px; }
   .spel-lede { max-width: 640px; color: var(--bone); font-size: 13.5px; line-height: 1.7; margin: -18px 0 26px; }
   .spel-open { max-width: 640px; color: var(--ash); font-size: 12px; margin: 22px 0 18px; }
+  .spel-curve { display: block; max-width: 800px; margin: 8px 0 0; border: 1px solid var(--ash); }
+  .spel-curve img { display: block; width: 100%; height: auto; }
+  .spel-curve .night, :root[data-theme="dark"] .spel-curve .day { display: none; }
+  :root[data-theme="dark"] .spel-curve .night { display: block; }
+  .spel-curve-note { margin-top: 10px; }
   .riso-art { position: relative; justify-self: end; width: min(100%, 640px); }
   .riso-art img { width: 100%; height: auto; display: block; filter: var(--art); mix-blend-mode: var(--art-blend); }
   .riso-art::after { content: ''; position: absolute; inset: -14px; border: 1px solid var(--sumi); pointer-events: none; }
@@ -1319,6 +1324,8 @@ brew install mithraeums/tap/hako mithraeums/tap/hake mithraeums/tap/hakm</pre>
     </div>
     <p class="spel-lede" id="spel-lede"></p>
     <div class="creed-strip" id="spel-points"></div>
+    <a class="spel-curve" href="https://huggingface.co/datasets/mithraeum/spelaeum/tree/main/progress" target="_blank" rel="noopener"><img class="day" src="https://huggingface.co/datasets/mithraeum/spelaeum/resolve/main/progress/chart.svg" width="800" height="280" loading="lazy" alt="the first chain's loss, block by block, redrawn after every block"><img class="night" src="https://huggingface.co/datasets/mithraeum/spelaeum/resolve/main/progress/chart-night.svg" width="800" height="280" loading="lazy" alt=""></a>
+    <p class="spel-open spel-curve-note">The model's loss, redrawn by the coordinator after every block. <a href="https://huggingface.co/datasets/mithraeum/spelaeum/blob/main/progress/samples.md" target="_blank" rel="noopener">What it writes</a> after each one.</p>
     <p class="spel-open" id="spel-open"></p>
     <div class="hero-cta" id="spel-cta"></div>
   </div>
